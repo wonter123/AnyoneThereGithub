@@ -22,8 +22,6 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/takeRequest_head"
         android:layout_alignBottom="@+id/takeRequest_head"
-        android:layout_marginStart="12dp"
-        android:layout_toEndOf="@+id/takeRequest_head"
         android:ems="10"
         android:hint="Request"
         android:textSize="5pt" />
@@ -43,7 +41,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/takeRequest_from"
-        android:layout_below="labelDescription"
         android:ems="10" />
 
     <TextView
