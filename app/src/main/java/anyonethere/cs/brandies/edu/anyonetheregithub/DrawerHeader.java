@@ -1,4 +1,4 @@
-package com.anyonethere;
+package anyonethere.cs.brandies.edu.anyonetheregithub;
 
 import android.widget.ImageView;
 import android.widget.TextView;

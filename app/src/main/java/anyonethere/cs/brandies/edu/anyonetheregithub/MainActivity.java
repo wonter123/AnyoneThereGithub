@@ -1,4 +1,4 @@
-package com.anyonethere;
+package anyonethere.cs.brandies.edu.anyonetheregithub;
 
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
