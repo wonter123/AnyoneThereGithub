@@ -7,34 +7,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="40dp"
         android:text="I want:" />
 
     <EditText
-        android:id="@+id/post_request_heading"
+        android:id="@+id/request_reward_box"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/request_title_box"
+        android:layout_alignStart="@+id/request_title_box"
+        android:layout_below="@+id/request_title_box"
+        android:layout_marginTop="21dp"
         android:ems="10"
-        android:textSize="5pt"
-        android:inputType="textPersonName"
         android:hint="Request"
-        android:layout_below="@+id/editText5"
-        android:layout_alignStart="@+id/editText5"
-        android:layout_marginTop="21dp" />
+        android:inputType="textShortMessage"
+        android:textSize="5pt" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/request_title_box"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/labelHeading"
         android:layout_alignBottom="@+id/labelHeading"
+        android:layout_marginLeft="12dp"
         android:layout_marginStart="12dp"
         android:layout_toEndOf="@+id/labelHeading"
+        android:layout_toRightOf="@+id/labelHeading"
         android:ems="10"
         android:hint="Request"
-        android:inputType="textPersonName"
+        android:inputType="textShortMessage"
         android:textSize="5pt" />
 
     <TextView
@@ -43,19 +48,20 @@
         android:layout_height="wrap_content"
         android:text="Description"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/post_request_heading"
-        android:layout_alignStart="@+id/textView4" />
+        android:layout_below="@+id/request_reward_box"
+        android:layout_alignStart="@+id/textView4"
+        android:layout_alignLeft="@+id/textView4"/>
 
     <EditText
-        android:id="@+id/post_request_description"
+        android:id="@+id/request_description_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textMultiLine"
-        android:layout_marginTop="12dp"
-        android:layout_below="@+id/labelDescription"
+        android:layout_alignLeft="@+id/labelDescription"
         android:layout_alignStart="@+id/labelDescription"
-        android:layout_alignEnd="@+id/post_request_minute" />
+        android:layout_below="@+id/labelDescription"
+        android:layout_marginTop="13dp"
+        android:ems="10"
+        android:inputType="textMultiLine" />
 
     <Spinner
         android:id="@+id/post_request_from"
@@ -63,8 +69,9 @@
         android:layout_height="wrap_content"
         android:autofillHints="From"
         android:layout_marginTop="94dp"
-        android:layout_below="@+id/post_request_description"
-        android:layout_alignStart="@+id/post_request_description" />
+        android:layout_below="@+id/request_description_box"
+        android:layout_alignStart="@+id/request_description_box"
+        android:layout_alignLeft="@+id/request_description_box"/>
 
     <Spinner
         android:id="@+id/post_request_to"
@@ -72,7 +79,8 @@
         android:layout_height="wrap_content"
         android:autofillHints="To"
         android:layout_alignTop="@+id/post_request_from"
-        android:layout_alignEnd="@+id/post_request_description" />
+        android:layout_alignEnd="@+id/request_description_box"
+        android:layout_alignRight="@+id/request_description_box"/>
 
     <Spinner
         android:id="@+id/post_request_day"
@@ -81,6 +89,7 @@
         android:layout_alignTop="@+id/post_request_hour"
         android:autofillHints="day"
         android:layout_centerHorizontal="true" />
+
     <Spinner
         android:id="@+id/post_request_hour"
         android:layout_width="60dp"
@@ -88,22 +97,25 @@
         android:autofillHints="hour"
         android:layout_marginTop="58dp"
         android:layout_below="@+id/post_request_from"
-        android:layout_alignStart="@+id/post_request_from" />
+        android:layout_alignStart="@+id/post_request_from"
+        android:layout_alignLeft="@+id/post_request_from"/>
+
     <Spinner
         android:id="@+id/post_request_minute"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/post_request_day"
+        android:layout_alignTop="@+id/post_request_hour"
         android:autofillHints="min"
-        android:layout_alignEnd="@+id/post_request_heading" />
+        android:layout_alignEnd="@+id/request_reward_box"
+        android:layout_alignRight="@+id/request_reward_box"/>
 
     <TextView
         android:id="@+id/labelExpireIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/post_request_day"
+        android:layout_above="@+id/post_request_hour"
         android:layout_alignStart="@+id/post_request_hour"
-        android:layout_marginBottom="10dp"
+        android:layout_alignLeft="@+id/post_request_hour"
         android:text="Expire in:" />
 
     <TextView
@@ -111,8 +123,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Reward"
-        android:layout_alignBaseline="@+id/post_request_heading"
-        android:layout_alignBottom="@+id/post_request_heading"
-        android:layout_alignStart="@+id/labelHeading" />
+        android:layout_alignBaseline="@+id/request_reward_box"
+        android:layout_alignBottom="@+id/request_reward_box"
+        android:layout_alignStart="@+id/labelHeading"
+        android:layout_alignLeft="@+id/labelHeading"/>
+
+    <Button
+        android:id="@+id/request_save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/post_request_hour"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/post_request_hour"
+        android:layout_marginBottom="12dp"
+        android:text="Save" />
+
+    <Button
+        android:id="@+id/request_cancel_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/request_save_button"
+        android:layout_alignEnd="@+id/post_request_minute"
+        android:layout_alignRight="@+id/post_request_minute"
+        android:text="Cancel" />
 
 </RelativeLayout>
