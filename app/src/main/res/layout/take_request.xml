@@ -6,10 +6,12 @@
         android:id="@+id/takeRequest_head"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="40dp"
+        android:layout_below="@+id/post_request_description"
+        android:layout_marginLeft="31dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="66dp"
         android:text="Request" />
 
 
@@ -121,9 +123,10 @@
         android:id="@+id/takeRequest_ExpireContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/takeRequest_Expire"
+        android:layout_alignBottom="@+id/takeRequest_Expire"
         android:layout_alignLeft="@+id/takeRequest_toContent"
         android:layout_alignStart="@+id/takeRequest_toContent"
-        android:layout_alignTop="@+id/takeRequest_Expire"
         android:ems="10"
         android:text="When"
         android:textSize="5pt" />
@@ -158,5 +161,15 @@
         android:layout_alignRight="@+id/takeRequest_descriptionContent"
         android:layout_alignTop="@+id/takeRequest_take"
         android:text="Cancle" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/post_request_description"
+        android:layout_alignStart="@+id/post_request_description"
+        android:layout_below="@+id/post_request_description"
+        android:layout_marginTop="17dp"
+        android:text="POST USER" />
 
 </RelativeLayout>
