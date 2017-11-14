@@ -1,6 +1,5 @@
 package anyonethere.cs.brandies.edu.anyonetheregithub;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -57,14 +56,5 @@ public class MainActivity extends AppCompatActivity {
 
         mDrawer.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == GET_REQUEST) {
-            if (resultCode == RESULT_OK) {
-
-            }
-        }
     }
 }
