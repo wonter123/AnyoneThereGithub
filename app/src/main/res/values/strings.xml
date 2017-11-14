@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">AnyoneThere(Github)</string>
+    <string name="app_name">AnyoneThere</string>
+    <string name="open_drawer">OPEN</string>
+    <string name="close_drawer">CLOSE</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
