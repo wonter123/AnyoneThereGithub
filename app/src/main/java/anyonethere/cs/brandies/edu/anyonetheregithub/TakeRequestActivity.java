@@ -13,7 +13,6 @@ public class TakeRequestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.take_request);
 
-
     }
 
     protected void cancelBtn() {
