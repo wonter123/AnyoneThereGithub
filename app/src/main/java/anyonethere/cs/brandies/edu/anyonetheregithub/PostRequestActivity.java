@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -90,15 +92,24 @@ public class PostRequestActivity extends AppCompatActivity implements AdapterVie
                 String title = ((EditText) findViewById(R.id.request_title_box)).getText().toString();
                 String reward = ((EditText) findViewById(R.id.request_reward_box)).getText().toString();
                 String description = ((EditText) findViewById(R.id.request_description_box)).getText().toString();
-                String day = ((Spinner) findViewById(R.id.post_request_day)).getSelectedItem().toString();
-                String hour = ((Spinner) findViewById(R.id.post_request_hour)).getSelectedItem().toString();
-                String minute = ((Spinner) findViewById(R.id.post_request_minute)).getSelectedItem().toString();
+                int day = Integer.parseInt(((Spinner) findViewById(R.id.post_request_day)).getSelectedItem().toString());
+                int hour = Integer.parseInt(((Spinner) findViewById(R.id.post_request_hour)).getSelectedItem().toString());
+                int minute = Integer.parseInt(((Spinner) findViewById(R.id.post_request_minute)).getSelectedItem().toString());
                 String from = ((Spinner) findViewById(R.id.post_request_from)).getSelectedItem().toString();
                 String to = ((Spinner) findViewById(R.id.post_request_to)).getSelectedItem().toString();
-                Post newPost = new Post(title, Integer.parseInt(reward), description, Integer.parseInt(day),
-                        Integer.parseInt(hour), Integer.parseInt(minute), from, to);
-                Map<String, Object> postValues = newPost.toMap();
 
+                Calendar cal = Calendar.getInstance();
+                Date current = new Date();
+                cal.setTime(current);
+                cal.add(Calendar.DATE, day);
+                cal.add(Calendar.HOUR, hour);
+                cal.add(Calendar.MINUTE, minute);
+                Date expire = cal.getTime();
+
+                Post newPost = new Post(title, Integer.parseInt(reward), description, current,
+                        expire, from, to);
+
+                Map<String, Object> postValues = newPost.toMap();
                 Map<String, Object> childUpdates = new HashMap<>();
                 String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 childUpdates.put("/posts/" + key, postValues);
