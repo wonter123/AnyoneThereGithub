@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/labelHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
+        android:text="I want:" />
+
+    <EditText
+        android:id="@+id/post_request_heading"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textSize="5pt"
+        android:inputType="textPersonName"
+        android:hint="Request"
+        android:layout_below="@+id/editText5"
+        android:layout_alignStart="@+id/editText5"
+        android:layout_marginTop="21dp" />
+
+    <EditText
+        android:id="@+id/editText5"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/labelHeading"
+        android:layout_alignBottom="@+id/labelHeading"
+        android:layout_marginStart="12dp"
+        android:layout_toEndOf="@+id/labelHeading"
+        android:ems="10"
+        android:hint="Request"
+        android:inputType="textPersonName"
+        android:textSize="5pt" />
+
+    <TextView
+        android:id="@+id/labelDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/post_request_heading"
+        android:layout_alignStart="@+id/textView4" />
+
+    <EditText
+        android:id="@+id/post_request_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:layout_marginTop="12dp"
+        android:layout_below="@+id/labelDescription"
+        android:layout_alignStart="@+id/labelDescription"
+        android:layout_alignEnd="@+id/post_request_minute" />
+
+    <Spinner
+        android:id="@+id/post_request_from"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:autofillHints="From"
+        android:layout_marginTop="94dp"
+        android:layout_below="@+id/post_request_description"
+        android:layout_alignStart="@+id/post_request_description" />
+
+    <Spinner
+        android:id="@+id/post_request_to"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:autofillHints="To"
+        android:layout_alignTop="@+id/post_request_from"
+        android:layout_alignEnd="@+id/post_request_description" />
+
+    <Spinner
+        android:id="@+id/post_request_day"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/post_request_hour"
+        android:autofillHints="day"
+        android:layout_centerHorizontal="true" />
+    <Spinner
+        android:id="@+id/post_request_hour"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:autofillHints="hour"
+        android:layout_marginTop="58dp"
+        android:layout_below="@+id/post_request_from"
+        android:layout_alignStart="@+id/post_request_from" />
+    <Spinner
+        android:id="@+id/post_request_minute"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/post_request_day"
+        android:autofillHints="min"
+        android:layout_alignEnd="@+id/post_request_heading" />
+
+    <TextView
+        android:id="@+id/labelExpireIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/post_request_day"
+        android:layout_alignStart="@+id/post_request_hour"
+        android:layout_marginBottom="10dp"
+        android:text="Expire in:" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reward"
+        android:layout_alignBaseline="@+id/post_request_heading"
+        android:layout_alignBottom="@+id/post_request_heading"
+        android:layout_alignStart="@+id/labelHeading" />
+
+</RelativeLayout>
