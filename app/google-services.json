@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "531896018489",
+    "firebase_url": "https://anyonetheregithub.firebaseio.com",
+    "project_id": "anyonetheregithub",
+    "storage_bucket": "anyonetheregithub.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:531896018489:android:f113869dc237e58c",
+        "android_client_info": {
+          "package_name": "anyonethere.cs.brandies.edu.anyonetheregithub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "531896018489-b4koo9h32nkub733ejtq1fpqs9pq9k10.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "anyonethere.cs.brandies.edu.anyonetheregithub",
+            "certificate_hash": "1f872c77ad92fd387dea2b4d02b7315378e65197"
+          }
+        },
+        {
+          "client_id": "531896018489-ugquc4q877gm79nr1persqfajvvhkmuu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwkWEgVjcr-ycy0OU5Q8apBWjAB2JNbB0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "531896018489-ugquc4q877gm79nr1persqfajvvhkmuu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
