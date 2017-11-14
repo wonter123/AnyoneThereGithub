@@ -21,4 +21,23 @@
         <item>Rubenstein-Pomerantz Residence Hall</item>
         <item>International Business School</item>
     </string-array>
+    <string-array name="day">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>1 week</item>
+    </string-array>
+    <string-array name="hour">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>12</item>
+    </string-array>
+    <string-array name="minute">
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+        <item>30</item>
+        <item>45</item>
+    </string-array>
 </resources>
