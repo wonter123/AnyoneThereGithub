@@ -51,7 +51,7 @@
         android:layout_alignLeft="@+id/takeRequest_to"
         android:layout_alignStart="@+id/takeRequest_to"
         android:layout_below="@+id/takeRequest_to"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="27dp"
         android:text="Expire" />
 
     <TextView
@@ -71,7 +71,7 @@
         android:layout_alignLeft="@+id/takeRequest_reward"
         android:layout_alignStart="@+id/takeRequest_reward"
         android:layout_below="@+id/takeRequest_reward"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="27dp"
         android:text="From" />
 
     <TextView
