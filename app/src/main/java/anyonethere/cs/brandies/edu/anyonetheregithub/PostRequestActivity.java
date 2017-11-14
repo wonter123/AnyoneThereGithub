@@ -14,6 +14,18 @@ public class PostRequestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.post_request);
 
+        // Create spinner
+        Spinner spinner_from = (Spinner) findViewById(R.id.post_request_from);
+        Spinner spinner_to = (Spinner) findViewById(R.id.post_request_to);
+        Spinner spinner_day = (Spinner) findViewById(R.id.post_request_day);
+        Spinner spinner_hour = (Spinner) findViewById(R.id.post_request_hour);
+        Spinner spinner_minute = (Spinner) findViewById(R.id.post_request_minute);
+
+        // Spinner Click Listener
+        spinner_from.set
+
+
+
         findViewById(R.id.request_cancel_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
