@@ -13,20 +13,20 @@
         android:layout_marginLeft="100dp">
     </TextView>
     <TextView
-        android:id="@+id/description"
+        android:id="@+id/Requester"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/heading"
         android:padding="10dp"
         android:textSize="16sp"
-        android:text="description"
+        android:text="Requester ID"
         android:layout_marginLeft="100dp">
     </TextView>
     <TextView
         android:id="@+id/reward"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/description"
+        android:layout_below="@+id/Requester"
         android:padding="10dp"
         android:textSize="16sp"
         android:text="reward"
@@ -43,7 +43,7 @@
         android:layout_marginTop="10dp"/>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -51,7 +51,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/reward"
-        android:text="Button" />
+        android:text="Detail" />
 
     <RatingBar
         android:id="@+id/userRating"
