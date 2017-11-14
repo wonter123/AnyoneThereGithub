@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,6 +23,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class SignInActivity extends BaseActivity implements View.OnClickListener {
     private DatabaseReference mDatabase;
+
+    private static final String TAG = "SignInActivity";
 
     private FirebaseAuth mAuth;
 
@@ -83,7 +86,6 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
     }
 
     private void signIn() {
-        Log.d(TAG, "signIn");
         if (!validateForm()) {
             return;
         }
@@ -96,7 +98,6 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "signIn:onComplete:" + task.isSuccessful());
                         hideProgressDialog();
 
                         if (task.isSuccessful()) {
@@ -110,7 +111,6 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
     }
 
     private void signUp() {
-        Log.d(TAG, "signUp");
         if (!validateForm()) {
             return;
         }
@@ -123,7 +123,6 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "createUser:onComplete:" + task.isSuccessful());
                         hideProgressDialog();
 
                         if (task.isSuccessful()) {
@@ -161,6 +160,7 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
         } else {
             mPasswordField.setError(null);
         }
+
 
         return result;
     }

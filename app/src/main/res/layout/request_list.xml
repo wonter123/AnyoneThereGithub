@@ -29,7 +29,7 @@
         android:layout_below="@+id/Requester"
         android:padding="10dp"
         android:textSize="16sp"
-        android:text="reward"
+        android:text="Reward"
         android:layout_marginLeft="100dp">
     </TextView>
 
@@ -61,8 +61,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/userID"
-        android:layout_left="match_parent"
-        android:layout_right="@+id/reward"
         android:numStars="5"
         android:rating="5" />
 </RelativeLayout>
