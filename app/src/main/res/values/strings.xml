@@ -3,4 +3,22 @@
     <string name="open_drawer">OPEN</string>
     <string name="close_drawer">CLOSE</string>
     <string name="title_activity_maps">Map</string>
+    <string-array name="locations">
+        <item>Foster Residence Quad</item>
+        <item>Athletic Center</item>
+        <item>Health Center</item>
+        <item>East Quad</item>
+        <item>North Quad</item>
+        <item>Olin-Sang Center</item>
+        <item>Heller School</item>
+        <item>Usdan Student Center</item>
+        <item>Libaries</item>
+        <item>Social Science</item>
+        <item>Science Complex</item>
+        <item>Shapiro Science Center</item>
+        <item>Charles River Apartment</item>
+        <item>Shapiro Brothers Resident Hall</item>
+        <item>Rubenstein-Pomerantz Residence Hall</item>
+        <item>International Business School</item>
+    </string-array>
 </resources>
