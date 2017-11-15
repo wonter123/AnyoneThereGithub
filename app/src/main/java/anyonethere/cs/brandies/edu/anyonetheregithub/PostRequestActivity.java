@@ -34,6 +34,7 @@ public class PostRequestActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String key = mDatabase.child("posts").push().getKey();
+
                 String title = ((EditText) findViewById(R.id.request_title_box)).getText().toString();
                 String reward = ((EditText) findViewById(R.id.request_reward_box)).getText().toString();
                 String description = ((EditText) findViewById(R.id.request_description_box)).getText().toString();

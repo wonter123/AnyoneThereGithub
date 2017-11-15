@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawer;
     private Toolbar mToolbar;
     private PlaceHolderView mGalleryView;
-    static final int GET_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
