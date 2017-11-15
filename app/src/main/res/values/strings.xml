@@ -3,6 +3,9 @@
     <string name="open_drawer">OPEN</string>
     <string name="close_drawer">CLOSE</string>
     <string name="title_activity_maps">Map</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
     <string-array name="locations">
         <item>Foster Residence Quad</item>
         <item>Athletic Center</item>
@@ -20,5 +23,24 @@
         <item>Shapiro Brothers Resident Hall</item>
         <item>Rubenstein-Pomerantz Residence Hall</item>
         <item>International Business School</item>
+    </string-array>
+    <string-array name="day">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>1 week</item>
+    </string-array>
+    <string-array name="hour">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>12</item>
+    </string-array>
+    <string-array name="minute">
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+        <item>30</item>
+        <item>45</item>
     </string-array>
 </resources>
