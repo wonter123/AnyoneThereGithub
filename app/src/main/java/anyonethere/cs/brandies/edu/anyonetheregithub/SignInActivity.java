@@ -84,6 +84,29 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
         startActivity(new Intent(SignInActivity.this, MainActivity.class));
         finish();
     }
+    private void signUp() {
+        if (!validateForm()) {
+            return;
+        }
+
+        showProgressDialog();
+        String email = mEmailField.getText().toString();
+        String password = mPasswordField.getText().toString();
+
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        if (task.isSuccessful()) {
+                            onAuthSuccess(task.getResult().getUser());
+                        } else {
+                            Toast.makeText(SignInActivity.this, "Sign Up Failed",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
 
     private void signIn() {
         if (!validateForm()) {
@@ -110,30 +133,7 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
                 });
     }
 
-    private void signUp() {
-        if (!validateForm()) {
-            return;
-        }
 
-        showProgressDialog();
-        String email = mEmailField.getText().toString();
-        String password = mPasswordField.getText().toString();
-
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        hideProgressDialog();
-
-                        if (task.isSuccessful()) {
-                            onAuthSuccess(task.getResult().getUser());
-                        } else {
-                            Toast.makeText(SignInActivity.this, "Sign Up Failed",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
 
 
 
@@ -160,7 +160,10 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
         } else {
             mPasswordField.setError(null);
         }
-
+        if(!mEmailField.getText().toString().contains("brandeis")){
+            mEmailField.setError("Brandeis students only");
+            return false;
+        }
 
         return result;
     }
