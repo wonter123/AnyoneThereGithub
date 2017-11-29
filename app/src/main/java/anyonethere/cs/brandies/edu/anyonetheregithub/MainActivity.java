@@ -1,5 +1,6 @@
 package anyonethere.cs.brandies.edu.anyonetheregithub;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import com.mindorks.placeholderview.PlaceHolderView;
 
@@ -39,6 +42,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        final Switch switchButton = (Switch) findViewById(R.id.main_switchViewButton);
+        switchButton.setChecked(true);
+        switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean bChecked) {
+                if (bChecked) {
+                    switchButton.setText("List View");
+                } else {
+                    setContentView(R.layout.activity_main_map);
+                    switchButton.setText("Map View");
+                }
+            }
+        });
 
     }
 
