@@ -52,20 +52,21 @@
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/sign_in_button_sign_in"
+        android:id="@+id/sign_in_button_sign_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/sign_in_pass_label"
         android:layout_alignStart="@+id/sign_in_pass_label"
         android:layout_below="@+id/sign_in_password"
-        android:layout_marginTop="47dp"
+        android:layout_marginTop="61dp"
         android:text="SIGN UP" />
 
     <Button
-        android:id="@+id/sign_in_button_sign_up"
+        android:id="@+id/sign_in_button_sign_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/sign_in_button_sign_in"
+        android:layout_alignBaseline="@+id/sign_in_button_sign_up"
+        android:layout_alignBottom="@+id/sign_in_button_sign_up"
         android:layout_alignEnd="@+id/sign_in_password"
         android:layout_alignRight="@+id/sign_in_password"
         android:text="SIGN IN" />
