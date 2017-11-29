@@ -32,6 +32,7 @@ public class Post {
         this.posterId = null;
         this.takerId = null;
         result = new HashMap<>();
+        toMap();
     }
 
     public Map<String, Object> toMap() {
@@ -44,7 +45,6 @@ public class Post {
         result.put("from", from);
         result.put("poster", posterId);
         result.put("taker", takerId);
-
         return result;
     }
 
