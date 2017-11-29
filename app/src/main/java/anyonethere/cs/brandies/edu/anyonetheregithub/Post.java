@@ -33,6 +33,7 @@ public class Post {
         this.takerId = null;
         result = new HashMap<>();
         toMap();
+
     }
 
     public Map<String, Object> toMap() {
