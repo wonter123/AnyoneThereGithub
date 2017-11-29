@@ -49,7 +49,7 @@
         android:layout_alignLeft="@+id/sign_in_username"
         android:layout_alignStart="@+id/sign_in_username"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/sign_in_button_sign_in"
