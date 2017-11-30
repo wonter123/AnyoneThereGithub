@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="brandeisGreen_dark">#00695C</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="titleBar">#ececec</color>
 </resources>
