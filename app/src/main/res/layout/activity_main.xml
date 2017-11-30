@@ -9,6 +9,27 @@
     android:background="@drawable/background"
     tools:openDrawer="start">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:text="VIEW"
+            android:textSize="60dp"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/main_mapButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/map_button" />
+    </RelativeLayout>
+
     <include
         layout="@layout/app_bar_main"
         android:layout_width="match_parent"
@@ -21,7 +42,8 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/activity_main_drawer" />
+        app:menu="@menu/activity_main_drawer"
+        android:foregroundGravity="fill"/>
 
 
 </android.support.v4.widget.DrawerLayout>

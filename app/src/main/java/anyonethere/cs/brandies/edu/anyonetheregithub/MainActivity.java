@@ -3,6 +3,7 @@ package anyonethere.cs.brandies.edu.anyonetheregithub;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -43,6 +44,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        // set button to map
+        FloatingActionButton mapButton = (FloatingActionButton) findViewById(R.id.main_mapButton);
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mapIntent = new Intent(MainActivity.this, MapsActivity.class);
+                startActivity(mapIntent);
+            }
+        });
 
 
     }
