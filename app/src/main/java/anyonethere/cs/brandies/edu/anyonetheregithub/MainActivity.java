@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mapIntent = new Intent(MainActivity.this, MapsActivity.class);
+                Intent mapIntent = new Intent(MainActivity.this, MapsActivity2.class);
                 startActivity(mapIntent);
             }
         });
