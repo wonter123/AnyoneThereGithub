@@ -21,30 +21,5 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="350dp"
-        android:layout_height="500dp">
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:text="VIEW"
-            android:textSize="60dp"
-            android:layout_alignParentBottom="true" />
-
-        <Button
-            android:id="@+id/bar_main_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:text="BUTTON"
-            android:textSize="20dp" />
-
-    </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>
