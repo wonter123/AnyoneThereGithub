@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -25,14 +26,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar mToolbar;
     private PlaceHolderView mGalleryView;
 
+    NavigationView navigationView;
+    View menuheader;
+    TextView userName;
+    TextView userEmail;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+
+        // set the user profile in menu header
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        ((TextView) findViewById(R.id.nav_username)).setText(user.getDisplayName());
-        ((TextView) findViewById(R.id.nav_email)).setText(user.getEmail());
+
+        menuheader = navigationView.getHeaderView(0);
+
+        if (menuheader != null) {
+            userEmail = (TextView) menuheader.findViewById(R.id.nav_email);
+            userName = (TextView) menuheader.findViewById(R.id.nav_username);
+            String email = user.getEmail();
+            String name = email.split("@")[0];
+
+            // load menu navigation data
+            userName.setText(name);
+            userEmail.setText(email);
+        } else {
+            Log.d("Warning", "menu header is null");
+        }
+
+
+        // set tool bar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -42,7 +68,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         // set button to map
@@ -54,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(mapIntent);
             }
         });
-
 
     }
 
