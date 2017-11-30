@@ -11,8 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.mindorks.placeholderview.PlaceHolderView;
 
 
@@ -28,6 +30,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        ((TextView) findViewById(R.id.nav_username)).setText(user.getDisplayName());
+        ((TextView) findViewById(R.id.nav_email)).setText(user.getEmail());
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -45,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mapIntent = new Intent(MainActivity.this, MapsActivity2.class);
+                Intent mapIntent = new Intent(MainActivity.this, MapsActivity.class);
                 startActivity(mapIntent);
             }
         });
