@@ -124,15 +124,15 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
             if (mLocationPermissionGranted) {
                 Toast.makeText(this, "This is my Toast message!",
                         Toast.LENGTH_LONG).show();
-                mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
-
-                    @Override
-                    public void onMyLocationChange(Location arg0) {
-                        // TODO Auto-generated method stub
-
-                        mMap.addMarker(new MarkerOptions().position(new LatLng(arg0.getLatitude(), arg0.getLongitude())).title("It's Me!"));
-                    }
-                });
+//                mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
+//
+//                    @Override
+//                    public void onMyLocationChange(Location arg0) {
+//                        // TODO Auto-generated method stub
+//
+//                        mMap.addMarker(new MarkerOptions().position(new LatLng(arg0.getLatitude(), arg0.getLongitude())).title("It's Me!"));
+//                    }
+//                });
 
 
 //                Task<Location> locationResult = mFusedLocationProviderClient.getLastLocation();

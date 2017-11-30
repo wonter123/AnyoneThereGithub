@@ -8,6 +8,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -111,10 +112,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         getLocationPermission();
         // Turn on the My Location layer and the related control on the map.
         updateLocationUI();
+
+
+
         // Get the current location of the device and set the position of the map.
+        //uncomment this and the app will CRASH!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!...
 //        getDeviceLocation();
     }
-
     private void getLocationPermission() {
         /*
          * Request location permission, so that we can get the location of the
@@ -155,11 +159,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
          */
         try {
             if (mLocationPermissionGranted) {
+                Toast.makeText(this, "This is my Toast message1!",
+                        Toast.LENGTH_LONG).show();
                 Task<Location> locationResult = mFusedLocationProviderClient.getLastLocation();
                 locationResult.addOnCompleteListener(this, new OnCompleteListener<Location>() {
                     @Override
                     public void onComplete(@NonNull Task<Location> task) {
                         if (task.isSuccessful()) {
+
                             // Set the map's camera position to the current location of the device.
                             mLastKnownLocation = task.getResult();
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
