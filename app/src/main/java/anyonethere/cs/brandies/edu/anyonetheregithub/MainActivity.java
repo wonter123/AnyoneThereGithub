@@ -41,10 +41,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
 
-//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        ((TextView) findViewById(R.id.nav_username)).setText(user.getDisplayName());
-//        ((TextView) findViewById(R.id.nav_email)).setText(user.getEmail());
-
         // set the user profile in menu header
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
