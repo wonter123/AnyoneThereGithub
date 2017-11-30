@@ -109,10 +109,12 @@ public class PostRequestActivity extends AppCompatActivity implements AdapterVie
 
                 Post newPost = new Post(title, Integer.parseInt(reward), description, current,
                         expire, from, to);
+                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                newPost.setPoster(userId);
 
                 Map<String, Object> postValues = newPost.toMap();
                 Map<String, Object> childUpdates = new HashMap<>();
-                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
                 childUpdates.put("/posts/" + key, postValues);
                 childUpdates.put("/user-posts/" + userId + "/" + key, postValues);
 
