@@ -104,15 +104,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        mMap.addMarker(new MarkerOptions().position(mDefaultLocation).title("Marker in Brandies"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(mDefaultLocation));
+        mMap.addMarker(new MarkerOptions().position(mDefaultLocation).title("Marker in Brandeis"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
 
         // Prompt the user for permission.
         getLocationPermission();
         // Turn on the My Location layer and the related control on the map.
         updateLocationUI();
         // Get the current location of the device and set the position of the map.
-        getDeviceLocation();
+//        getDeviceLocation();
     }
 
     private void getLocationPermission() {
