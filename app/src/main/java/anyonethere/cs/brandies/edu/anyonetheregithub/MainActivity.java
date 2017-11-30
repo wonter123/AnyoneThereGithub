@@ -1,6 +1,5 @@
 package anyonethere.cs.brandies.edu.anyonetheregithub;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,11 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-
 import android.view.View;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.Switch;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.mindorks.placeholderview.PlaceHolderView;
