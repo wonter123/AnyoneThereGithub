@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@drawable/background"
     tools:openDrawer="start">
 
     <include
@@ -23,26 +22,26 @@
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
 
-        <Button
-            android:id="@+id/main_switchViewButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            android:text="choose location from map"
-            android:textColor="#FFFFFF"
-            android:textSize="30sp"
+        <!--<Button-->
+            <!--android:id="@+id/main_switchViewButton"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:text="choose location from map"-->
+            <!--android:textColor="#FFFFFF"-->
+            <!--android:textSize="30sp"-->
 
-            android:background="@drawable/button_shape"
-            android:shadowColor="#A8A8A8"
-            android:shadowDx="0"
-            android:shadowDy="0"
-            android:shadowRadius="5"/>
+            <!--android:background="@drawable/button_shape"-->
+            <!--android:shadowColor="#A8A8A8"-->
+            <!--android:shadowDx="0"-->
+            <!--android:shadowDy="0"-->
+            <!--android:shadowRadius="5"/>-->
 
-    </RelativeLayout>
+    <!--</RelativeLayout>-->
 
 </android.support.v4.widget.DrawerLayout>
