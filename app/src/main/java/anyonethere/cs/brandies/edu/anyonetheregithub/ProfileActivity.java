@@ -1,10 +1,15 @@
 package anyonethere.cs.brandies.edu.anyonetheregithub;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseUser;
 
 
 /**
@@ -15,8 +20,9 @@ public class ProfileActivity extends AppCompatActivity {
 
     String name;
     String email;
-    String phoneNumber;
+    String phone;
     String photoURL;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +36,33 @@ public class ProfileActivity extends AppCompatActivity {
         ImageView profilePhoto = (ImageView) findViewById(R.id.profile_photo);
         TextView profilePhone = (TextView) findViewById(R.id.profile_phone);
 
+        name = user.getEmail().split("@")[0];
+        email = user.getEmail();
+        phone = user.getPhoneNumber();
+
         // set each view with input information
-        profileName.setText(bundle.getString("name"));
-        profileEmail.setText(bundle.getString("email"));
-        profilePhone.setText(bundle.getString("phone"));
+        profileName.setText(name);
+        profileEmail.setText(email);
+        profilePhone.setText(phone);
 //        profilePhoto.setImageURI(Uri.parse(bundle.getString("photo"))); // since current no uri for photo
+
+        Button editButton = (Button) findViewById(R.id.profile_edit_button);
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent editIntent = new Intent(ProfileActivity.this, ProfileEditActivity.class);
+                startActivity(editIntent);
+            }
+        });
+
+        Button backButton = (Button) findViewById(R.id.profile_back_button);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent backIntent = new Intent(ProfileActivity.this, MainActivity.class);
+                startActivity(backIntent);
+            }
+        });
 
     }
 }

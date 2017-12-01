@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TextView userName;
     TextView userEmail;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,10 +91,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_profile) {
             // Handle the profile action
             Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
-            intent.putExtra("name", user.getEmail().split("@")[0]);
-            intent.putExtra("email", user.getEmail());
-            intent.putExtra("phone", user.getPhoneNumber());
-            intent.putExtra("photo", user.getPhotoUrl());
             startActivity(intent);
 
         } else if (id == R.id.nav_post) {
