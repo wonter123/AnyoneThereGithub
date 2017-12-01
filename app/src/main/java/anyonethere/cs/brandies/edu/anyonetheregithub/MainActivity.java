@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 mainListView.setAdapter(adp);
             }
 
+
             @Override
             public void onCancelled(DatabaseError firebaseError) {
                 Log.w("loadPost:onCancelled", firebaseError.toException());
