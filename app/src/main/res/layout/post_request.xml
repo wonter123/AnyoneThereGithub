@@ -46,12 +46,12 @@
         android:id="@+id/labelDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Description"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/request_reward_box"
-        android:inputType="textCapSentences|textMultiLine"
+        android:layout_alignLeft="@+id/textView4"
         android:layout_alignStart="@+id/textView4"
-        android:layout_alignLeft="@+id/textView4"/>
+        android:layout_below="@+id/request_reward_box"
+        android:layout_marginTop="20dp"
+        android:inputType="textCapSentences|textMultiLine"
+        android:text="Description" />
 
     <EditText
         android:id="@+id/request_description_box"
