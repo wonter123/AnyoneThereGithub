@@ -9,10 +9,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.mindorks.placeholderview.PlaceHolderView;
 
 
@@ -23,11 +26,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar mToolbar;
     private PlaceHolderView mGalleryView;
 
+    NavigationView navigationView;
+    View menuheader;
+    FirebaseUser user;
+    TextView userName;
+    TextView userEmail;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+
+        // set the user profile in menu header
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+        menuheader = navigationView.getHeaderView(0);
+
+        if (menuheader != null) {
+            userEmail = (TextView) menuheader.findViewById(R.id.nav_email);
+            userName = (TextView) menuheader.findViewById(R.id.nav_username);
+            String email = user.getEmail();
+            String name = email.split("@")[0];
+
+            // load menu navigation data
+            userName.setText(name);
+            userEmail.setText(email);
+        } else {
+            Log.d("Warning", "menu header is null");
+        }
+
+
+        // set tool bar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -37,7 +68,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         // set button to map
@@ -45,11 +75,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mapIntent = new Intent(MainActivity.this, MapsActivity2.class);
+                Intent mapIntent = new Intent(MainActivity.this, MapsActivity.class);
                 startActivity(mapIntent);
             }
         });
-
 
     }
 
@@ -61,7 +90,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_profile) {
             // Handle the profile action
-
+            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_post) {
             // Handle the post new request action

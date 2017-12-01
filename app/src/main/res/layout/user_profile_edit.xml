@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:theme="@style/dialog_profile_edit">
+
+
+    <ImageView
+        android:id="@+id/profile_edit_cover"
+        android:layout_width="384dp"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal_background"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="0dp" />
+
+    <ImageView
+        android:id="@+id/profile_edit_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal_background"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="184dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/profile_edit_name"
+        android:layout_alignLeft="@+id/profile_edit_phone_label"
+        android:layout_alignStart="@+id/profile_edit_phone_label"
+        android:text="User Name: "
+        android:textSize="20dp"
+        android:id="@+id/profile_edit_name_label" />
+
+    <TextView
+        android:id="@+id/profile_edit_name"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/profile_edit_photo"
+        android:layout_toEndOf="@+id/profile_edit_name_label"
+        android:layout_toRightOf="@+id/profile_edit_name_label"
+        android:text="user_name"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/profile_edit_rating_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/profile_edit_phone_label"
+        android:layout_alignStart="@+id/profile_edit_phone_label"
+        android:layout_below="@+id/profile_edit_name"
+        android:layout_marginTop="15dp"
+        android:text="Rating: "
+        android:textSize="20dp" />
+
+    <RatingBar
+        android:id="@+id/profile_edit_ratingBar"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/profile_edit_email"
+        android:layout_alignStart="@+id/profile_edit_email"
+        android:layout_alignTop="@+id/profile_edit_rating_label" />
+
+    <TextView
+        android:id="@+id/profile_edit_email_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profile_edit_ratingBar"
+        android:layout_marginTop="20dp"
+        android:layout_alignLeft="@+id/profile_edit_phone_label"
+        android:layout_alignStart="@+id/profile_edit_phone_label"
+        android:layout_marginBottom="15dp"
+        android:text="Email: "
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/profile_edit_email"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/profile_edit_name"
+        android:layout_alignStart="@+id/profile_edit_name"
+        android:layout_alignTop="@+id/profile_edit_email_label"
+        android:text="email"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/profile_edit_phone_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/profile_edit_email_label"
+        android:text="Phone: "
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/profile_edit_phone"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/profile_edit_email"
+        android:layout_alignStart="@+id/profile_edit_email"
+        android:layout_alignTop="@+id/profile_edit_phone_label"
+        android:text="phone"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/profile_edit_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/profile_edit_phone"
+        android:text="Task Accepted: 10"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/profile_edit_accomplished"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_edit_task"
+        android:layout_alignLeft="@+id/profile_edit_task"
+        android:layout_alignStart="@+id/profile_edit_task"
+        android:text="Task Accomplished: 7"
+        android:layout_marginTop="15dp"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/profile_edit_savebutton"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/profile_edit_task"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/profile_edit_task"
+        android:layout_marginEnd="22dp"
+        android:layout_marginRight="22dp"
+        android:text="SAVE" />
+
+    <Button
+        android:id="@+id/profile_edit_cancelbutton"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="29dp"
+        android:layout_marginStart="29dp"
+        android:layout_toEndOf="@+id/profile_edit_photo"
+        android:layout_toRightOf="@+id/profile_edit_photo"
+        android:text="CANCEL" />
+
+</RelativeLayout>
