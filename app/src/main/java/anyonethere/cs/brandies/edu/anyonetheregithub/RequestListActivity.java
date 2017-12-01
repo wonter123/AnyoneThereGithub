@@ -3,6 +3,7 @@ package anyonethere.cs.brandies.edu.anyonetheregithub;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,69 +22,65 @@ import java.util.ArrayList;
 
 
 public class RequestListActivity extends AppCompatActivity {
-    private ListView mainListView ;
     private DatabaseReference mDatabase;
-    private AppAdaptor adp;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.request_elements);
 
-        adp = new AppAdaptor();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase = mDatabase.getRoot();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("posts");
         mDatabase.addValueEventListener(new ValueEventListener(){
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                AppAdaptor adp = new AppAdaptor();
+                ListView mainListView = (ListView) findViewById( R.id.listexpense);
                 for (DataSnapshot uniqueUserSnapshot : dataSnapshot.getChildren()) {
                     String key = uniqueUserSnapshot.getKey();
                     Post post = uniqueUserSnapshot.getValue(Post.class);
                     adp.addIn(post,key);
                 }
+                mainListView.setAdapter(adp);
             }
 
             @Override
             public void onCancelled(DatabaseError firebaseError) {
-
+                Log.w("loadPost:onCancelled", firebaseError.toException());
             }
         });
 
-        mainListView = (ListView) findViewById( R.id.listexpense);
-        mainListView.setAdapter(adp);
+
+//        mainListView = (ListView) findViewById( R.id.listexpense);
+//        mainListView.setAdapter(adp);
     }
 
     class AppAdaptor extends BaseAdapter {
         ArrayList<Post> arrlist;
         ArrayList<String> key;
-//        Context content;
-//        int layoutId;
 
         public AppAdaptor() {
             super();
-            arrlist = new ArrayList<>();
             key = new ArrayList<>();
-//            ExpenseLogEntryData e1 = new ExpenseLogEntryData("test","sometest");
-//            ExpenseLogEntryData e2 = new ExpenseLogEntryData("another test","someday some night");
-//            arrlist.add(e1);
-//            arrlist.add(e2);
+            arrlist = new ArrayList<>();
         }
 
-        public void addIn(Post post,String keys) {
-//            User e3 = new ExpenseLogEntryData(expense,note);
+        public void addIn(Post post, String keys) {
             arrlist.add(post);
             key.add(keys);
+
         }
 
+        @Override
         public int getCount() {
             return arrlist.size();
         }
 
+        @Override
         public Object getItem(int index) {
             return arrlist.get(index);
         }
 
+        @Override
         public long getItemId(int index) {
             return index;
         }
@@ -100,12 +97,14 @@ public class RequestListActivity extends AppCompatActivity {
             requester = (TextView) row.findViewById(R.id.Requester);
             reward = (TextView) row.findViewById(R.id.reward);
 
-            Post post = arrlist.get(index);
-            heading.setText((String)post.result.get("title"));
-            requester.setText((String)post.result.get("poster"));
-            reward.setText((String)post.result.get("reward"));
-
             final String k = key.get(index);
+
+            Post post = arrlist.get(index);
+            System.out.println("here");
+
+            heading.setText(post.title);
+            requester.setText(post.posterId);
+            reward.setText(post.reward+"");
 
             Button button = (Button) row.findViewById(R.id.detail);
             button.setOnClickListener(new View.OnClickListener() {
@@ -116,9 +115,6 @@ public class RequestListActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-
-
-            //System.out.println("here");
 
             return (row);
         }
