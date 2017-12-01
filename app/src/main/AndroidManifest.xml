@@ -62,6 +62,14 @@
         <activity
             android:name=".MapsActivity2"
             android:label="@string/title_activity_maps2"></activity>
+
+        <activity android:name=".ProfileActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.PROFILE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

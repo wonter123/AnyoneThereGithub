@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     NavigationView navigationView;
     View menuheader;
+    FirebaseUser user;
     TextView userName;
     TextView userEmail;
 
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = (NavigationView) findViewById(R.id.nav_view);
 
         // set the user profile in menu header
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
         menuheader = navigationView.getHeaderView(0);
 
@@ -90,7 +91,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_profile) {
             // Handle the profile action
-
+            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+            intent.putExtra("name", user.getEmail().split("@")[0]);
+            intent.putExtra("email", user.getEmail());
+            intent.putExtra("phone", user.getPhoneNumber());
+            intent.putExtra("photo", user.getPhotoUrl());
+            startActivity(intent);
 
         } else if (id == R.id.nav_post) {
             // Handle the post new request action
