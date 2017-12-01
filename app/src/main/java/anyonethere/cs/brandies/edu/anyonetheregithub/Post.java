@@ -32,7 +32,7 @@ public class Post {
 
 
     public Post(String title, int reward, String description, Date postDate,
-                Date expireDate, String from, String to, int rating, String imageID) {
+                Date expireDate, String from, String to) {
         this.title = title;
         this.reward = reward;
         this.description = description;
@@ -40,8 +40,8 @@ public class Post {
         this.expireDate = expireDate;
         this.from = from;
         this.to = to;
-        this.rating = rating;
-        this.imageID = imageID;
+//        this.rating = rating;
+//        this.imageID = imageID;
         this.posterId = null;
         this.takerId = null;
         toMap();
@@ -70,6 +70,14 @@ public class Post {
     public void setPoster(String id) {
         this.posterId = id;
         result.put("poster", posterId);
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public void setImageID(String imageID) {
+        this.imageID = imageID;
     }
 
     public String  toString(){
