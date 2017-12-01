@@ -31,6 +31,8 @@ public class TakeRequestActivity extends AppCompatActivity {
         take();
     }
 
+
+
     // if cancel is clicked, do nothing
     void cancel() {
         Button cancel = (Button)findViewById(R.id.takeRequest_cancle);
