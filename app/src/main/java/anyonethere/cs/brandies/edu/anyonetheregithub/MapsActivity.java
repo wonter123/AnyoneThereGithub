@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
@@ -80,6 +81,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ListInDialogAdapter listInDialogAdapter;
     private ListView listInDialog;
 
+
+    private FloatingActionButton backToList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -137,6 +140,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         for(String loc: allLocations){
             locationIndex.put(loc, positions[i++]);
         }
+
+        backToList = (FloatingActionButton) findViewById(R.id.main_mapButton);
     }
 
     @Override

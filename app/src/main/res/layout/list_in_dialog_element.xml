@@ -20,7 +20,7 @@
         android:id="@+id/list_in_dialog_Requester"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/heading"
+        android:layout_below="@+id/list_in_dialog_heading"
         android:layout_marginLeft="100dp"
         android:padding="10dp"
         android:text="Requester ID"
@@ -30,7 +30,7 @@
         android:id="@+id/list_in_dialog_reward"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/Requester"
+        android:layout_below="@+id/list_in_dialog_Requester"
         android:layout_marginLeft="100dp"
         android:padding="10dp"
         android:text="Reward"
@@ -43,29 +43,25 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="11dp"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="18dp"
         app:srcCompat="@drawable/ic_face" />
 
     <Button
         android:id="@+id/list_in_dialog_detail"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/linearLayout"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:layout_alignStart="@+id/linearLayout"
-        android:layout_below="@+id/reward"
+        android:layout_below="@+id/list_in_dialog_reward"
         android:text="Detail" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/userID"
-        android:layout_alignStart="@+id/userID"
-        android:layout_below="@+id/userID">
+        android:layout_alignLeft="@+id/list_in_dialog_userID"
+        android:layout_alignStart="@+id/list_in_dialog_userID"
+        android:layout_below="@+id/list_in_dialog_userID">
 
         <RatingBar
             android:id="@+id/list_in_dialog_ratingbar"
@@ -73,7 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:numStars="5"
-            android:rating="3"
+            android:rating="5"
             android:stepSize="0.1" />
     </LinearLayout>
 

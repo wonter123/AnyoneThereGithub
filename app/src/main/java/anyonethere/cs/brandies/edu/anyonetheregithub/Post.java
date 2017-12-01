@@ -28,7 +28,6 @@ public class Post {
         // Default constructor required for calls to DataSnapshot.getValue(Post.class)
     }
 
-    public Post(){}
 
     public Post(String title, int reward, String description, Date postDate,
                 Date expireDate, String from, String to) {
