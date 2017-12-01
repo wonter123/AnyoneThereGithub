@@ -1,13 +1,17 @@
 package anyonethere.cs.brandies.edu.anyonetheregithub;
 
+import android.app.Dialog;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.Window;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -19,11 +23,22 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
     private static final String TAG = MapsActivity.class.getSimpleName();
@@ -52,18 +67,36 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
 
+    private static ArrayList<Post> allPosts;
+
+
+    private DatabaseReference mDataBase;
+
+    private Map<String, double[]> locationIndex;
+    private Map<String, ArrayList<Post>> mapToPosts;
+    private String[] allLocations;
+    private double[][] positions;
+
+    private ListView requestList;
+    private ListInDialogAdapter listInDialogAdapter;
+    private ListView listInDialog;
+
+
+    private FloatingActionButton backToList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        Log.d(TAG, "akakaksdkjfs");
+        Log.d(TAG, "123456789012345678901234567890");
 
         // Retrieve location and camera position from saved instance state.
         if (savedInstanceState != null) {
             mLastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION);
             mCameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
         }
+
+        mDataBase = FirebaseDatabase.getInstance().getReference("posts");
 
 
         // Construct a GeoDataClient.
@@ -80,6 +113,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
+        allPosts = new ArrayList<Post>();
+        allLocations = getResources().getStringArray(R.array.locations);
+        locationIndex = new HashMap<>();
+        mapToPosts = new HashMap<String, ArrayList<Post>>();
+        for(String loc: allLocations){
+            mapToPosts.put(loc, new ArrayList<Post>());
+        }
+        positions = new double[allLocations.length][2];
+        positions[0] = new double[]{42.365938, -71.253759 };
+        positions[1] = new double[]{42.364940, -71.254762 };
+        positions[2] = new double[]{42.366207, -71.255398 };
+        positions[3] = new double[]{42.367665, -71.254871 };
+        positions[4] = new double[]{42.369348, -71.255645 };
+        positions[5] = new double[]{42.369592, -71.257693 };
+        positions[6] = new double[]{42.369226, -71.259192 };
+        positions[7] = new double[]{42.368012, -71.256807 };
+        positions[8] = new double[]{42.368191, -71.258212 };
+        positions[9] = new double[]{42.366958, -71.258760 };
+        positions[10] = new double[]{42.365929, -71.258290 };
+        positions[11] = new double[]{42.359766, -71.257016 };
+        positions[12] = new double[]{42.364772, -71.264716 };
+        int i=0;
+        for(String loc: allLocations){
+            locationIndex.put(loc, positions[i++]);
+        }
+
+        backToList = (FloatingActionButton) findViewById(R.id.main_mapButton);
     }
 
     @Override
@@ -111,13 +173,66 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Prompt the user for permission.
         getLocationPermission();
         // Turn on the My Location layer and the related control on the map.
-        updateLocationUI();
-
-
-
+//        updateLocationUI();
         // Get the current location of the device and set the position of the map.
         //uncomment this and the app will CRASH!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!...
 //        getDeviceLocation();
+
+        mDataBase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds: dataSnapshot.getChildren()){
+                    Post curP = ds.getValue(Post.class);
+                    allPosts.add(curP);
+                    mapToPosts.get(curP.getFrom()).add(curP);
+                }
+
+                // add a marker to show the location with at least one outgoing request
+                for(String loc: mapToPosts.keySet()){
+                    int count = mapToPosts.get(loc).size();
+                    if(count!=0){
+                        Marker marker =  mMap.addMarker(new MarkerOptions().position(new LatLng(locationIndex.get(loc)[0], locationIndex.get(loc)[1]))
+                                .title(count+"" )
+                                .alpha(0.8f)
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+
+                        marker.setTag(loc);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
+        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                String loc = marker.getTag().toString();
+                if(loc == null || loc.length() == 0) return false;
+                Dialog dialog = new Dialog(MapsActivity.this);
+                dialog.setContentView(R.layout.list_in_dialog);
+                Window window = dialog.getWindow();
+                window.setLayout(1000, 1200 );
+                ArrayList<Post> postsAtCurrentLocation = mapToPosts.get(loc);
+
+                listInDialogAdapter = new ListInDialogAdapter(MapsActivity.this, R.layout.request_list, postsAtCurrentLocation);
+                listInDialog = (ListView)dialog.findViewById(R.id.list_in_dialog_listview);
+                Toast.makeText(MapsActivity.this, "lalala: "+ listInDialog,Toast.LENGTH_LONG).show();
+                listInDialog.setAdapter(listInDialogAdapter);
+
+                dialog.show();
+                return true;
+            }
+        });
+
+
+
     }
     private void getLocationPermission() {
         /*

@@ -16,12 +16,9 @@
         <item>Heller School</item>
         <item>Usdan Student Center</item>
         <item>Libaries</item>
-        <item>Social Science</item>
         <item>Science Complex</item>
         <item>Shapiro Science Center</item>
         <item>Charles River Apartment</item>
-        <item>Shapiro Brothers Resident Hall</item>
-        <item>Rubenstein-Pomerantz Residence Hall</item>
         <item>International Business School</item>
     </string-array>
     <string-array name="day">
