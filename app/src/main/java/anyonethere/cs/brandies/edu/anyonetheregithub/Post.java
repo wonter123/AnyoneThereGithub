@@ -39,12 +39,12 @@ public class Post {
         this.to = to;
         this.posterId = null;
         this.takerId = null;
-        result = new HashMap<>();
         toMap();
     }
 
     @Exclude
     public Map<String, Object> toMap() {
+        result = new HashMap<>();
         result.put("title", title);
         result.put("reward", reward);
         result.put("description", description);

@@ -7,10 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class TakeRequestActivity extends AppCompatActivity {
@@ -26,12 +29,10 @@ public class TakeRequestActivity extends AppCompatActivity {
         setContentView(R.layout.take_request);
 
         drawPost();
-        drawPoster();
+        //drawPoster();
         cancel();
         take();
     }
-
-
 
     // if cancel is clicked, do nothing
     void cancel() {
@@ -61,30 +62,43 @@ public class TakeRequestActivity extends AppCompatActivity {
         if (intent.getExtras() != null) {
             String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
             postId = intent.getExtras().getString("key");
-            mDatabase = FirebaseDatabase.getInstance().getReference();
-            curtPost = mDatabase.child("posts").child(postId);
+            mDatabase = FirebaseDatabase.getInstance().getReference("posts");
+            curtPost = mDatabase.child(postId);
 
-            TextView header = (TextView) findViewById(R.id.takeRequest_headContent);
-            TextView reward = (TextView) findViewById(R.id.takeRequest_rewardContent);
-            TextView from = (TextView) findViewById(R.id.takeRequest_fromContent);
-            TextView to = (TextView) findViewById(R.id.takeRequest_toContent);
-            TextView expireDate = (TextView) findViewById(R.id.takeRequest_ExpireContent);
-            TextView description = (TextView) findViewById(R.id.takeRequest_descriptionContent);
+            curtPost.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    Post p = dataSnapshot.getValue(Post.class);
 
-            header.setText(curtPost.child("title").toString());
-            reward.setText(curtPost.child("reward").toString());
-            description.setText(curtPost.child("description").toString());
-            expireDate.setText(curtPost.child("expireDate").toString());
-            from.setText(curtPost.child("from").toString());
-            to.setText(curtPost.child("to").toString());
+                    TextView header = (TextView) findViewById(R.id.takeRequest_headContent);
+                    TextView reward = (TextView) findViewById(R.id.takeRequest_rewardContent);
+                    TextView from = (TextView) findViewById(R.id.takeRequest_fromContent);
+                    TextView to = (TextView) findViewById(R.id.takeRequest_toContent);
+                    TextView expireDate = (TextView) findViewById(R.id.takeRequest_ExpireContent);
+                    TextView description = (TextView) findViewById(R.id.takeRequest_descriptionContent);
+
+                    header.setText(p.title);
+                    reward.setText(p.reward);
+                    description.setText(p.description);
+                    expireDate.setText(p.expireDate.toString());
+                    from.setText(p.from);
+                    to.setText(p.to);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+
         }
     }
 
     // waiting support for user profile
     void drawPoster() {
-        /*TextView postUser = (TextView) findViewById(R.id.takeRequest_headContent);
-        String userId = curtPost.child("posterId").toString();
-        String poserUserName = mDatabase.child("users").child("userId").child("username").toString();
-        postUser.setText(poserUserName);*/
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference curtUser = FirebaseDatabase.getInstance().getReference("posts");
+        DatabaseReference user = curtUser.child(userId);
     }
 }
