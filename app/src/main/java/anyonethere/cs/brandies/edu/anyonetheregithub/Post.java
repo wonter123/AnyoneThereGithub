@@ -1,5 +1,8 @@
 package anyonethere.cs.brandies.edu.anyonetheregithub;
 
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.IgnoreExtraProperties;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,6 +11,7 @@ import java.util.Map;
  * Created by phoebez on 14.11.17.
  */
 
+@IgnoreExtraProperties
 public class Post {
     public String title;
     public int reward;
@@ -39,6 +43,7 @@ public class Post {
         toMap();
     }
 
+    @Exclude
     public Map<String, Object> toMap() {
         result.put("title", title);
         result.put("reward", reward);
