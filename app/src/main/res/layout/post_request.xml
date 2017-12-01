@@ -65,19 +65,41 @@
         android:ems="10"
         android:inputType="textMultiLine" />
 
+    <TextView
+        android:id="@+id/labelFrom"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/request_description_box"
+        android:layout_alignStart="@+id/post_request_day"
+        android:layout_alignLeft="@+id/post_request_day"
+        android:text="From:" />
+
+    <TextView
+        android:id="@+id/labelTo"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/request_description_box"
+        android:layout_alignStart="@+id/post_request_to"
+        android:layout_alignLeft="@+id/post_request_to"
+        android:text="To:" />
+
     <Spinner
+        style="@style/Widget.AppCompat.Spinner.Underlined"
         android:id="@+id/post_request_from"
-        android:layout_width="120dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:autofillHints="From"
-        android:layout_marginTop="15dp"
-        android:layout_below="@+id/request_description_box"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/labelFrom"
         android:layout_alignStart="@+id/request_description_box"
         android:layout_alignLeft="@+id/request_description_box"/>
 
     <Spinner
+        style="@style/Widget.AppCompat.Spinner.Underlined"
         android:id="@+id/post_request_to"
-        android:layout_width="120dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:autofillHints="To"
         android:layout_alignTop="@+id/post_request_from"
@@ -85,31 +107,34 @@
         android:layout_alignRight="@+id/request_description_box"/>
 
     <Spinner
+        style="@style/Widget.AppCompat.Spinner.Underlined"
         android:id="@+id/post_request_day"
-        android:layout_width="60dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/post_request_hour"
-        android:autofillHints="day"
-        android:layout_centerHorizontal="true" />
-
-    <Spinner
-        android:id="@+id/post_request_hour"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:autofillHints="hour"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/labelExpireIn"
+        android:layout_alignLeft="@+id/post_request_from"
         android:layout_alignStart="@+id/post_request_from"
-        android:layout_alignLeft="@+id/post_request_from"/>
+        android:autofillHints="day" />
 
     <Spinner
-        android:id="@+id/post_request_minute"
-        android:layout_width="60dp"
+        style="@style/Widget.AppCompat.Spinner.Underlined"
+        android:id="@+id/post_request_hour"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/post_request_hour"
-        android:autofillHints="min"
+        android:layout_below="@+id/labelExpireIn"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:autofillHints="hour" />
+
+    <Spinner
+        style="@style/Widget.AppCompat.Spinner.Underlined"
+        android:id="@+id/post_request_minute"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/request_reward_box"
-        android:layout_alignRight="@+id/request_reward_box"/>
+        android:layout_alignRight="@+id/request_reward_box"
+        android:layout_alignTop="@+id/post_request_hour"
+        android:autofillHints="min" />
 
     <TextView
         android:id="@+id/labelExpireIn"
@@ -117,8 +142,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/post_request_from"
-        android:layout_alignStart="@+id/post_request_hour"
-        android:layout_alignLeft="@+id/post_request_hour"
+        android:layout_alignStart="@+id/post_request_day"
+        android:layout_alignLeft="@+id/post_request_day"
         android:text="Expire in:" />
 
     <TextView
@@ -135,9 +160,9 @@
         android:id="@+id/request_save_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/post_request_hour"
+        android:layout_alignLeft="@+id/post_request_day"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/post_request_hour"
+        android:layout_alignStart="@+id/post_request_day"
         android:layout_marginBottom="12dp"
         android:text="Save" />
 
