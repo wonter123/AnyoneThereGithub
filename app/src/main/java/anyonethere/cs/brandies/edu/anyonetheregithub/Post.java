@@ -20,6 +20,8 @@ public class Post {
     private String takerId;
     HashMap<String, Object> result;
 
+    public Post(){}
+
     public Post(String title, int reward, String description, Date postDate,
                 Date expireDate, String from, String to) {
         this.title = title;
@@ -57,5 +59,43 @@ public class Post {
     public void setPoster(String id) {
         this.posterId = id;
         result.put("poster", posterId);
+    }
+
+    public String  toString(){
+        return this.title+" "+this.description;
+    }
+
+    public String getFrom(){
+        return this.from;
+    }
+
+    public String getTitle(){
+        return title;
+    }
+    public String getPosterId(){
+        return posterId;
+    }
+    public int getReward(){
+        return reward;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Date getPostDate() {
+        return postDate;
+    }
+
+    public Date getExpireDate() {
+        return expireDate;
+    }
+
+    public String getTo() {
+        return to;
+    }
+
+    public String getTakerId() {
+        return takerId;
     }
 }
