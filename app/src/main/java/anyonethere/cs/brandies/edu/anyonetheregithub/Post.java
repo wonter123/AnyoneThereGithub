@@ -1,5 +1,8 @@
 package anyonethere.cs.brandies.edu.anyonetheregithub;
 
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.IgnoreExtraProperties;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,17 +11,22 @@ import java.util.Map;
  * Created by phoebez on 14.11.17.
  */
 
+@IgnoreExtraProperties
 public class Post {
-    private String title;
-    private int reward;
-    private String description;
-    private Date postDate;
-    private Date expireDate;
-    private String from;
-    private String to;
-    private String posterId;
-    private String takerId;
-    HashMap<String, Object> result;
+    public String title;
+    public int reward;
+    public String description;
+    public Date postDate;
+    public Date expireDate;
+    public String from;
+    public String to;
+    public String posterId;
+    public String takerId;
+    public HashMap<String, Object> result;
+
+    public Post() {
+        // Default constructor required for calls to DataSnapshot.getValue(Post.class)
+    }
 
     public Post(String title, int reward, String description, Date postDate,
                 Date expireDate, String from, String to) {
@@ -33,9 +41,9 @@ public class Post {
         this.takerId = null;
         result = new HashMap<>();
         toMap();
-
     }
 
+    @Exclude
     public Map<String, Object> toMap() {
         result.put("title", title);
         result.put("reward", reward);
