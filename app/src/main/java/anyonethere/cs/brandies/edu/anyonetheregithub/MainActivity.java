@@ -10,16 +10,29 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.mindorks.placeholderview.PlaceHolderView;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private DatabaseReference mDatabase;
 
     private PlaceHolderView mDrawerView;
     private DrawerLayout mDrawer;
@@ -80,6 +93,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("posts");
+        mDatabase.addValueEventListener(new ValueEventListener(){
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                AppAdaptor adp = new AppAdaptor();
+                ListView mainListView = (ListView) findViewById( R.id.listlog);
+                for (DataSnapshot uniqueUserSnapshot : dataSnapshot.getChildren()) {
+                    String key = uniqueUserSnapshot.getKey();
+                    Post post = uniqueUserSnapshot.getValue(Post.class);
+                    adp.addIn(post,key);
+                }
+                mainListView.setAdapter(adp);
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError firebaseError) {
+                Log.w("loadPost:onCancelled", firebaseError.toException());
+            }
+        });
+
+
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -98,7 +133,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(MainActivity.this, PostRequestActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_management) {
-
+            Intent intent = new Intent(MainActivity.this, RequestListActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_notification) {
 
         } else if (id == R.id.nav_logout) {
@@ -112,6 +148,72 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    class AppAdaptor extends BaseAdapter {
+        ArrayList<Post> arrlist;
+        ArrayList<String> key;
+
+        public AppAdaptor() {
+            super();
+            key = new ArrayList<>();
+            arrlist = new ArrayList<>();
+        }
+
+        public void addIn(Post post, String keys) {
+            arrlist.add(post);
+            key.add(keys);
+
+        }
+
+        @Override
+        public int getCount() {
+            return arrlist.size();
+        }
+
+        @Override
+        public Object getItem(int index) {
+            return arrlist.get(index);
+        }
+
+        @Override
+        public long getItemId(int index) {
+            return index;
+        }
+
+        @Override
+        public View getView(int index, View view, ViewGroup parent){
+
+            LayoutInflater inflater = getLayoutInflater();
+            View row;
+            row = inflater.inflate(R.layout.request_list, parent, false);
+
+            TextView heading,requester,reward;
+            heading = (TextView) row.findViewById(R.id.heading);
+            requester = (TextView) row.findViewById(R.id.Requester);
+            reward = (TextView) row.findViewById(R.id.reward);
+
+            final String k = key.get(index);
+
+            Post post = arrlist.get(index);
+            System.out.println("here");
+
+            heading.setText(post.title);
+            requester.setText(post.posterId);
+            reward.setText(post.reward+"");
+
+            Button button = (Button) row.findViewById(R.id.detail);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(MainActivity.this,TakeRequestActivity.class);
+                    intent.putExtra("key",k);
+                    startActivity(intent);
+                }
+            });
+
+            return (row);
+        }
     }
 
 }

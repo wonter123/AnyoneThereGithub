@@ -16,32 +16,31 @@
         <item>Heller School</item>
         <item>Usdan Student Center</item>
         <item>Libaries</item>
-        <item>Social Science</item>
         <item>Science Complex</item>
         <item>Shapiro Science Center</item>
         <item>Charles River Apartment</item>
-        <item>Shapiro Brothers Resident Hall</item>
-        <item>Rubenstein-Pomerantz Residence Hall</item>
         <item>International Business School</item>
     </string-array>
     <string-array name="day">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
+        <item>1 day</item>
+        <item>2 days</item>
+        <item>3 days</item>
         <item>1 week</item>
     </string-array>
     <string-array name="hour">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>12</item>
+        <item>0 hour</item>
+        <item>1 hour</item>
+        <item>2 hours</item>
+        <item>3 hours</item>
+        <item>12 hours</item>
     </string-array>
     <string-array name="minute">
-        <item>10</item>
-        <item>15</item>
-        <item>20</item>
-        <item>30</item>
-        <item>45</item>
+        <item>0 minute</item>
+        <item>10 minutes</item>
+        <item>15 minutes</item>
+        <item>20 minutes</item>
+        <item>30 minutes</item>
+        <item>45 minutes</item>
     </string-array>
     <string name="title_activity_maps2">Map</string>
 </resources>
