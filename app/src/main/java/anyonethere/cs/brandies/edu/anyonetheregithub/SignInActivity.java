@@ -34,6 +34,11 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
     private Button mSignUpButton;
 
 
+    public String currentUserName;
+    public String Uid;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +84,9 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
 
         // Write new user
         writeNewUser(user.getUid(), username, user.getEmail());
+
+        currentUserName = user.getDisplayName();
+        Uid = user.getUid();
 
         // Go to MainActivity
         startActivity(new Intent(SignInActivity.this, MainActivity.class));
