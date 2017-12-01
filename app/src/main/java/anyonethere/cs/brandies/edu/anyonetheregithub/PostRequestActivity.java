@@ -90,38 +90,47 @@ public class PostRequestActivity extends AppCompatActivity implements AdapterVie
         findViewById(R.id.request_save_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String key = mDatabase.child("posts").push().getKey();
 
                 String title = ((EditText) findViewById(R.id.request_title_box)).getText().toString();
                 String reward = ((EditText) findViewById(R.id.request_reward_box)).getText().toString();
-                String description = ((EditText) findViewById(R.id.request_description_box)).getText().toString();
-                int day = Integer.parseInt(((Spinner) findViewById(R.id.post_request_day)).getSelectedItem().toString());
-                int hour = Integer.parseInt(((Spinner) findViewById(R.id.post_request_hour)).getSelectedItem().toString());
-                int minute = Integer.parseInt(((Spinner) findViewById(R.id.post_request_minute)).getSelectedItem().toString());
-                String from = ((Spinner) findViewById(R.id.post_request_from)).getSelectedItem().toString();
-                String to = ((Spinner) findViewById(R.id.post_request_to)).getSelectedItem().toString();
 
-                Calendar cal = Calendar.getInstance();
-                Date current = new Date();
-                cal.setTime(current);
-                cal.add(Calendar.DATE, day);
-                cal.add(Calendar.HOUR, hour);
-                cal.add(Calendar.MINUTE, minute);
-                Date expire = cal.getTime();
+                if (title.trim().equals(""))
+                    ((EditText) findViewById(R.id.request_title_box)).setError("Please enter a title for your request.");
+                else if (reward.trim().equals("") || !reward.trim().matches("[-+]?\\d*\\.?\\d+"))
+                    ((EditText) findViewById(R.id.request_reward_box)).setError("Please enter a valid reward amount.");
+                else {
 
-                Post newPost = new Post(title, Integer.parseInt(reward), description, current,
-                        expire, from, to);
-                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                newPost.setPoster(userId);
+                    String key = mDatabase.child("posts").push().getKey();
 
-                Map<String, Object> postValues = newPost.toMap();
-                Map<String, Object> childUpdates = new HashMap<>();
+                    String description = ((EditText) findViewById(R.id.request_description_box)).getText().toString();
+                    int day = Integer.parseInt(((Spinner) findViewById(R.id.post_request_day)).getSelectedItem().toString());
+                    int hour = Integer.parseInt(((Spinner) findViewById(R.id.post_request_hour)).getSelectedItem().toString());
+                    int minute = Integer.parseInt(((Spinner) findViewById(R.id.post_request_minute)).getSelectedItem().toString());
+                    String from = ((Spinner) findViewById(R.id.post_request_from)).getSelectedItem().toString();
+                    String to = ((Spinner) findViewById(R.id.post_request_to)).getSelectedItem().toString();
 
-                childUpdates.put("/posts/" + key, postValues);
-                childUpdates.put("/user-posts/" + userId + "/" + key, postValues);
+                    Calendar cal = Calendar.getInstance();
+                    Date current = new Date();
+                    cal.setTime(current);
+                    cal.add(Calendar.DATE, day);
+                    cal.add(Calendar.HOUR, hour);
+                    cal.add(Calendar.MINUTE, minute);
+                    Date expire = cal.getTime();
 
-                mDatabase.updateChildren(childUpdates);
-                finish();
+                    Post newPost = new Post(title, Integer.parseInt(reward), description, current,
+                            expire, from, to);
+                    String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    newPost.setPoster(userId);
+
+                    Map<String, Object> postValues = newPost.toMap();
+                    Map<String, Object> childUpdates = new HashMap<>();
+
+                    childUpdates.put("/posts/" + key, postValues);
+                    childUpdates.put("/user-posts/" + userId + "/" + key, postValues);
+
+                    mDatabase.updateChildren(childUpdates);
+                    finish();
+                }
             }
         });
     }
