@@ -10,8 +10,11 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -91,46 +94,62 @@ public class PostRequestActivity extends AppCompatActivity implements AdapterVie
             @Override
             public void onClick(View v) {
 
-                String title = ((EditText) findViewById(R.id.request_title_box)).getText().toString();
-                String reward = ((EditText) findViewById(R.id.request_reward_box)).getText().toString();
-
+                final String title = ((EditText) findViewById(R.id.request_title_box)).getText().toString();
+                final String reward = ((EditText) findViewById(R.id.request_reward_box)).getText().toString();
                 if (title.trim().equals(""))
                     ((EditText) findViewById(R.id.request_title_box)).setError("Please enter a title for your request.");
-                else if (reward.trim().equals("") || !reward.trim().matches("[-+]?\\d*\\.?\\d+"))
+                else if (reward.trim().equals("") || !reward.trim().matches("[-+]?\\d*\\.?\\d+") || Integer.parseInt(reward.trim()) < 0)
                     ((EditText) findViewById(R.id.request_reward_box)).setError("Please enter a valid reward amount.");
-                else {
 
-                    String key = mDatabase.child("posts").push().getKey();
+                final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                DatabaseReference curUser = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
 
-                    String description = ((EditText) findViewById(R.id.request_description_box)).getText().toString();
-                    int day = Integer.parseInt(((Spinner) findViewById(R.id.post_request_day)).getSelectedItem().toString());
-                    int hour = Integer.parseInt(((Spinner) findViewById(R.id.post_request_hour)).getSelectedItem().toString());
-                    int minute = Integer.parseInt(((Spinner) findViewById(R.id.post_request_minute)).getSelectedItem().toString());
-                    String from = ((Spinner) findViewById(R.id.post_request_from)).getSelectedItem().toString();
-                    String to = ((Spinner) findViewById(R.id.post_request_to)).getSelectedItem().toString();
+                curUser.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        User u = dataSnapshot.getValue(User.class);
+                        if (Integer.parseInt(reward.trim()) > u.getCredit())
+                            ((EditText) findViewById(R.id.request_reward_box)).setError("Please enter a reward amount less than your available credits.");
+                        else {
+                            String key = mDatabase.child("posts").push().getKey();
 
-                    Calendar cal = Calendar.getInstance();
-                    Date current = new Date();
-                    cal.setTime(current);
-                    cal.add(Calendar.DATE, day);
-                    cal.add(Calendar.HOUR, hour);
-                    cal.add(Calendar.MINUTE, minute);
-                    Date expire = cal.getTime();
+                            String description = ((EditText) findViewById(R.id.request_description_box)).getText().toString();
+                            int day = Integer.parseInt(((Spinner) findViewById(R.id.post_request_day)).getSelectedItem().toString().replaceAll("[^0-9]", ""));
+                            int hour = Integer.parseInt(((Spinner) findViewById(R.id.post_request_hour)).getSelectedItem().toString().replaceAll("[^0-9]", ""));
+                            int minute = Integer.parseInt(((Spinner) findViewById(R.id.post_request_minute)).getSelectedItem().toString().replaceAll("[^0-9]", ""));
+                            String from = ((Spinner) findViewById(R.id.post_request_from)).getSelectedItem().toString();
+                            String to = ((Spinner) findViewById(R.id.post_request_to)).getSelectedItem().toString();
 
-                    Post newPost = new Post(title, Integer.parseInt(reward), description, current,
-                            expire, from, to);
-                    String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    newPost.setPoster(userId);
+                            Calendar cal = Calendar.getInstance();
+                            Date current = new Date();
+                            cal.setTime(current);
+                            cal.add(Calendar.DATE, day);
+                            cal.add(Calendar.HOUR, hour);
+                            cal.add(Calendar.MINUTE, minute);
+                            Date expire = cal.getTime();
 
-                    Map<String, Object> postValues = newPost.toMap();
-                    Map<String, Object> childUpdates = new HashMap<>();
+                            Post newPost = new Post(title, Integer.parseInt(reward), description, current,
+                                    expire, from, to);
 
-                    childUpdates.put("/posts/" + key, postValues);
-                    childUpdates.put("/user-posts/" + userId + "/" + key, postValues);
+                            newPost.setPoster(userId);
 
-                    mDatabase.updateChildren(childUpdates);
-                    finish();
-                }
+                            Map<String, Object> postValues = newPost.toMap();
+                            Map<String, Object> childUpdates = new HashMap<>();
+
+                            childUpdates.put("/posts/" + key, postValues);
+                            childUpdates.put("/user-posts/" + userId + "/" + key, postValues);
+
+                            mDatabase.updateChildren(childUpdates);
+                            finish();
+                        }
+                    }
+
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
     }

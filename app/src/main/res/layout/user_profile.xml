@@ -44,14 +44,34 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp" />
 
+    <ImageView
+        android:id="@+id/profile_credit_label"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/profile_ratingBar"
+        android:src="@drawable/bcoin" />
+
+    <TextView
+        android:id="@+id/profile_credit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/profile_credit_label"
+        android:layout_marginBottom="10dp"
+        android:textSize="25dp"
+        android:layout_toEndOf="@+id/profile_phone"
+        android:layout_toRightOf="@+id/profile_phone"
+        android:layout_marginLeft="30dp"
+        android:text="0" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20dp"
         android:text="email"
-        android:layout_below="@+id/profile_ratingBar"
+        android:layout_below="@+id/profile_credit"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:id="@+id/profile_email" />
 
     <TextView

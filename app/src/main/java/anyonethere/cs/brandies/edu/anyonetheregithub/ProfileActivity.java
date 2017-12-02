@@ -41,7 +41,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_profile);
 
-
+        // get the database information
         mDatabase = FirebaseDatabase.getInstance().getReference("users");
         mAuth = FirebaseAuth.getInstance();
 
@@ -61,6 +61,7 @@ public class ProfileActivity extends AppCompatActivity {
                         TextView profileEmail = (TextView) findViewById(R.id.profile_email);
                         TextView profilePhone = (TextView) findViewById(R.id.profile_phone);
                         RatingBar profileRating = (RatingBar) findViewById(R.id.profile_ratingBar);
+                        TextView profileCredit = (TextView) findViewById(R.id.profile_credit);
                         TextView profileTaskAccomplished = (TextView) findViewById(R.id.profile_accomplished_number);
                         TextView profileTaskPoseted = (TextView) findViewById(R.id.profile_post_number);
 
@@ -68,6 +69,7 @@ public class ProfileActivity extends AppCompatActivity {
                         profileName.setText(currentUser.getUsername());
                         profileEmail.setText(currentUser.getEmail());
                         profilePhone.setText(currentUser.getPhone());
+                        profileCredit.setText(Integer.toString(currentUser.getCredit()));
                         profileRating.setNumStars(currentUser.getRating());
                         profileTaskAccomplished.setText(Integer.toString(currentUser.getTask_accomplished()));
                         profileTaskPoseted.setText(Integer.toString(currentUser.getTask_posted()));
