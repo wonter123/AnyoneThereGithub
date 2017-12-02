@@ -22,6 +22,7 @@
         <item>International Business School</item>
     </string-array>
     <string-array name="day">
+        <item>0 day</item>
         <item>1 day</item>
         <item>2 days</item>
         <item>3 days</item>

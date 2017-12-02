@@ -188,7 +188,7 @@
         android:layout_alignBottom="@+id/takeRequest_take"
         android:layout_alignEnd="@+id/takeRequest_descriptionContent"
         android:layout_alignRight="@+id/takeRequest_descriptionContent"
-        android:text="Cancle" />
+        android:text="Cancel" />
 
 
 
