@@ -43,6 +43,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Created by zhanglingjun on 11/29/17.
+ */
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
     private static final String TAG = MapsActivity.class.getSimpleName();
     private GoogleMap mMap;
@@ -74,6 +78,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     private DatabaseReference mDataBase;
+    private DatabaseReference requestState;
 
     private Map<String, double[]> locationIndex;
     private Map<String, ArrayList<Post>> mapToPosts;
@@ -88,6 +93,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private ImageButton backToList;
     private ImageButton newPost;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,6 +108,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         mDataBase = FirebaseDatabase.getInstance().getReference("posts");
+        requestState = FirebaseDatabase.getInstance().getReference("posts").child("postState");
 
 
         // Construct a GeoDataClient.
@@ -251,6 +258,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             }
         });
+
+
+        ValueEventListener stateChanged = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+//                int state = dataSnapshot.getValue();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+                // ...
+            }
+        };
+        requestState.addValueEventListener(stateChanged);
 
 
 

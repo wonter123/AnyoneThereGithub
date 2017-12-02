@@ -24,6 +24,7 @@ public class Post {
     public String takerId;
     public int rating;
     public String imageID;
+    public int postState;
     public HashMap<String, Object> result;
 
     public Post() {
@@ -42,6 +43,7 @@ public class Post {
         this.to = to;
         this.posterId = null;
         this.takerId = null;
+        this.postState = 0;
         toMap();
     }
 
@@ -77,6 +79,11 @@ public class Post {
     public void setImageID(String imageID) {
         this.imageID = imageID;
     }
+
+    public void setPostState(int newState){
+        this.postState = newState;
+    }
+
 
     public String  toString(){
         return this.title+" "+this.description;
