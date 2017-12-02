@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             final String k = key.get(index);
 
             Post post = arrlist.get(index);
-            System.out.println("here");
+            Log.d("Main Activity: ", "main activity getView");
 
             heading.setText(post.title);
             requester.setText(post.posterId);
@@ -208,6 +208,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public void onClick(View view) {
                     Intent intent = new Intent(MainActivity.this,TakeRequestActivity.class);
                     intent.putExtra("key",k);
+                    Log.d("Main Activity: ", "main activity onClick");
                     startActivity(intent);
                 }
             });
@@ -215,5 +216,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return (row);
         }
     }
-
 }
