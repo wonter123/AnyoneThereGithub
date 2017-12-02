@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="anyonethere.cs.brandies.edu.anyonetheregithub.ConfirmPageActivity">
+
+    <RelativeLayout
+        android:id="@+id/relative"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp">
+        <TextView
+            android:id="@+id/heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:text="Heading"
+            android:layout_marginLeft="100dp">
+        </TextView>
+        <TextView
+            android:id="@+id/Requester"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/heading"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:text="Requester ID"
+            android:layout_marginLeft="100dp">
+        </TextView>
+        <TextView
+            android:id="@+id/reward"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Requester"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:text="Reward"
+            android:layout_marginLeft="100dp">
+        </TextView>
+
+        <ImageView
+            android:id="@+id/userID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            app:srcCompat="@drawable/ic_face"
+            android:layout_marginTop="10dp"/>
+
+        <RatingBar
+            android:id="@+id/userRating"
+            style="@android:style/Widget.DeviceDefault.Light.RatingBar.Small"
+            android:layout_width="100dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/userID"
+            android:numStars="5"
+            android:rating="5" />
+    </RelativeLayout>
+
+
+</RelativeLayout>
