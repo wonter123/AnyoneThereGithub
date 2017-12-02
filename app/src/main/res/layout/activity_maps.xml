@@ -15,30 +15,57 @@
         android:layout_alignParentTop="true"
         tools:context="anyonethere.cs.brandies.edu.anyonetheregithub.MapsActivity" />
 
-    <android.support.design.widget.FloatingActionButton
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/button_in_map_newPostButton"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_marginBottom="23dp"-->
+        <!--android:layout_marginLeft="151dp"-->
+        <!--android:layout_marginStart="151dp"-->
+        <!--android:clickable="true"-->
+        <!--android:src="@drawable/post_icon2"-->
+        <!--app:backgroundTint="@android:color/background_light" />-->
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/button_in_map_listButton"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignBottom="@+id/button_in_map_newPostButton"-->
+        <!--android:layout_toEndOf="@+id/button_in_map_newPostButton"-->
+        <!--android:layout_toRightOf="@+id/button_in_map_newPostButton"-->
+        <!--android:clickable="true"-->
+        <!--android:src="@drawable/map_icon2"-->
+        <!--app:backgroundTint="@android:color/background_light" />-->
+
+
+    <ImageButton
         android:id="@+id/button_in_map_newPostButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="23dp"
-        android:layout_marginLeft="151dp"
-        android:layout_marginStart="151dp"
-        android:clickable="true"
-        android:src="@drawable/post_icon2"
-        app:backgroundTint="@android:color/background_light" />
+        android:layout_marginBottom="29dp"
+        android:layout_marginLeft="155dp"
+        android:layout_marginStart="154dp"
+        android:background="#d8ffffff"
+        android:elevation="10dp"
+        android:src="@drawable/add_new_post" />
 
-    <android.support.design.widget.FloatingActionButton
+    <ImageButton
         android:id="@+id/button_in_map_listButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/button_in_map_newPostButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignTop="@+id/button_in_map_newPostButton"
         android:layout_toEndOf="@+id/button_in_map_newPostButton"
+        android:layout_marginLeft="1dp"
         android:layout_toRightOf="@+id/button_in_map_newPostButton"
-        android:clickable="true"
-        android:src="@drawable/map_icon2"
-        app:backgroundTint="@android:color/background_light" />
+        android:elevation="10dp"
+        android:src="@drawable/back_to_list"
+        android:background="#d8ffffff"/>
 
 
 </RelativeLayout>

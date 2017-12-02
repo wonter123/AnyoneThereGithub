@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
@@ -14,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -86,8 +86,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ListView listInDialog;
 
 
-    private FloatingActionButton backToList;
-    private FloatingActionButton newPost;
+    private ImageButton backToList;
+    private ImageButton newPost;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -148,8 +148,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             locationIndex.put(loc, positions[i++]);
         }
 
-        backToList = (FloatingActionButton) findViewById(R.id.button_in_map_listButton);
-        newPost = (FloatingActionButton) findViewById(R.id.button_in_map_newPostButton);
+        backToList = (ImageButton) findViewById(R.id.button_in_map_listButton);
+        newPost = (ImageButton) findViewById(R.id.button_in_map_newPostButton);
     }
 
     @Override
