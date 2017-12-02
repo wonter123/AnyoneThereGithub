@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -38,7 +37,7 @@ public class ListInDialogAdapter extends ArrayAdapter<Post> {
         TextView Requester = (TextView) curView.findViewById (R.id.list_in_dialog_Requester);
         TextView Reward = (TextView) curView.findViewById(R.id.list_in_dialog_reward);
         ImageView profileImg = (ImageView) curView.findViewById(R.id.list_in_dialog_userID);
-        Button detailButton = (Button) curView.findViewById(R.id.list_in_dialog_detail);
+//        Button detailButton = (Button) curView.findViewById(R.id.list_in_dialog_detail);
         RatingBar rb = (RatingBar) curView.findViewById(R.id.list_in_dialog_ratingbar);
 
 
@@ -47,14 +46,18 @@ public class ListInDialogAdapter extends ArrayAdapter<Post> {
         Requester.setText(p.getPosterId());
         Reward.setText("Reward: "+p.getReward()+"");
         profileImg.setImageResource(R.drawable.ic_face);
+        rb.setRating(p.getRating());
 
+//        final String key = p.getPosterId();
 
-        detailButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Intent i = new Intent(MapsActivity.this, );
-            }
-        });
+//        detailButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent i  = new Intent(MapsActivity.this, TakeRequestActivity.class);
+//                i.putExtra("key", key);
+//                curView.startActivity(i);
+//            }
+//        });
 
 
         return curView;

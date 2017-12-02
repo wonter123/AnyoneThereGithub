@@ -2,7 +2,6 @@ package anyonethere.cs.brandies.edu.anyonetheregithub;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -85,12 +85,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         // set button to map
-        FloatingActionButton mapButton = (FloatingActionButton) findViewById(R.id.main_mapButton);
+        ImageButton mapButton = (ImageButton) findViewById(R.id.activity_main_map_button);
+        ImageButton newPostButton = (ImageButton) findViewById(R.id.activity_main_newpost_button);
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent mapIntent = new Intent(MainActivity.this, MapsActivity.class);
                 startActivity(mapIntent);
+            }
+        });
+        newPostButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent newPostIntent = new Intent(MainActivity.this, PostRequestActivity.class);
+                startActivity(newPostIntent);
             }
         });
 

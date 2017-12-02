@@ -6,13 +6,14 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -76,6 +77,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private Map<String, double[]> locationIndex;
     private Map<String, ArrayList<Post>> mapToPosts;
+    private Map<String, ArrayList<String>> keys;
     private String[] allLocations;
     private double[][] positions;
 
@@ -84,8 +86,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ListView listInDialog;
 
 
-    private FloatingActionButton backToList;
-    private FloatingActionButton newPost;
+    private ImageButton backToList;
+    private ImageButton newPost;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,9 +123,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         allPosts = new ArrayList<Post>();
         allLocations = getResources().getStringArray(R.array.locations);
         locationIndex = new HashMap<>();
+        keys = new HashMap<>();
         mapToPosts = new HashMap<String, ArrayList<Post>>();
         for(String loc: allLocations){
             mapToPosts.put(loc, new ArrayList<Post>());
+            keys.put(loc, new ArrayList<String>());
         }
         positions = new double[allLocations.length][2];
         positions[0] = new double[]{42.365938, -71.253759 };
@@ -144,8 +148,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             locationIndex.put(loc, positions[i++]);
         }
 
-        backToList = (FloatingActionButton) findViewById(R.id.button_in_map_listButton);
-        newPost = (FloatingActionButton) findViewById(R.id.button_in_map_newPostButton);
+        backToList = (ImageButton) findViewById(R.id.button_in_map_listButton);
+        newPost = (ImageButton) findViewById(R.id.button_in_map_newPostButton);
     }
 
     @Override
@@ -168,7 +172,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * installed Google Play services and returned to the app.
      */
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(final GoogleMap googleMap) {
         mMap = googleMap;
 
         mMap.addMarker(new MarkerOptions().position(mDefaultLocation).title("Marker in Brandeis"));
@@ -183,12 +187,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        getDeviceLocation();
 
         mDataBase.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds: dataSnapshot.getChildren()){
                     Post curP = ds.getValue(Post.class);
                     allPosts.add(curP);
+
                     mapToPosts.get(curP.getFrom()).add(curP);
+                    keys.get(curP.getFrom()).add(ds.getKey());
                 }
 
                 // add a marker to show the location with at least one outgoing request
@@ -198,11 +205,45 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         Marker marker =  mMap.addMarker(new MarkerOptions().position(new LatLng(locationIndex.get(loc)[0], locationIndex.get(loc)[1]))
                                 .title(count+"" )
                                 .alpha(0.8f)
-                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                                );
 
                         marker.setTag(loc);
                     }
                 }
+
+
+                googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+                        Object o = marker.getTag();
+                        if(o == null) return false;
+                        final String loc = o.toString();
+                        if(loc == null || loc.length() == 0) return false;
+                        Dialog dialog = new Dialog(MapsActivity.this);
+                        dialog.setContentView(R.layout.list_in_dialog);
+                        Window window = dialog.getWindow();
+                        window.setLayout(1000, 1200 );
+                        final ArrayList<Post> postsAtCurrentLocation = mapToPosts.get(loc);
+
+                        listInDialogAdapter = new ListInDialogAdapter(MapsActivity.this, R.layout.request_list, postsAtCurrentLocation);
+                        listInDialog = (ListView)dialog.findViewById(R.id.list_in_dialog_listview);
+//                        Toast.makeText(MapsActivity.this, "lalala: "+ listInDialog,Toast.LENGTH_LONG).show();
+                        listInDialog.setAdapter(listInDialogAdapter);
+                        listInDialog.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                Intent intent = new Intent(view.getContext(), TakeRequestActivity.class);
+                                Post p  = postsAtCurrentLocation.get(i);
+                                intent.putExtra("key",keys.get(loc).get(i));
+                                startActivity(intent);
+                            }
+                        });
+
+                        dialog.show();
+                        return true;
+                    }
+                });
             }
 
             @Override
@@ -214,26 +255,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                String loc = marker.getTag().toString();
-                if(loc == null || loc.length() == 0) return false;
-                Dialog dialog = new Dialog(MapsActivity.this);
-                dialog.setContentView(R.layout.list_in_dialog);
-                Window window = dialog.getWindow();
-                window.setLayout(1000, 1200 );
-                ArrayList<Post> postsAtCurrentLocation = mapToPosts.get(loc);
 
-                listInDialogAdapter = new ListInDialogAdapter(MapsActivity.this, R.layout.request_list, postsAtCurrentLocation);
-                listInDialog = (ListView)dialog.findViewById(R.id.list_in_dialog_listview);
-                Toast.makeText(MapsActivity.this, "lalala: "+ listInDialog,Toast.LENGTH_LONG).show();
-                listInDialog.setAdapter(listInDialogAdapter);
-
-                dialog.show();
-                return true;
-            }
-        });
 
         backToList.setOnClickListener(new View.OnClickListener() {
             @Override

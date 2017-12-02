@@ -168,7 +168,7 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
         } else {
             mPasswordField.setError(null);
         }
-        if(!mEmailField.getText().toString().contains("brandeis")){
+        if(!mEmailField.getText().toString().contains("@brandeis.edu")){
             mEmailField.setError("Brandeis students only");
             return false;
         }
