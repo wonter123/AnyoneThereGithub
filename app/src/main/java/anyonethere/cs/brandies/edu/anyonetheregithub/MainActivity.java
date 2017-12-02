@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -132,10 +133,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // Handle the post new request action
             Intent intent = new Intent(MainActivity.this, PostRequestActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_management) {
+        } else if (id == R.id.nav_myposts) {
             Intent intent = new Intent(MainActivity.this, RequestListActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_notification) {
+        } else if (id == R.id.nav_mytasks) {
 
         } else if (id == R.id.nav_logout) {
             FirebaseAuth.getInstance().signOut();
@@ -193,14 +194,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             requester = (TextView) row.findViewById(R.id.Requester);
             reward = (TextView) row.findViewById(R.id.reward);
 
+            RatingBar rate = (RatingBar) row.findViewById(R.id.userRating);
+
             final String k = key.get(index);
 
             Post post = arrlist.get(index);
             Log.d("Main Activity: ", "main activity getView");
 
-            heading.setText(post.title);
-            requester.setText(post.posterId);
-            reward.setText(post.reward+"");
+            heading.setText("Title:  "+post.title);
+            requester.setText("From:  "+post.from);
+            reward.setText("Reward:  "+post.reward+"");
+
+            rate.setRating(post.rating);
 
             Button button = (Button) row.findViewById(R.id.detail);
             button.setOnClickListener(new View.OnClickListener() {
