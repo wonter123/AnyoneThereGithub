@@ -112,7 +112,7 @@ public class ProfileEditActivity extends AppCompatActivity {
 
         // click save button
         Button saveButton = (Button) findViewById(R.id.profile_edit_savebutton);
-        // set the edit field with old data
+        // save input phone into database
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,13 +121,16 @@ public class ProfileEditActivity extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot ds : dataSnapshot.getChildren()) {
                             User tmp = ds.getValue(User.class);
-                            if (tmp.getEmail().equals(email)) {
-                                String key = ds.getKey();
 
+                            // traverse database to find current USER
+                            if (tmp.getEmail().equals(email)) {
+                                // the key(uid) for this USER object
+                                String key = ds.getKey();
+                                curUserReference = mDatabase.child(key);
+
+                                // update phone number to this USER object in database
                                 phoneText = (EditText) findViewById(R.id.profile_edit_phone);
                                 String phone = phoneText.getText().toString();
-
-                                curUserReference = mDatabase.child(key);
                                 curUserReference.child("phone").setValue(phone);
 
                                 finish();

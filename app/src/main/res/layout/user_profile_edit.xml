@@ -24,7 +24,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="146dp"
-        app:srcCompat="@drawable/pito_head_1" />
+        app:srcCompat="@drawable/user_head_1" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -179,8 +179,10 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/profile_edit_cancelbutton"
         android:layout_alignBottom="@+id/profile_edit_cancelbutton"
-        android:layout_alignEnd="@+id/profile_edit_accomplished_number"
-        android:layout_alignRight="@+id/profile_edit_accomplished_number"
+        android:layout_marginEnd="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_toLeftOf="@+id/profile_edit_photo"
+        android:layout_toStartOf="@+id/profile_edit_photo"
         android:text="SAVE" />
 
     <Button
@@ -188,8 +190,8 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="29dp"
-        android:layout_marginStart="29dp"
+        android:layout_marginLeft="19dp"
+        android:layout_marginStart="19dp"
         android:layout_toEndOf="@+id/profile_edit_photo"
         android:layout_toRightOf="@+id/profile_edit_photo"
         android:text="CANCEL" />

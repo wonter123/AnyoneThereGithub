@@ -23,7 +23,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="146dp"
-        app:srcCompat="@drawable/pito_head_1" />
+        app:srcCompat="@drawable/user_head_1" />
     
     <TextView
         android:layout_width="wrap_content"
@@ -48,18 +48,20 @@
         android:id="@+id/profile_credit_label"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/profile_ratingBar"
+        android:layout_below="@+id/profile_ratingBar"
+        android:layout_marginTop="10dp"
+        android:layout_toLeftOf="@+id/profile_email"
+        android:layout_toStartOf="@+id/profile_email"
         android:src="@drawable/bcoin" />
 
     <TextView
         android:id="@+id/profile_credit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/profile_photo"
+        android:layout_alignRight="@+id/profile_photo"
         android:layout_below="@+id/profile_ratingBar"
-        android:layout_marginTop="8dp"
-        android:layout_toEndOf="@+id/profile_name"
-        android:layout_toRightOf="@+id/profile_name"
+        android:layout_marginTop="20dp"
         android:text="0"
         android:textSize="25dp" />
 
