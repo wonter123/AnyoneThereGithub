@@ -45,13 +45,14 @@
             android:name=".MapsActivity2"
             android:label="@string/title_activity_maps2"></activity>
         <activity android:name=".ProfileActivity"
-                  android:theme="@style/Theme.AppCompat.Light.NoActionBar">>
+                  android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.PROFILE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".ProfileEditActivity">
+        <activity android:name=".ProfileEditActivity"
+                  android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.PROFILE" />
                 <category android:name="android.intent.category.DEFAULT" />

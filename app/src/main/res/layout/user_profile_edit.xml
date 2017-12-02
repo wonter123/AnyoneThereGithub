@@ -7,23 +7,24 @@
 
     <ImageView
         android:id="@+id/profile_edit_cover"
-        android:layout_width="384dp"
+        android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:scaleType="centerCrop"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal_background"
-        android:layout_marginTop="0dp"
-        android:layout_marginLeft="0dp" />
+        app:srcCompat="@drawable/profile_cover" />
 
     <ImageView
         android:id="@+id/profile_edit_photo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal_background"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="184dp" />
+        android:layout_marginTop="146dp"
+        app:srcCompat="@drawable/pito_head_1" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -77,7 +78,7 @@
         android:text="Email: "
         android:textSize="20dp" />
 
-    <EditText
+    <TextView
         android:id="@+id/profile_edit_email"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
@@ -114,7 +115,17 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/profile_edit_phone"
-        android:text="Task Accepted: 10"
+        android:text="Task Posted: "
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/profile_edit_post_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/profile_edit_accomplished"
+        android:layout_toEndOf="@+id/profile_edit_task"
+        android:layout_toRightOf="@+id/profile_edit_task"
+        android:text="0"
         android:textSize="20dp" />
 
     <TextView
@@ -124,19 +135,31 @@
         android:layout_below="@+id/profile_edit_task"
         android:layout_alignLeft="@+id/profile_edit_task"
         android:layout_alignStart="@+id/profile_edit_task"
-        android:text="Task Accomplished: 7"
+        android:text="Task Accomplished: "
         android:layout_marginTop="15dp"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/profile_edit_accomplished_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/profile_edit_accomplished"
+        android:layout_alignBottom="@+id/profile_edit_accomplished"
+        android:layout_marginLeft="6dp"
+        android:layout_marginStart="6dp"
+        android:layout_toEndOf="@+id/profile_edit_accomplished"
+        android:layout_toRightOf="@+id/profile_edit_accomplished"
+        android:text="0"
         android:textSize="20dp" />
 
     <Button
         android:id="@+id/profile_edit_savebutton"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/profile_edit_task"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/profile_edit_task"
-        android:layout_marginEnd="22dp"
-        android:layout_marginRight="22dp"
+        android:layout_alignBaseline="@+id/profile_edit_cancelbutton"
+        android:layout_alignBottom="@+id/profile_edit_cancelbutton"
+        android:layout_alignEnd="@+id/profile_edit_accomplished_number"
+        android:layout_alignRight="@+id/profile_edit_accomplished_number"
         android:text="SAVE" />
 
     <Button

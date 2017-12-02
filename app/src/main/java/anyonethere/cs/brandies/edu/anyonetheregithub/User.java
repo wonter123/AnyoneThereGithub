@@ -1,5 +1,10 @@
 package anyonethere.cs.brandies.edu.anyonetheregithub;
 
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by zhanglingjun on 11/14/17.
  */
@@ -12,6 +17,8 @@ public class User {
     public int task_accomplished;
     public int task_posted;
 
+    public HashMap<String, Object> result;
+
     public User() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
@@ -23,6 +30,27 @@ public class User {
         this.rating = 0;
         this.task_accomplished = 0;
         this.task_posted = 0;
+    }
+
+    public User(String username, String email, String phone, int rating, int task_accomplished, int task_posted) {
+        this.username = username;
+        this.email = email;
+        this.phone = phone;
+        this.rating = rating;
+        this.task_accomplished = task_accomplished;
+        this.task_posted = task_posted;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        result = new HashMap<>();
+        result.put("username", username);
+        result.put("email", email);
+        result.put("phone", phone);
+        result.put("rating", rating);
+        result.put("task_accomplished", task_accomplished);
+        result.put("task_posted", task_posted);
+        return result;
     }
 
     public String getUsername() {
