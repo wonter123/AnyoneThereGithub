@@ -40,8 +40,6 @@ public class Post {
         this.expireDate = expireDate;
         this.from = from;
         this.to = to;
-//        this.rating = rating;
-//        this.imageID = imageID;
         this.posterId = null;
         this.takerId = null;
         toMap();

@@ -103,9 +103,9 @@ public class PostRequestActivity extends AppCompatActivity implements AdapterVie
                     String key = mDatabase.child("posts").push().getKey();
 
                     String description = ((EditText) findViewById(R.id.request_description_box)).getText().toString();
-                    int day = Integer.parseInt(((Spinner) findViewById(R.id.post_request_day)).getSelectedItem().toString());
-                    int hour = Integer.parseInt(((Spinner) findViewById(R.id.post_request_hour)).getSelectedItem().toString());
-                    int minute = Integer.parseInt(((Spinner) findViewById(R.id.post_request_minute)).getSelectedItem().toString());
+                    int day = Integer.parseInt(((Spinner) findViewById(R.id.post_request_day)).getSelectedItem().toString().replaceAll("[^0-9]", ""));
+                    int hour = Integer.parseInt(((Spinner) findViewById(R.id.post_request_hour)).getSelectedItem().toString().replaceAll("[^0-9]", ""));
+                    int minute = Integer.parseInt(((Spinner) findViewById(R.id.post_request_minute)).getSelectedItem().toString().replaceAll("[^0-9]", ""));
                     String from = ((Spinner) findViewById(R.id.post_request_from)).getSelectedItem().toString();
                     String to = ((Spinner) findViewById(R.id.post_request_to)).getSelectedItem().toString();
 
