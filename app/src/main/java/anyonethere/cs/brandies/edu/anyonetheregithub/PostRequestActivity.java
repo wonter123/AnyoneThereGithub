@@ -140,7 +140,7 @@ public class PostRequestActivity extends AppCompatActivity implements AdapterVie
                             int minute = Integer.parseInt(((Spinner) findViewById(R.id.post_request_minute)).getSelectedItem().toString().replaceAll("[^0-9]", ""));
                             String from = ((Spinner) findViewById(R.id.post_request_from)).getSelectedItem().toString();
                             String to;
-                            if (single_loc) to = null;
+                            if (single_loc) to = from;
                             else
                                 to = ((Spinner) findViewById(R.id.post_request_to)).getSelectedItem().toString();
 
