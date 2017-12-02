@@ -22,6 +22,8 @@ public class Post {
     public String to;
     public String posterId;
     public String takerId;
+    public int rating;
+    public String imageID;
     public HashMap<String, Object> result;
 
     public Post() {
@@ -38,14 +40,16 @@ public class Post {
         this.expireDate = expireDate;
         this.from = from;
         this.to = to;
+//        this.rating = rating;
+//        this.imageID = imageID;
         this.posterId = null;
         this.takerId = null;
-        result = new HashMap<>();
         toMap();
     }
 
     @Exclude
     public Map<String, Object> toMap() {
+        result = new HashMap<>();
         result.put("title", title);
         result.put("reward", reward);
         result.put("description", description);
@@ -66,6 +70,14 @@ public class Post {
     public void setPoster(String id) {
         this.posterId = id;
         result.put("poster", posterId);
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public void setImageID(String imageID) {
+        this.imageID = imageID;
     }
 
     public String  toString(){
@@ -104,5 +116,13 @@ public class Post {
 
     public String getTakerId() {
         return takerId;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public String getImageID() {
+        return imageID;
     }
 }
