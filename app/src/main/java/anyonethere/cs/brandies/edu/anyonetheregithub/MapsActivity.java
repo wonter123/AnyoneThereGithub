@@ -13,6 +13,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -223,12 +224,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 dialog.setContentView(R.layout.list_in_dialog);
                 Window window = dialog.getWindow();
                 window.setLayout(1000, 1200 );
-                ArrayList<Post> postsAtCurrentLocation = mapToPosts.get(loc);
+                final ArrayList<Post> postsAtCurrentLocation = mapToPosts.get(loc);
 
                 listInDialogAdapter = new ListInDialogAdapter(MapsActivity.this, R.layout.request_list, postsAtCurrentLocation);
                 listInDialog = (ListView)dialog.findViewById(R.id.list_in_dialog_listview);
                 Toast.makeText(MapsActivity.this, "lalala: "+ listInDialog,Toast.LENGTH_LONG).show();
                 listInDialog.setAdapter(listInDialogAdapter);
+                listInDialog.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Intent intent = new Intent(view.getContext(), TakeRequestActivity.class);
+                        Post p  = postsAtCurrentLocation.get(i);
+                        intent.putExtra("key",p.getPosterId());
+                        startActivity(intent);
+                    }
+                });
 
                 dialog.show();
                 return true;

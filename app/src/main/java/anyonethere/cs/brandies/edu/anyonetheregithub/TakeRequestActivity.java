@@ -8,11 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -64,6 +63,8 @@ public class TakeRequestActivity extends AppCompatActivity {
             String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
             postId = intent.getExtras().getString("key");
             mDatabase = FirebaseDatabase.getInstance().getReference("posts");
+//            Toast.makeText(this, postId,
+//                    Toast.LENGTH_LONG).show();
             curtPost = mDatabase.child(postId);
 
             Log.d("Take Request: ", "take request");

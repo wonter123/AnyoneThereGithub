@@ -46,14 +46,14 @@
         android:layout_marginTop="18dp"
         app:srcCompat="@drawable/ic_face" />
 
-    <Button
-        android:id="@+id/list_in_dialog_detail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/linearLayout"
-        android:layout_alignStart="@+id/linearLayout"
-        android:layout_below="@+id/list_in_dialog_reward"
-        android:text="Detail" />
+    <!--<Button-->
+        <!--android:id="@+id/list_in_dialog_detail"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignLeft="@+id/linearLayout"-->
+        <!--android:layout_alignStart="@+id/linearLayout"-->
+        <!--android:layout_below="@+id/list_in_dialog_reward"-->
+        <!--android:text="Detail" />-->
 
     <LinearLayout
         android:id="@+id/linearLayout"

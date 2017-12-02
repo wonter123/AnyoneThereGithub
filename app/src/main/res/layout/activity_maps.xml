@@ -16,7 +16,7 @@
         tools:context="anyonethere.cs.brandies.edu.anyonetheregithub.MapsActivity" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/button_in_map_listButton"
+        android:id="@+id/button_in_map_newPostButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -30,12 +30,12 @@
         app:backgroundTint="@android:color/background_light" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/button_in_map_newPostButton"
+        android:id="@+id/button_in_map_listButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/button_in_map_listButton"
-        android:layout_toEndOf="@+id/button_in_map_listButton"
-        android:layout_toRightOf="@+id/button_in_map_listButton"
+        android:layout_alignBottom="@+id/button_in_map_newPostButton"
+        android:layout_toEndOf="@+id/button_in_map_newPostButton"
+        android:layout_toRightOf="@+id/button_in_map_newPostButton"
         android:clickable="true"
         android:src="@drawable/map_icon2"
         app:backgroundTint="@android:color/background_light" />
