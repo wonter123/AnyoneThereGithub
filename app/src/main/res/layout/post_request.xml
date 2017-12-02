@@ -21,9 +21,9 @@
         android:layout_alignLeft="@+id/request_title_box"
         android:layout_alignStart="@+id/request_title_box"
         android:layout_below="@+id/request_title_box"
-        android:layout_marginTop="21dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="Request"
+        android:hint="Reward"
         android:inputType="textShortMessage"
         android:textSize="5pt" />
 
@@ -49,14 +49,14 @@
         android:layout_alignLeft="@+id/textView4"
         android:layout_alignStart="@+id/textView4"
         android:layout_below="@+id/request_reward_box"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:inputType="textCapSentences|textMultiLine"
         android:text="Description" />
 
     <EditText
         android:id="@+id/request_description_box"
         android:layout_width="325dp"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:layout_alignLeft="@+id/labelDescription"
         android:layout_alignStart="@+id/labelDescription"
         android:layout_below="@+id/labelDescription"
@@ -138,10 +138,10 @@
 
     <TextView
         android:id="@+id/labelExpireIn"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/post_request_from"
+        android:layout_below="@+id/toggleButton"
         android:layout_alignStart="@+id/post_request_day"
         android:layout_alignLeft="@+id/post_request_day"
         android:text="Expire in:" />
@@ -174,5 +174,15 @@
         android:layout_alignEnd="@+id/post_request_minute"
         android:layout_alignRight="@+id/post_request_minute"
         android:text="Cancel" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/post_request_from"
+        android:layout_alignLeft="@+id/post_request_from"
+        android:layout_alignStart="@+id/post_request_from"
+        android:textOff="Single location task"
+        android:textOn="Double location task"/>
 
 </RelativeLayout>

@@ -5,9 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -27,7 +29,7 @@ public class PostRequestActivity extends AppCompatActivity implements AdapterVie
     String[] days;
     String[] hours;
     String[] minutes;
-
+    boolean single_loc;
     private DatabaseReference mDatabase;
 
     @Override
@@ -49,11 +51,11 @@ public class PostRequestActivity extends AppCompatActivity implements AdapterVie
         minutes = getResources().getStringArray(R.array.minute);
 
         // Create spinner
-        Spinner spinner_from = (Spinner) findViewById(R.id.post_request_from);
-        Spinner spinner_to = (Spinner) findViewById(R.id.post_request_to);
-        Spinner spinner_day = (Spinner) findViewById(R.id.post_request_day);
-        Spinner spinner_hour = (Spinner) findViewById(R.id.post_request_hour);
-        Spinner spinner_minute = (Spinner) findViewById(R.id.post_request_minute);
+        Spinner spinner_from = findViewById(R.id.post_request_from);
+        final Spinner spinner_to = findViewById(R.id.post_request_to);
+        Spinner spinner_day = findViewById(R.id.post_request_day);
+        Spinner spinner_hour = findViewById(R.id.post_request_hour);
+        Spinner spinner_minute = findViewById(R.id.post_request_minute);
 
         // Spinner Click Listener
         spinner_from.setOnItemSelectedListener(this);
@@ -64,7 +66,7 @@ public class PostRequestActivity extends AppCompatActivity implements AdapterVie
 
         // Create adapter for spinner
         ArrayAdapter<String> fromAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, locations);
-        ArrayAdapter<String> toAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, locations);
+        final ArrayAdapter<String> toAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, locations);
         ArrayAdapter<String> dayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, days);
         ArrayAdapter<String> hourAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, hours);
         ArrayAdapter<String> minuteAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, minutes);
@@ -84,6 +86,23 @@ public class PostRequestActivity extends AppCompatActivity implements AdapterVie
         spinner_minute.setAdapter(minuteAdapter);
 
         spinner_minute.setSelection(4);
+
+        ToggleButton loc_toggle = findViewById(R.id.toggleButton);
+        final TextView to_label = findViewById(R.id.labelTo);
+        single_loc = false;
+        loc_toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    spinner_to.setVisibility(View.GONE);
+                    to_label.setVisibility(View.GONE);
+                    single_loc = true;
+                } else {
+                    spinner_to.setVisibility(View.VISIBLE);
+                    to_label.setVisibility(View.VISIBLE);
+                    single_loc = false;
+                }
+            }
+        });
 
         findViewById(R.id.request_cancel_button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,7 +139,10 @@ public class PostRequestActivity extends AppCompatActivity implements AdapterVie
                             int hour = Integer.parseInt(((Spinner) findViewById(R.id.post_request_hour)).getSelectedItem().toString().replaceAll("[^0-9]", ""));
                             int minute = Integer.parseInt(((Spinner) findViewById(R.id.post_request_minute)).getSelectedItem().toString().replaceAll("[^0-9]", ""));
                             String from = ((Spinner) findViewById(R.id.post_request_from)).getSelectedItem().toString();
-                            String to = ((Spinner) findViewById(R.id.post_request_to)).getSelectedItem().toString();
+                            String to;
+                            if (single_loc) to = null;
+                            else
+                                to = ((Spinner) findViewById(R.id.post_request_to)).getSelectedItem().toString();
 
                             Calendar cal = Calendar.getInstance();
                             Date current = new Date();
@@ -158,11 +180,6 @@ public class PostRequestActivity extends AppCompatActivity implements AdapterVie
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // on selected item
-        String item = parent.getItemAtPosition(position).toString();
-
-        // Toast selected item
-        Toast.makeText(parent.getContext(), "selected: "+ item, Toast.LENGTH_SHORT).show();
 
     }
 
