@@ -28,7 +28,7 @@ public class User {
         this.username = username;
         this.email = email;
         this.phone = "";
-        this.credit = 0;
+        this.credit = 100;
         this.rating = 0;
         this.task_accomplished = 0;
         this.task_posted = 0;

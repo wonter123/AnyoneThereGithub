@@ -32,6 +32,7 @@ public class ProfileEditActivity extends AppCompatActivity {
     String email;
     String phone;
     String name;
+    int credit;
     int rating;
     int post_number;
     int accomplished_number;
@@ -66,6 +67,7 @@ public class ProfileEditActivity extends AppCompatActivity {
                         TextView profileName = (TextView) findViewById(R.id.profile_edit_name);
                         TextView profileEmail = (TextView) findViewById(R.id.profile_edit_email);
                         phoneText = (EditText) findViewById(R.id.profile_edit_phone);
+                        TextView profileCoin = (TextView) findViewById(R.id.profile_edit_credit);
                         RatingBar profileRating = (RatingBar) findViewById(R.id.profile_edit_ratingBar);
                         TextView profileTaskAccomplished = (TextView) findViewById(R.id.profile_edit_accomplished_number);
                         TextView profileTaskPoseted = (TextView) findViewById(R.id.profile_edit_post_number);
@@ -75,12 +77,14 @@ public class ProfileEditActivity extends AppCompatActivity {
                         email = currentUser.getEmail();
                         phone = currentUser.getPhone();
                         rating = currentUser.getRating();
+                        credit = currentUser.getCredit();
                         accomplished_number = currentUser.getTask_accomplished();
                         post_number = currentUser.getTask_posted();
 
                         // set each view with input information
                         profileName.setText(name);
                         profileEmail.setText(email);
+                        profileCoin.setText(Integer.toString(credit));
                         phoneText.setText(phone);
                         profileRating.setNumStars(rating);
                         profileTaskAccomplished.setText(Integer.toString(accomplished_number));

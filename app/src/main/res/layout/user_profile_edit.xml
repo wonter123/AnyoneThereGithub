@@ -67,10 +67,31 @@
         android:layout_alignTop="@+id/profile_edit_rating_label" />
 
     <TextView
+        android:id="@+id/profile_edit_credit_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="20dp"
+        android:text="BCoin: "
+        android:layout_below="@id/profile_edit_ratingBar"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/profile_edit_credit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/profile_edit_credit_label"
+        android:layout_alignBottom="@+id/profile_edit_credit_label"
+        android:layout_alignLeft="@+id/profile_edit_email"
+        android:layout_alignStart="@+id/profile_edit_email"
+        android:text="0"
+        android:textSize="20dp" />
+
+    <TextView
         android:id="@+id/profile_edit_email_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/profile_edit_ratingBar"
+        android:layout_below="@id/profile_edit_credit"
         android:layout_marginTop="20dp"
         android:layout_alignLeft="@+id/profile_edit_phone_label"
         android:layout_alignStart="@+id/profile_edit_phone_label"
