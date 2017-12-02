@@ -205,7 +205,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         Marker marker =  mMap.addMarker(new MarkerOptions().position(new LatLng(locationIndex.get(loc)[0], locationIndex.get(loc)[1]))
                                 .title(count+"" )
                                 .alpha(0.8f)
-                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                                );
 
                         marker.setTag(loc);
                     }
