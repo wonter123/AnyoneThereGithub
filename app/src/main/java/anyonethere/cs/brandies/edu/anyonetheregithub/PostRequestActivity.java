@@ -83,6 +83,8 @@ public class PostRequestActivity extends AppCompatActivity implements AdapterVie
         spinner_hour.setAdapter(hourAdapter);
         spinner_minute.setAdapter(minuteAdapter);
 
+        spinner_minute.setSelection(4);
+
         findViewById(R.id.request_cancel_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
