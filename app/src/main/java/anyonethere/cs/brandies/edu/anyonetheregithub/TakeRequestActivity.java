@@ -3,6 +3,7 @@ package anyonethere.cs.brandies.edu.anyonetheregithub;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -27,7 +28,7 @@ public class TakeRequestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.take_request);
-
+        System.out.println("problem here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         drawPost();
         //drawPoster();
         cancel();
@@ -50,9 +51,9 @@ public class TakeRequestActivity extends AppCompatActivity {
         take.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            curtPost.child("takerId").setValue(userId);
-            finish();
+                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                curtPost.child("takerId").setValue(userId);
+                finish();
             }
         });
     }
@@ -65,6 +66,7 @@ public class TakeRequestActivity extends AppCompatActivity {
             mDatabase = FirebaseDatabase.getInstance().getReference("posts");
             curtPost = mDatabase.child(postId);
 
+            Log.d("Take Request: ", "take request");
             curtPost.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -78,7 +80,7 @@ public class TakeRequestActivity extends AppCompatActivity {
                     TextView description = (TextView) findViewById(R.id.takeRequest_descriptionContent);
 
                     header.setText(p.title);
-                    reward.setText(p.reward);
+                    reward.setText("" + p.reward);
                     description.setText(p.description);
                     expireDate.setText(p.expireDate.toString());
                     from.setText(p.from);
@@ -90,8 +92,6 @@ public class TakeRequestActivity extends AppCompatActivity {
 
                 }
             });
-
-
         }
     }
 
