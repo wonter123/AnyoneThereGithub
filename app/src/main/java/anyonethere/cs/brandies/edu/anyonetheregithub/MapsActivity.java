@@ -1,6 +1,7 @@
 package anyonethere.cs.brandies.edu.anyonetheregithub;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -83,6 +85,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     private FloatingActionButton backToList;
+    private FloatingActionButton newPost;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -141,7 +144,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             locationIndex.put(loc, positions[i++]);
         }
 
-        backToList = (FloatingActionButton) findViewById(R.id.main_mapButton);
+        backToList = (FloatingActionButton) findViewById(R.id.button_in_map_listButton);
+        newPost = (FloatingActionButton) findViewById(R.id.button_in_map_newPostButton);
     }
 
     @Override
@@ -231,7 +235,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+        backToList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MapsActivity.this, MainActivity.class);
+                startActivity(i);
+            }
+        });
 
+        newPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MapsActivity.this, PostRequestActivity.class);
+                startActivity(i);
+            }
+        });
 
     }
     private void getLocationPermission() {

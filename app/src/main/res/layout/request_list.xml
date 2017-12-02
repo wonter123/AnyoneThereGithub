@@ -1,78 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="10dp">
-    <TextView
-        android:id="@+id/heading"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="30dp">
+
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:textSize="16sp"
-        android:text="Heading"
-        android:layout_marginLeft="100dp">
-    </TextView>
-    <TextView
-        android:id="@+id/Requester"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/heading"
-        android:padding="10dp"
-        android:textSize="16sp"
-        android:text="Requester ID"
-        android:layout_marginLeft="100dp">
-    </TextView>
-    <TextView
-        android:id="@+id/reward"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/Requester"
-        android:padding="10dp"
-        android:textSize="16sp"
-        android:text="Reward"
-        android:layout_marginLeft="100dp">
-    </TextView>
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:paddingLeft="20dp"
+        android:padding="20dp"
+        android:background="#ffffff">
+        <TextView
+            android:id="@+id/heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:text="Heading"
+            android:layout_marginLeft="100dp">
+        </TextView>
+        <TextView
+            android:id="@+id/Requester"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/heading"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:text="Requester ID"
+            android:layout_marginLeft="100dp">
+        </TextView>
+        <TextView
+            android:id="@+id/reward"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Requester"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:text="Reward"
+            android:layout_marginLeft="100dp">
+        </TextView>
 
-    <ImageView
-        android:id="@+id/userID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        app:srcCompat="@drawable/ic_face"
-        android:layout_marginTop="10dp"/>
-
-    <Button
-        android:id="@+id/detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/reward"
-        android:text="Detail" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="8dp"
-        android:layout_below="@+id/userID">
-
-        <RatingBar
-            android:id="@+id/userRating"
-            style="@android:style/Widget.DeviceDefault.Light.RatingBar.Small"
+        <ImageView
+            android:id="@+id/userID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/userID"
-            android:numStars="5"
-            android:rating="5"
-            android:stepSize="0.1" />
-    </LinearLayout>
-</RelativeLayout>
+            app:srcCompat="@drawable/ic_face"
+            android:layout_marginTop="10dp"/>
+
+        <Button
+            android:id="@+id/detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/reward"
+            android:text="Detail" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="8dp"
+            android:layout_below="@+id/userID">
+
+            <RatingBar
+                android:id="@+id/userRating"
+                style="@android:style/Widget.DeviceDefault.Light.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/userID"
+                android:numStars="5"
+                android:rating="5"
+                android:stepSize="0.1" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>
+
