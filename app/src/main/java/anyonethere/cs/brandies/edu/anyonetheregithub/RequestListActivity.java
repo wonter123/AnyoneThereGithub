@@ -9,8 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
@@ -23,11 +25,19 @@ import java.util.ArrayList;
 
 public class RequestListActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
+    final int[] userHeadsId = new int[6];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.request_elements);
+
+        userHeadsId[0] = R.drawable.user_head_1;
+        userHeadsId[1] = R.drawable.user_head_2;
+        userHeadsId[2] = R.drawable.user_head_3;
+        userHeadsId[3] = R.drawable.user_head_4;
+        userHeadsId[4] = R.drawable.user_head_5;
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("posts");
         mDatabase.addValueEventListener(new ValueEventListener(){
@@ -105,6 +115,11 @@ public class RequestListActivity extends AppCompatActivity {
             heading.setText(post.title);
             requester.setText(post.posterId);
             reward.setText(post.reward+"");
+
+            ImageView profileImg = (ImageView) row.findViewById(R.id.userID);
+            int photoId = userHeadsId[(int) (Math.random()*5)];
+            profileImg.setImageDrawable(getResources().getDrawable(photoId));
+            Log.d("Warning: ", "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Math.random()*5");
 
             Button button = (Button) row.findViewById(R.id.detail);
             button.setOnClickListener(new View.OnClickListener() {

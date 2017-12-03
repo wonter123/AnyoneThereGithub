@@ -3,7 +3,9 @@ package anyonethere.cs.brandies.edu.anyonetheregithub;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.Button;
 import android.widget.EdgeEffect;
 import android.widget.EditText;
@@ -28,71 +30,81 @@ import java.util.Map;
 
 public class ProfileEditActivity extends AppCompatActivity {
 
-    FirebaseUser user;
-    String email;
-    String phone;
-    String name;
-    int credit;
-    int rating;
-    int post_number;
-    int accomplished_number;
+    private FirebaseUser user;
+    private String email;
+    private String phone;
+    private String name;
+    private int credit;
+    private int rating;
+    private int post_number;
+    private int accomplished_number;
+    private String currentUID;
 
-    EditText phoneText;
-    FirebaseAuth mAuth;
-    DatabaseReference mDatabase;
-    DatabaseReference curUserReference;
-    User currentUser;
+    private TextView profileName;
+    private TextView profileEmail;
+    private TextView profileCoin;
+    private RatingBar profileRating;
+    private TextView profileTaskAccomplished;
+    private TextView profileTaskPoseted;
+    private EditText phoneText;
+
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
+    private DatabaseReference parentDatabase;
+    private DatabaseReference curUserReference;
+    private User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_profile_edit);
 
-        // get the database information
-        mDatabase = FirebaseDatabase.getInstance().getReference("users");
+
+
         mAuth = FirebaseAuth.getInstance();
+        currentUID = mAuth.getCurrentUser().getUid();
 
         // get current user's name for further search in database
         email = mAuth.getCurrentUser().getEmail();
+
+        parentDatabase = FirebaseDatabase.getInstance().getReference();
+
+        // get the database information
+        mDatabase = FirebaseDatabase.getInstance().getReference("users").child(currentUID);
 
         // extract user info from database
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    currentUser = ds.getValue(User.class);
+                Toast.makeText(ProfileEditActivity.this, dataSnapshot.child("username").getValue().toString(), Toast.LENGTH_SHORT).show();
+                currentUser = dataSnapshot.getValue(User.class);
 
-                    if(currentUser.getEmail().equals(email)){
-                        // set all fields from database
-                        TextView profileName = (TextView) findViewById(R.id.profile_edit_name);
-                        TextView profileEmail = (TextView) findViewById(R.id.profile_edit_email);
-                        phoneText = (EditText) findViewById(R.id.profile_edit_phone);
-                        TextView profileCoin = (TextView) findViewById(R.id.profile_edit_credit);
-                        RatingBar profileRating = (RatingBar) findViewById(R.id.profile_edit_ratingBar);
-                        TextView profileTaskAccomplished = (TextView) findViewById(R.id.profile_edit_accomplished_number);
-                        TextView profileTaskPoseted = (TextView) findViewById(R.id.profile_edit_post_number);
+                // set all fields from database
+                profileName = (TextView) findViewById(R.id.profile_edit_name);
+                profileEmail = (TextView) findViewById(R.id.profile_edit_email);
+                phoneText = (EditText) findViewById(R.id.profile_edit_phone);
+                profileCoin = (TextView) findViewById(R.id.profile_edit_credit);
+                profileRating = (RatingBar) findViewById(R.id.profile_edit_ratingBar);
+                profileTaskAccomplished = (TextView) findViewById(R.id.profile_edit_accomplished_number);
+                profileTaskPoseted = (TextView) findViewById(R.id.profile_edit_post_number);
 
-                        // set the field of user
-                        name = currentUser.getUsername();
-                        email = currentUser.getEmail();
-                        phone = currentUser.getPhone();
-                        rating = currentUser.getRating();
-                        credit = currentUser.getCredit();
-                        accomplished_number = currentUser.getTask_accomplished();
-                        post_number = currentUser.getTask_posted();
+                // set the field of user
+                name = currentUser.getUsername();
+                email = currentUser.getEmail();
+                phone = currentUser.getPhone();
+                rating = currentUser.getRating();
+                credit = currentUser.getCredit();
+                accomplished_number = currentUser.getTask_accomplished();
+                post_number = currentUser.getTask_posted();
 
-                        // set each view with input information
-                        profileName.setText(name);
-                        profileEmail.setText(email);
-                        profileCoin.setText(Integer.toString(credit));
-                        phoneText.setText(phone);
-                        profileRating.setNumStars(rating);
-                        profileTaskAccomplished.setText(Integer.toString(accomplished_number));
-                        profileTaskPoseted.setText(Integer.toString(post_number));
-
-                        break;
-                    }
-                }
+                // set each view with input information
+                profileName.setText(name);
+                profileEmail.setText(email);
+                profileCoin.setText(Integer.toString(credit));
+                phoneText.setText(phone);
+                profileRating.setNumStars(rating);
+                profileTaskAccomplished.setText(Integer.toString(accomplished_number));
+                profileTaskPoseted.setText(Integer.toString(post_number));
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -116,31 +128,17 @@ public class ProfileEditActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDatabase.addValueEventListener(new ValueEventListener() {
+
+                phoneText = (EditText) findViewById(R.id.profile_edit_phone);
+                phone = phoneText.getText().toString();
+                mDatabase.child("phone").setValue(phone, new DatabaseReference.CompletionListener() {
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                            User tmp = ds.getValue(User.class);
-
-                            // traverse database to find current USER
-                            if (tmp.getEmail().equals(email)) {
-                                // the key(uid) for this USER object
-                                String key = ds.getKey();
-                                curUserReference = mDatabase.child(key);
-
-                                // update phone number to this USER object in database
-                                phoneText = (EditText) findViewById(R.id.profile_edit_phone);
-                                String phone = phoneText.getText().toString();
-                                curUserReference.child("phone").setValue(phone);
-
-                                finish();
-                            }
+                    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                        if (databaseError != null) {
+                            Log.d("!!!!!Warning: ", "SAVED WITH ERROR");
+                        } else {
+                            Log.d("!!!!!Warning: ", "SAVED SUCCESS");
                         }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
                     }
                 });
 
