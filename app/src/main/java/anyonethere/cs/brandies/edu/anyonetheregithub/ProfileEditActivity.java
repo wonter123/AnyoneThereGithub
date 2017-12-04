@@ -9,6 +9,7 @@ import android.view.accessibility.AccessibilityManager;
 import android.widget.Button;
 import android.widget.EdgeEffect;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +35,7 @@ public class ProfileEditActivity extends AppCompatActivity {
     private String email;
     private String phone;
     private String name;
+    private int photoId;
     private int credit;
     private int rating;
     private int post_number;
@@ -43,6 +45,7 @@ public class ProfileEditActivity extends AppCompatActivity {
     private TextView profileName;
     private TextView profileEmail;
     private TextView profileCoin;
+    private ImageView profilePhoto;
     private RatingBar profileRating;
     private TextView profileTaskAccomplished;
     private TextView profileTaskPoseted;
@@ -83,6 +86,7 @@ public class ProfileEditActivity extends AppCompatActivity {
                 profileName = (TextView) findViewById(R.id.profile_edit_name);
                 profileEmail = (TextView) findViewById(R.id.profile_edit_email);
                 phoneText = (EditText) findViewById(R.id.profile_edit_phone);
+                profilePhoto = (ImageView) findViewById(R.id.profile_edit_photo);
                 profileCoin = (TextView) findViewById(R.id.profile_edit_credit);
                 profileRating = (RatingBar) findViewById(R.id.profile_edit_ratingBar);
                 profileTaskAccomplished = (TextView) findViewById(R.id.profile_edit_accomplished_number);
@@ -92,6 +96,7 @@ public class ProfileEditActivity extends AppCompatActivity {
                 name = currentUser.getUsername();
                 email = currentUser.getEmail();
                 phone = currentUser.getPhone();
+                photoId = currentUser.getPhotoId();
                 rating = currentUser.getRating();
                 credit = currentUser.getCredit();
                 accomplished_number = currentUser.getTask_accomplished();
@@ -102,6 +107,7 @@ public class ProfileEditActivity extends AppCompatActivity {
                 profileEmail.setText(email);
                 profileCoin.setText(Integer.toString(credit));
                 phoneText.setText(phone);
+                profilePhoto.setImageDrawable(getResources().getDrawable(photoId));
                 profileRating.setNumStars(rating);
                 profileTaskAccomplished.setText(Integer.toString(accomplished_number));
                 profileTaskPoseted.setText(Integer.toString(post_number));
