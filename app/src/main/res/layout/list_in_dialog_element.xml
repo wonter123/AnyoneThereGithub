@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp">
+    android:layout_margin="10dp"
+    android:background="#f1ffffff">
 
     <TextView
         android:id="@+id/list_in_dialog_heading"
@@ -14,27 +15,27 @@
         android:layout_marginLeft="100dp"
         android:padding="10dp"
         android:text="Heading"
-        android:textSize="6pt"></TextView>
+        android:textSize="6pt"/>
 
     <TextView
-        android:id="@+id/list_in_dialog_Requester"
+        android:id="@+id/list_in_dialog_from"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/list_in_dialog_heading"
         android:layout_marginLeft="100dp"
         android:padding="10dp"
         android:text="Requester ID"
-        android:textSize="6pt"></TextView>
+        android:textSize="6pt"/>
 
     <TextView
         android:id="@+id/list_in_dialog_reward"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/list_in_dialog_Requester"
+        android:layout_below="@+id/list_in_dialog_from"
         android:layout_marginLeft="100dp"
         android:padding="10dp"
         android:text="Reward"
-        android:textSize="6pt"></TextView>
+        android:textSize="6pt"/>
 
     <ImageView
         android:id="@+id/list_in_dialog_userID"
@@ -43,8 +44,13 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp"
         android:layout_marginTop="18dp"
         app:srcCompat="@drawable/ic_face" />
+
+
+
 
     <!--<Button-->
         <!--android:id="@+id/list_in_dialog_detail"-->
@@ -72,5 +78,16 @@
             android:rating="5"
             android:stepSize="0.1" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/list_in_dialog_takenimg"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+
+        android:layout_alignEnd="@+id/list_in_dialog_heading"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/list_in_dialog_heading"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/stamp_taken" />
 
 </RelativeLayout>
