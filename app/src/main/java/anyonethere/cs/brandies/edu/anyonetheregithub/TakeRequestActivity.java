@@ -19,19 +19,26 @@ import com.google.firebase.database.ValueEventListener;
 public class TakeRequestActivity extends AppCompatActivity {
 
     Intent intent;
-    private String postId;
-    private DatabaseReference mDatabase;
-    private DatabaseReference curtPost;
+    String postId;
+    DatabaseReference mDatabase;
+    DatabaseReference curtPost;
+    final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    Post p;
+
+    Button take;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.take_request);
-        System.out.println("problem here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        init();
+    }
+
+    void init() {
+        take = (Button)findViewById(R.id.takeRequest_take);
         drawPost();
-        //drawPoster();
+        drawPoster();
         cancel();
-        take();
     }
 
     // if cancel is clicked, do nothing
@@ -46,11 +53,9 @@ public class TakeRequestActivity extends AppCompatActivity {
     }
 
     void take() {
-        Button take = (Button)findViewById(R.id.takeRequest_take);
         take.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 curtPost.child("takerId").setValue(userId);
                 finish();
             }
@@ -60,7 +65,6 @@ public class TakeRequestActivity extends AppCompatActivity {
     void drawPost() {
         intent = getIntent();
         if (intent.getExtras() != null) {
-            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
             postId = intent.getExtras().getString("key");
             mDatabase = FirebaseDatabase.getInstance().getReference("posts");
 //            Toast.makeText(this, postId,
@@ -71,7 +75,13 @@ public class TakeRequestActivity extends AppCompatActivity {
             curtPost.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    Post p = dataSnapshot.getValue(Post.class);
+                    p = dataSnapshot.getValue(Post.class);
+
+                    if (p.takerId != null || (p.posterId != null || p.posterId.equals(userId))) {  // bug here
+                        take.setVisibility(View.GONE);
+                    } else {
+                        take();
+                    }
 
                     TextView header = (TextView) findViewById(R.id.takeRequest_headContent);
                     TextView reward = (TextView) findViewById(R.id.takeRequest_rewardContent);
@@ -98,7 +108,6 @@ public class TakeRequestActivity extends AppCompatActivity {
 
     // waiting support for user profile
     void drawPoster() {
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference curtUser = FirebaseDatabase.getInstance().getReference("posts");
         DatabaseReference user = curtUser.child(userId);
     }

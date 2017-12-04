@@ -231,9 +231,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             row = inflater.inflate(R.layout.request_list, parent, false);
 
             TextView heading,requester,reward;
-            heading = (TextView) row.findViewById(R.id.heading);
-            requester = (TextView) row.findViewById(R.id.Requester);
-            reward = (TextView) row.findViewById(R.id.reward);
+            heading = (TextView) row.findViewById(R.id.myTake_entry_title);
+            requester = (TextView) row.findViewById(R.id.myTake_entry_poster);
+            reward = (TextView) row.findViewById(R.id.myTake_entry_reward);
 
             RatingBar rate = (RatingBar) row.findViewById(R.id.userRating);
 

@@ -9,35 +9,36 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.DatabaseError;
 
 import java.util.ArrayList;
 
+public class myPost_entry extends AppCompatActivity {
+    DatabaseReference mDatabase;
+    Button confirm_btn;
+    Button detail_btn;
+    String userId;
 
-public class RequestListActivity extends AppCompatActivity {
-    private DatabaseReference mDatabase;
-    final int[] userHeadsId = new int[6];
-
+    void init() {
+        confirm_btn = (Button)findViewById(R.id.myPost_entry_confirm);
+        detail_btn = (Button)findViewById(R.id.myPost_entry_detail);
+        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.request_elements);
+        init();
 
-        userHeadsId[0] = R.drawable.user_head_1;
-        userHeadsId[1] = R.drawable.user_head_2;
-        userHeadsId[2] = R.drawable.user_head_3;
-        userHeadsId[3] = R.drawable.user_head_4;
-        userHeadsId[4] = R.drawable.user_head_5;
-
+        setContentView(R.layout.activity_my_post_entry);
         mDatabase = FirebaseDatabase.getInstance().getReference().child("posts");
         mDatabase.addValueEventListener(new ValueEventListener(){
             @Override
@@ -47,6 +48,9 @@ public class RequestListActivity extends AppCompatActivity {
                 for (DataSnapshot uniqueUserSnapshot : dataSnapshot.getChildren()) {
                     String key = uniqueUserSnapshot.getKey();
                     Post post = uniqueUserSnapshot.getValue(Post.class);
+                    if (post.posterId != userId) {
+                        continue;
+                    }
                     adp.addIn(post,key);
                 }
                 mainListView.setAdapter(adp);
@@ -108,19 +112,13 @@ public class RequestListActivity extends AppCompatActivity {
             System.out.println("here");
 
             heading.setText(post.title);
-            requester.setText(post.posterId);
-            reward.setText(post.reward+"");
+            requester.setText(post.takerId);
+            reward.setText(post.reward + "");
 
-            ImageView profileImg = (ImageView) row.findViewById(R.id.userID);
-            int photoId = userHeadsId[(int) (Math.random()*5)];
-            profileImg.setImageDrawable(getResources().getDrawable(photoId));
-            Log.d("Warning: ", "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Math.random()*5");
-
-            Button button = (Button) row.findViewById(R.id.detail);
-            button.setOnClickListener(new View.OnClickListener() {
+            detail_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(RequestListActivity.this,TakeRequestActivity.class);
+                    Intent intent = new Intent(myPost_entry.this,TakeRequestActivity.class);
                     intent.putExtra("key",k);
                     startActivity(intent);
                 }
@@ -130,4 +128,3 @@ public class RequestListActivity extends AppCompatActivity {
         }
     }
 }
-
