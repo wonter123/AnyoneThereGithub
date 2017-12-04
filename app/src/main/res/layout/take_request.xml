@@ -184,12 +184,11 @@
         android:id="@+id/takeRequest_cancle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/takeRequest_take"
-        android:layout_alignBottom="@+id/takeRequest_take"
         android:layout_alignEnd="@+id/takeRequest_descriptionContent"
+        android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/takeRequest_descriptionContent"
-        android:text="Cancel" />
-
+        android:layout_marginBottom="38dp"
+        android:text="Back" />
 
 
 </RelativeLayout>

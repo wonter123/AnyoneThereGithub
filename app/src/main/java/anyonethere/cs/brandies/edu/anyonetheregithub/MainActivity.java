@@ -276,6 +276,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             View row;
             row = inflater.inflate(R.layout.request_list, parent, false);
 
+            ImageView iv = (ImageView) row.findViewById(R.id.detail_statusimg);
+            Post p = (Post) getItem(index);
+            Log.d("post status: ", "" +  (p.postState));
+            if(p.postState == 1) iv.setImageResource(R.drawable.stamp_taken);
+            else if(p.postState == 2) iv.setImageResource(R.drawable.stamp_completed);
+
             TextView heading,requester,reward;
             heading = (TextView) row.findViewById(R.id.myPost_entry_title);
             requester = (TextView) row.findViewById(R.id.myPost_entry_poster);
@@ -288,9 +294,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Post post = arrlist.get(index);
             Log.d("Main Activity: ", "main activity getView");
 
-            heading.setText("Title:  "+post.title);
-            requester.setText("From:  "+post.from);
-            reward.setText("Reward:  "+post.reward+"");
+            heading.setText("Title:  " + post.title);
+            requester.setText("From:  " + post.from);
+            reward.setText("Reward:  " + post.reward + "");
 
             rate.setRating(post.rating);
 

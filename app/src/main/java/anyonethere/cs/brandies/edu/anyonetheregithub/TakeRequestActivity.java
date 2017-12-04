@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,6 +24,7 @@ public class TakeRequestActivity extends AppCompatActivity {
     DatabaseReference mDatabase;
     DatabaseReference curtPost;
     final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    final String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
     Post p = null;
 
     Button take;
@@ -57,6 +59,8 @@ public class TakeRequestActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 curtPost.child("takerId").setValue(userId);
+                curtPost.child("postState").setValue(1);
+                curtPost.child("takerName").setValue(userEmail);
                 finish();
             }
         });
@@ -74,13 +78,11 @@ public class TakeRequestActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     p = dataSnapshot.getValue(Post.class);
-
-                    /*if ((p != null && p.takerId != null) || (p.posterId != null || p.posterId.equals(userId))) {  // bug here
+                    if ((p != null || p.takerId != null) || (p.posterId != null || p.posterId.equals(userId))) {  // bug here
                         take.setVisibility(View.GONE);
                     } else {
                         take();
-                    }*/
-                    take();
+                    }
 
                     TextView header = (TextView) findViewById(R.id.takeRequest_headContent);
                     TextView reward = (TextView) findViewById(R.id.takeRequest_rewardContent);
