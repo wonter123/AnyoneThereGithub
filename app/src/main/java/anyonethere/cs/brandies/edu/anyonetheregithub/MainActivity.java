@@ -97,14 +97,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             userDatabase.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    photoId = Integer.valueOf(dataSnapshot.child("photoId").getValue().toString());
-                    Toast.makeText(MainActivity.this, Integer.toString(photoId), Toast.LENGTH_LONG);
-                    userPhoto.setImageDrawable(getResources().getDrawable(userHeadsId[photoId]));
-                    // load menu navigation data
-                    name = dataSnapshot.child("username").getValue().toString();
-                    email = dataSnapshot.child("email").getValue().toString();
-                    userName.setText(name);
-                    userEmail.setText(email);
+                    try {
+                        photoId = Integer.valueOf(dataSnapshot.child("photoId").getValue().toString());
+                        Toast.makeText(MainActivity.this, Integer.toString(photoId), Toast.LENGTH_LONG);
+                        userPhoto.setImageDrawable(getResources().getDrawable(userHeadsId[photoId]));
+                        // load menu navigation data
+                        name = dataSnapshot.child("username").getValue().toString();
+                        email = dataSnapshot.child("email").getValue().toString();
+                        userName.setText(name);
+                        userEmail.setText(email);
+                    } catch (RuntimeException e) {
+                        FirebaseAuth.getInstance().signOut();
+                        startActivity(new Intent(MainActivity.this, SignInActivity.class));
+                    }
                 }
 
                 @Override
