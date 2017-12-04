@@ -15,7 +15,7 @@
         android:background="#d5ffffff">
 
         <TextView
-            android:id="@+id/myPost_entry_title"
+            android:id="@+id/entry_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="100dp"
@@ -24,19 +24,19 @@
             android:textSize="16sp"></TextView>
 
         <TextView
-            android:id="@+id/myPost_entry_poster"
+            android:id="@+id/entry_poster"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/myPost_entry_title"
+            android:layout_below="@+id/entry_title"
             android:layout_marginLeft="100dp"
             android:padding="10dp"
             android:text="Request Taker"
             android:textSize="16sp"></TextView>
         <TextView
-            android:id="@+id/myPost_entry_reward"
+            android:id="@+id/entry_reward"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/myPost_entry_poster"
+            android:layout_below="@+id/entry_poster"
             android:padding="10dp"
             android:textSize="16sp"
             android:text="Reward"
@@ -60,7 +60,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/myPost_entry_reward"
+            android:layout_below="@+id/entry_reward"
             android:text="Detail" />
 
         <LinearLayout

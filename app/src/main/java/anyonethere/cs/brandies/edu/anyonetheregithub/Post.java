@@ -26,14 +26,12 @@ public class Post {
     public int imageID;
     public int postState;
     public HashMap<String, Object> result;
-//    public boolean status = true;
     public String takerName = null;
     public String posterName;
 
     public Post() {
         // Default constructor required for calls to DataSnapshot.getValue(Post.class)
     }
-
 
     public Post(String title, int reward, String description, Date postDate,
                 Date expireDate, String from, String to) {

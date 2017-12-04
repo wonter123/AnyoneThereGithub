@@ -106,20 +106,19 @@ public class myTakes extends AppCompatActivity {
             row = inflater.inflate(R.layout.request_list, parent, false);
 
             TextView heading,requester,reward;
-            heading = (TextView) row.findViewById(R.id.myPost_entry_title);
-            requester = (TextView) row.findViewById(R.id.myPost_entry_poster);
-            reward = (TextView) row.findViewById(R.id.myPost_entry_reward);
+            heading = (TextView) row.findViewById(R.id.entry_title);
+            requester = (TextView) row.findViewById(R.id.entry_poster);
+            reward = (TextView) row.findViewById(R.id.entry_reward);
 
             final String k = key.get(index);
 
             Post post = arrlist.get(index);
-            System.out.println("here");
 
             heading.setText(post.title);
             requester.setText(post.posterId);
-            reward.setText(post.reward+"");
+            reward.setText(post.reward + "");
 
-            Button button = (Button) row.findViewById(R.id.detail);
+            Button button = (Button) row.findViewById(R.id.entry_detail);
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

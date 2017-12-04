@@ -287,9 +287,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             else if(state == 2) iv.setImageResource(R.drawable.stamp_completed);
 
             TextView heading,requester,reward;
-            heading = (TextView) row.findViewById(R.id.myPost_entry_title);
-            requester = (TextView) row.findViewById(R.id.myPost_entry_poster);
-            reward = (TextView) row.findViewById(R.id.myPost_entry_reward);
+            heading = (TextView) row.findViewById(R.id.entry_title);
+            requester = (TextView) row.findViewById(R.id.entry_poster);
+            reward = (TextView) row.findViewById(R.id.entry_reward);
 
             RatingBar rate = (RatingBar) row.findViewById(R.id.userRating);
 

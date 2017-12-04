@@ -14,12 +14,13 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.DatabaseError;
 
 import java.util.ArrayList;
+
 
 public class myPosts extends AppCompatActivity {
     private DatabaseReference mDatabase;
@@ -27,9 +28,10 @@ public class myPosts extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_takes);
+        setContentView(R.layout.activity_my_posts);
 
         final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        cancel();
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("posts");
         mDatabase.addValueEventListener(new ValueEventListener(){
@@ -40,7 +42,9 @@ public class myPosts extends AppCompatActivity {
                 for (DataSnapshot uniqueUserSnapshot : dataSnapshot.getChildren()) {
                     String key = uniqueUserSnapshot.getKey();
                     Post post = uniqueUserSnapshot.getValue(Post.class);
-                    if (post.takerId != null && post.takerId.equals(uid)) {
+                    if (post.posterId != null && post.posterId.equals(uid)) {
+                        adp.addIn(post,key);
+                    } else {
                         adp.addIn(post,key);
                     }
                 }
@@ -50,6 +54,17 @@ public class myPosts extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError firebaseError) {
                 Log.w("loadPost:onCancelled", firebaseError.toException());
+            }
+        });
+    }
+
+    // if cancel is clicked, do nothing
+    void cancel() {
+        Button cancel = (Button)findViewById(R.id.myPosts_back);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }
@@ -67,6 +82,7 @@ public class myPosts extends AppCompatActivity {
         public void addIn(Post post,String keys) {
             arrlist.add(post);
             key.add(keys);
+
         }
 
         @Override
@@ -89,12 +105,12 @@ public class myPosts extends AppCompatActivity {
 
             LayoutInflater inflater = getLayoutInflater();
             View row;
-            row = inflater.inflate(R.layout.request_list, parent, false);
+            row = inflater.inflate(R.layout.activity_my_post_entry, parent, false);
 
             TextView heading,requester,reward;
-            heading = (TextView) row.findViewById(R.id.myPost_entry_title);
-            requester = (TextView) row.findViewById(R.id.myPost_entry_poster);
-            reward = (TextView) row.findViewById(R.id.myPost_entry_reward);
+            heading = (TextView) row.findViewById(R.id.entry_title);
+            requester = (TextView) row.findViewById(R.id.entry_poster);
+            reward = (TextView) row.findViewById(R.id.entry_reward);
 
             final String k = key.get(index);
 
@@ -105,13 +121,22 @@ public class myPosts extends AppCompatActivity {
             requester.setText(post.posterId);
             reward.setText(post.reward+"");
 
-            Button button = (Button) row.findViewById(R.id.detail);
+            Button button = (Button) row.findViewById(R.id.entry_detail);
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(myPosts.this,TakeRequestActivity.class);
                     intent.putExtra("key",k);
                     startActivity(intent);
+                }
+            });
+
+            Button confirm = (Button) row.findViewById(R.id.entry_confirm);
+            confirm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mDatabase.child("posts").child(k).setValue(3);
+                    finish();
                 }
             });
 
