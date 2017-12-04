@@ -34,16 +34,18 @@ public class ListInDialogAdapter extends ArrayAdapter<Post> {
         }
         Post p = getItem(position);
         TextView Heading = (TextView) curView.findViewById (R.id.list_in_dialog_heading);
-        TextView Requester = (TextView) curView.findViewById (R.id.list_in_dialog_Requester);
+        TextView from = (TextView) curView.findViewById (R.id.list_in_dialog_from);
         TextView Reward = (TextView) curView.findViewById(R.id.list_in_dialog_reward);
         ImageView profileImg = (ImageView) curView.findViewById(R.id.list_in_dialog_userID);
 //        Button detailButton = (Button) curView.findViewById(R.id.list_in_dialog_detail);
         RatingBar rb = (RatingBar) curView.findViewById(R.id.list_in_dialog_ratingbar);
+        ImageView iv = (ImageView) curView.findViewById(R.id.list_in_dialog_takenimg);
 
-
+        if(p.postState == 1) iv.setImageResource(R.drawable.stamp1);
+//        if(p.postState == 2) return new Space(curView.getContext());
 
         Heading.setText(p.getTitle());
-        Requester.setText(p.getPosterId());
+        from.setText("From: "+p.getFrom());
         Reward.setText("Reward: "+p.getReward()+"");
         profileImg.setImageResource(R.drawable.ic_face);
         rb.setRating(p.getRating());

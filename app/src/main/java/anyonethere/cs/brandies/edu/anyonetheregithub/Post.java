@@ -72,6 +72,10 @@ public class Post {
         result.put("poster", posterId);
     }
 
+    public int getPostState() {
+        return postState;
+    }
+
     public void setRating(int rating) {
         this.rating = rating;
     }
