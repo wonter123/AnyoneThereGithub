@@ -44,7 +44,7 @@ public class User {
         this.phone = "";
         this.photoId = userHeadsId[(int) (Math.random()*10)];
         this.credit = 100;
-        this.rating = 0;
+        this.rating = 5;
         this.task_accomplished = 0;
         this.task_posted = 0;
     }
