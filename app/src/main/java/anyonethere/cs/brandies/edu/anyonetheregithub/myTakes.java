@@ -1,25 +1,25 @@
 package anyonethere.cs.brandies.edu.anyonetheregithub;
 
-        import android.content.Intent;
-        import android.support.v7.app.AppCompatActivity;
-        import android.os.Bundle;
-        import android.util.Log;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.BaseAdapter;
-        import android.widget.Button;
-        import android.widget.ListView;
-        import android.widget.TextView;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 
-        import com.google.firebase.auth.FirebaseAuth;
-        import com.google.firebase.database.DataSnapshot;
-        import com.google.firebase.database.DatabaseReference;
-        import com.google.firebase.database.FirebaseDatabase;
-        import com.google.firebase.database.ValueEventListener;
-        import com.google.firebase.database.DatabaseError;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.DatabaseError;
 
-        import java.util.ArrayList;
+import java.util.ArrayList;
 
 
 public class myTakes extends AppCompatActivity {
@@ -31,6 +31,7 @@ public class myTakes extends AppCompatActivity {
         setContentView(R.layout.activity_my_takes);
 
         final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        cancel();
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("posts");
         mDatabase.addValueEventListener(new ValueEventListener(){
@@ -53,10 +54,17 @@ public class myTakes extends AppCompatActivity {
                 Log.w("loadPost:onCancelled", firebaseError.toException());
             }
         });
+    }
 
-
-//        mainListView = (ListView) findViewById( R.id.listexpense);
-//        mainListView.setAdapter(adp);
+    // if cancel is clicked, do nothing
+    void cancel() {
+        Button cancel = (Button)findViewById(R.id.myTakes_back);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     class AppAdaptor extends BaseAdapter {
