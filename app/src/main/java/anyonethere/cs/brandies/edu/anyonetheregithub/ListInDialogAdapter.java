@@ -41,13 +41,13 @@ public class ListInDialogAdapter extends ArrayAdapter<Post> {
         RatingBar rb = (RatingBar) curView.findViewById(R.id.list_in_dialog_ratingbar);
         ImageView iv = (ImageView) curView.findViewById(R.id.list_in_dialog_takenimg);
 
-        if(p.postState == 1) iv.setImageResource(R.drawable.stamp1);
+        if(p.postState == 1) iv.setImageResource(R.drawable.stamp_taken);
 //        if(p.postState == 2) return new Space(curView.getContext());
 
         Heading.setText(p.getTitle());
         from.setText("From: "+p.getFrom());
         Reward.setText("Reward: "+p.getReward()+"");
-        profileImg.setImageResource(R.drawable.ic_face);
+//        profileImg.setImageResource(p);
         rb.setRating(p.getRating());
 
 //        final String key = p.getPosterId();
