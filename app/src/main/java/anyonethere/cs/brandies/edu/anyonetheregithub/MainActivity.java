@@ -16,9 +16,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,6 +36,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DatabaseReference mDatabase;
+    private DatabaseReference userDatabase;
+    private FirebaseAuth mAuth;
+    private String currentUID;
 
     private PlaceHolderView mDrawerView;
     private DrawerLayout mDrawer;
@@ -45,6 +50,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FirebaseUser user;
     TextView userName;
     TextView userEmail;
+    ImageView userPhoto;
+
+    String name;
+    String email;
+    int photoId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,12 +71,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (menuheader != null) {
             userEmail = (TextView) menuheader.findViewById(R.id.nav_email);
             userName = (TextView) menuheader.findViewById(R.id.nav_username);
-            String email = user.getEmail();
-            String name = email.split("@")[0];
+            userPhoto = (ImageView) menuheader.findViewById(R.id.nav_photo);
+//            String email = user.getEmail();
+//            String name = email.split("@")[0];
 
-            // load menu navigation data
-            userName.setText(name);
-            userEmail.setText(email);
+            // get current user's name for further search in database
+            mAuth = FirebaseAuth.getInstance();
+            currentUID = mAuth.getCurrentUser().getUid();
+            userDatabase = FirebaseDatabase.getInstance().getReference("users").child(currentUID);
+            userDatabase.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    photoId = Integer.valueOf(dataSnapshot.child("photoId").getValue().toString());
+                    Toast.makeText(MainActivity.this, Integer.toString(photoId), Toast.LENGTH_LONG);
+                    userPhoto.setImageDrawable(getResources().getDrawable(photoId));
+                    // load menu navigation data
+                    name = dataSnapshot.child("username").getValue().toString();
+                    email = dataSnapshot.child("email").getValue().toString();
+                    userName.setText(name);
+                    userEmail.setText(email);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+
         } else {
             Log.d("Warning", "menu header is null");
         }

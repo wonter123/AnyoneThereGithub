@@ -30,53 +30,50 @@ import org.w3c.dom.Text;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    String email;
-    DatabaseReference mDatabase;
-    FirebaseAuth mAuth;
-    User currentUser;
-
+    private String email;
+    private String currentUID;
+    private DatabaseReference mDatabase;
+    private DatabaseReference mrDatabase;
+    private FirebaseAuth mAuth;
+    private User currentUser;
+    private Post post;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_profile);
 
-        // get the database information
-        mDatabase = FirebaseDatabase.getInstance().getReference("users");
-        mAuth = FirebaseAuth.getInstance();
-
         // get current user's name for further search in database
+        mAuth = FirebaseAuth.getInstance();
+        currentUID = mAuth.getCurrentUser().getUid();
         email = mAuth.getCurrentUser().getEmail();
 
+        // get the database information
+        mDatabase = FirebaseDatabase.getInstance().getReference("users").child(currentUID);
         // extract user info from database
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    currentUser = ds.getValue(User.class);
+                currentUser = dataSnapshot.getValue(User.class);
 
-                    if(currentUser.getEmail().equals(email)){
-                        // set all fields from database
-                        TextView profileName = (TextView) findViewById(R.id.profile_name);
-                        TextView profileEmail = (TextView) findViewById(R.id.profile_email);
-                        TextView profilePhone = (TextView) findViewById(R.id.profile_phone);
-                        RatingBar profileRating = (RatingBar) findViewById(R.id.profile_ratingBar);
-                        TextView profileCredit = (TextView) findViewById(R.id.profile_credit);
-                        TextView profileTaskAccomplished = (TextView) findViewById(R.id.profile_accomplished_number);
-                        TextView profileTaskPoseted = (TextView) findViewById(R.id.profile_post_number);
+                // set all fields from database
+                TextView profileName = (TextView) findViewById(R.id.profile_name);
+                TextView profileEmail = (TextView) findViewById(R.id.profile_email);
+                TextView profilePhone = (TextView) findViewById(R.id.profile_phone);
+                ImageView profilePhoto = (ImageView) findViewById(R.id.profile_photo);
+                RatingBar profileRating = (RatingBar) findViewById(R.id.profile_ratingBar);
+                TextView profileCredit = (TextView) findViewById(R.id.profile_credit);
+                TextView profileTaskAccomplished = (TextView) findViewById(R.id.profile_accomplished_number);
 
-                        // set each view with input information
-                        profileName.setText(currentUser.getUsername());
-                        profileEmail.setText(currentUser.getEmail());
-                        profilePhone.setText(currentUser.getPhone());
-                        profileCredit.setText(Integer.toString(currentUser.getCredit()));
-                        profileRating.setNumStars(currentUser.getRating());
-                        profileTaskAccomplished.setText(Integer.toString(currentUser.getTask_accomplished()));
-                        profileTaskPoseted.setText(Integer.toString(currentUser.getTask_posted()));
-
-                        break;
-                    }
-                }
+                // set each view with input information
+                profileName.setText(currentUser.getUsername());
+                profileEmail.setText(currentUser.getEmail());
+                profilePhone.setText(currentUser.getPhone());
+                profilePhoto.setImageDrawable(getResources().getDrawable(currentUser.getPhotoId()));
+                profileCredit.setText(Integer.toString(currentUser.getCredit()));
+                profileRating.setNumStars(currentUser.getRating());
+                profileTaskAccomplished.setText(Integer.toString(currentUser.getTask_accomplished()));
+                Toast.makeText(ProfileActivity.this, "POST: ", Toast.LENGTH_LONG);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -85,7 +82,26 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
 
+        mrDatabase = FirebaseDatabase.getInstance().getReference("posts");
+        mrDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int accomplished = 0;
+                int posted = 0;
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    post = ds.getValue(Post.class);
+//                    Toast.makeText(ProfileActivity.this, "POST: " + post.toString(), Toast.LENGTH_LONG).show();
+//                    if (post.getPosterId().equals(currentUID)) posted++;
+                }
+//                TextView profileTaskPosted = (TextView) findViewById(R.id.profile_post_number);
+//                profileTaskPosted.setText(Integer.toString(currentUser.getTask_posted()));
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         // GOTO EDIT
         Button editButton = (Button) findViewById(R.id.profile_edit_button);
