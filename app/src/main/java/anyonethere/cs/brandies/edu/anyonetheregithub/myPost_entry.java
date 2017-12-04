@@ -102,9 +102,9 @@ public class myPost_entry extends AppCompatActivity {
             row = inflater.inflate(R.layout.request_list, parent, false);
 
             TextView heading,requester,reward;
-            heading = (TextView) row.findViewById(R.id.myTake_entry_title);
-            requester = (TextView) row.findViewById(R.id.myTake_entry_poster);
-            reward = (TextView) row.findViewById(R.id.myTake_entry_reward);
+            heading = (TextView) row.findViewById(R.id.myPost_entry_title);
+            requester = (TextView) row.findViewById(R.id.myPost_entry_poster);
+            reward = (TextView) row.findViewById(R.id.myPost_entry_reward);
 
             final String k = key.get(index);
 
@@ -123,7 +123,6 @@ public class myPost_entry extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-
             return (row);
         }
     }

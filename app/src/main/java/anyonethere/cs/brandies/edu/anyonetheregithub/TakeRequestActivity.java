@@ -23,7 +23,7 @@ public class TakeRequestActivity extends AppCompatActivity {
     DatabaseReference mDatabase;
     DatabaseReference curtPost;
     final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-    Post p;
+    Post p = null;
 
     Button take;
 
@@ -67,8 +67,6 @@ public class TakeRequestActivity extends AppCompatActivity {
         if (intent.getExtras() != null) {
             postId = intent.getExtras().getString("key");
             mDatabase = FirebaseDatabase.getInstance().getReference("posts");
-//            Toast.makeText(this, postId,
-//                    Toast.LENGTH_LONG).show();
             curtPost = mDatabase.child(postId);
 
             Log.d("Take Request: ", "take request");
@@ -77,11 +75,12 @@ public class TakeRequestActivity extends AppCompatActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     p = dataSnapshot.getValue(Post.class);
 
-                    if (p.takerId != null || (p.posterId != null || p.posterId.equals(userId))) {  // bug here
+                    /*if ((p != null && p.takerId != null) || (p.posterId != null || p.posterId.equals(userId))) {  // bug here
                         take.setVisibility(View.GONE);
                     } else {
                         take();
-                    }
+                    }*/
+                    take();
 
                     TextView header = (TextView) findViewById(R.id.takeRequest_headContent);
                     TextView reward = (TextView) findViewById(R.id.takeRequest_rewardContent);

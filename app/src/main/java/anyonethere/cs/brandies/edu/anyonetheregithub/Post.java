@@ -26,7 +26,7 @@ public class Post {
     public int imageID;
     public int postState;
     public HashMap<String, Object> result;
-    public boolean status = true;
+//    public boolean status = true;
     public String takerName = null;
 
     public Post() {
@@ -62,7 +62,8 @@ public class Post {
         result.put("from", from);
         result.put("poster", posterId);
         result.put("taker", takerId);
-        result.put("status", status);
+//        result.put("status", status);
+        result.put("postState", postState);
         result.put("takerName", takerName);
         return result;
     }
@@ -77,14 +78,14 @@ public class Post {
         result.put("poster", posterId);
     }
 
-    public void setStatus(boolean boo) {
-        status = boo;
-        result.put("status", status);
-    }
-
-    public void setPostComplete() {
-        setStatus(false);
-    }
+//    public void setStatus(boolean boo) {
+//        status = boo;
+//        result.put("status", status);
+//    }
+//
+//    public void setPostComplete() {
+//        setStatus(false);
+//    }
 
     public void setRating(int rating) {
         this.rating = rating;
@@ -143,5 +144,8 @@ public class Post {
 
     public int getImageID() {
         return imageID;
+    }
+
+    public int getPostState() {return this.postState;
     }
 }

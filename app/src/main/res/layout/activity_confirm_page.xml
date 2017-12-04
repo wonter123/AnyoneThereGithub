@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:layout_margin="10dp">
         <TextView
-            android:id="@+id/myTake_entry_title"
+            android:id="@+id/myPost_entry_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -23,20 +23,20 @@
             android:layout_marginLeft="100dp">
         </TextView>
         <TextView
-            android:id="@+id/myTake_entry_poster"
+            android:id="@+id/myPost_entry_poster"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/myTake_entry_title"
+            android:layout_below="@+id/myPost_entry_title"
             android:padding="10dp"
             android:textSize="16sp"
             android:text="Requester ID"
             android:layout_marginLeft="100dp">
         </TextView>
         <TextView
-            android:id="@+id/myTake_entry_reward"
+            android:id="@+id/myPost_entry_reward"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/myTake_entry_poster"
+            android:layout_below="@+id/myPost_entry_poster"
             android:padding="10dp"
             android:textSize="16sp"
             android:text="Reward"
