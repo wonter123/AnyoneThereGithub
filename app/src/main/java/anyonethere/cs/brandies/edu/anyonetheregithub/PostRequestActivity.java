@@ -117,10 +117,14 @@ public class PostRequestActivity extends AppCompatActivity implements AdapterVie
 
                 final String title = ((EditText) findViewById(R.id.request_title_box)).getText().toString();
                 final String reward = ((EditText) findViewById(R.id.request_reward_box)).getText().toString();
-                if (title.trim().equals(""))
+                if (title.trim().equals("")) {
                     ((EditText) findViewById(R.id.request_title_box)).setError("Please enter a title for your request.");
-                else if (reward.trim().equals("") || !reward.trim().matches("[-+]?\\d*\\.?\\d+") || Integer.parseInt(reward.trim()) < 0)
+                    return;
+                }
+                else if (reward.trim().equals("") || !reward.trim().matches("[-+]?\\d*\\.?\\d+") || Integer.parseInt(reward.trim()) < 0) {
                     ((EditText) findViewById(R.id.request_reward_box)).setError("Please enter a valid reward amount.");
+                    return;
+                }
 
                 final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 DatabaseReference curUser = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
@@ -129,8 +133,10 @@ public class PostRequestActivity extends AppCompatActivity implements AdapterVie
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         User u = dataSnapshot.getValue(User.class);
-                        if (Integer.parseInt(reward.trim()) > u.getCredit())
+                        if (Integer.parseInt(reward.trim()) > u.getCredit()) {
                             ((EditText) findViewById(R.id.request_reward_box)).setError("Please enter a reward amount less than your available credits.");
+                            return;
+                        }
                         else {
                             String key = mDatabase.child("posts").push().getKey();
 
@@ -188,7 +194,4 @@ public class PostRequestActivity extends AppCompatActivity implements AdapterVie
     public void onNothingSelected(AdapterView<?> arg0) {
 
     }
-
-
-
 }
