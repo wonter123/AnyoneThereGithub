@@ -83,7 +83,7 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
         String username = usernameFromEmail(user.getEmail());
 
         // Write new user
-        writeNewUser(user.getUid(), username, user.getEmail());
+        //writeNewUser(user.getUid(), username, user.getEmail());
 
         currentUserName = user.getDisplayName();
         Uid = user.getUid();
@@ -107,6 +107,9 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (task.isSuccessful()) {
+                            FirebaseUser user = task.getResult().getUser();
+                            String username = usernameFromEmail(user.getEmail());
+                            writeNewUser(user.getUid(), username, user.getEmail());
                             onAuthSuccess(task.getResult().getUser());
                         } else {
                             Toast.makeText(SignInActivity.this, "Sign Up Failed",

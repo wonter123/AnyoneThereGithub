@@ -99,7 +99,6 @@ public class Post {
         this.postState = newState;
     }
 
-
     public String  toString(){
         return this.title+" "+this.description;
     }

@@ -1,11 +1,8 @@
 package anyonethere.cs.brandies.edu.anyonetheregithub;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,14 +11,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import org.w3c.dom.Text;
 
 
 /**
@@ -67,7 +61,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 currentUser = dataSnapshot.getValue(User.class);
-
+                Toast.makeText(ProfileActivity.this, "lalala: ",Toast.LENGTH_LONG).show();
                 // set all fields from database
                 TextView profileName = (TextView) findViewById(R.id.profile_name);
                 TextView profileEmail = (TextView) findViewById(R.id.profile_email);

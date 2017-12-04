@@ -47,7 +47,7 @@ public class ListInDialogAdapter extends ArrayAdapter<Post> {
         Heading.setText(p.getTitle());
         from.setText("From: "+p.getFrom());
         Reward.setText("Reward: "+p.getReward()+"");
-//        profileImg.setImageResource(p);
+        profileImg.setImageResource(p.getImageID());
         rb.setRating(p.getRating());
 
 //        final String key = p.getPosterId();
