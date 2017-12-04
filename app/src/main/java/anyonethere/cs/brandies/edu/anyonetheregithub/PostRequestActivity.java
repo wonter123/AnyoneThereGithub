@@ -156,6 +156,8 @@ public class PostRequestActivity extends AppCompatActivity implements AdapterVie
                                     expire, from, to);
 
                             newPost.setPoster(userId);
+                            // set user photo into request info
+                            newPost.setImageID(Integer.valueOf(dataSnapshot.child("photoId").getValue().toString()));
 
                             Map<String, Object> postValues = newPost.toMap();
                             Map<String, Object> childUpdates = new HashMap<>();

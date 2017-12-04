@@ -43,6 +43,18 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_profile);
 
+        final int[] userHeadsId = new int[10];
+        userHeadsId[0] = R.drawable.user_head_1;
+        userHeadsId[1] = R.drawable.user_head_2;
+        userHeadsId[2] = R.drawable.user_head_3;
+        userHeadsId[3] = R.drawable.user_head_4;
+        userHeadsId[4] = R.drawable.user_head_5;
+        userHeadsId[5] = R.drawable.user_head_6;
+        userHeadsId[6] = R.drawable.user_head_7;
+        userHeadsId[7] = R.drawable.user_head_8;
+        userHeadsId[8] = R.drawable.user_head_9;
+        userHeadsId[9] = R.drawable.user_head_10;
+
         // get current user's name for further search in database
         mAuth = FirebaseAuth.getInstance();
         currentUID = mAuth.getCurrentUser().getUid();
@@ -69,7 +81,7 @@ public class ProfileActivity extends AppCompatActivity {
                 profileName.setText(currentUser.getUsername());
                 profileEmail.setText(currentUser.getEmail());
                 profilePhone.setText(currentUser.getPhone());
-                profilePhoto.setImageDrawable(getResources().getDrawable(currentUser.getPhotoId()));
+                profilePhoto.setImageDrawable(getResources().getDrawable(userHeadsId[currentUser.getPhotoId()]));
                 profileCredit.setText(Integer.toString(currentUser.getCredit()));
                 profileRating.setNumStars(currentUser.getRating());
                 profileTaskAccomplished.setText(Integer.toString(currentUser.getTask_accomplished()));
