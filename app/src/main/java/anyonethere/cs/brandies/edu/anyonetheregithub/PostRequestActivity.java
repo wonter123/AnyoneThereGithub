@@ -186,7 +186,4 @@ public class PostRequestActivity extends AppCompatActivity implements AdapterVie
     public void onNothingSelected(AdapterView<?> arg0) {
 
     }
-
-
-
 }
