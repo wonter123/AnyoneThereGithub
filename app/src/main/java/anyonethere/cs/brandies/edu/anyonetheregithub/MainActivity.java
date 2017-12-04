@@ -61,6 +61,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // for photo getter
+        final int[] userHeadsId = new int[10];
+        userHeadsId[0] = R.drawable.user_head_1;
+        userHeadsId[1] = R.drawable.user_head_2;
+        userHeadsId[2] = R.drawable.user_head_3;
+        userHeadsId[3] = R.drawable.user_head_4;
+        userHeadsId[4] = R.drawable.user_head_5;
+        userHeadsId[5] = R.drawable.user_head_6;
+        userHeadsId[6] = R.drawable.user_head_7;
+        userHeadsId[7] = R.drawable.user_head_8;
+        userHeadsId[8] = R.drawable.user_head_9;
+        userHeadsId[9] = R.drawable.user_head_10;
+
         navigationView = (NavigationView) findViewById(R.id.nav_view);
 
         // set the user profile in menu header
@@ -84,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     photoId = Integer.valueOf(dataSnapshot.child("photoId").getValue().toString());
                     Toast.makeText(MainActivity.this, Integer.toString(photoId), Toast.LENGTH_LONG);
-                    userPhoto.setImageDrawable(getResources().getDrawable(photoId));
+                    userPhoto.setImageDrawable(getResources().getDrawable(userHeadsId[photoId]));
                     // load menu navigation data
                     name = dataSnapshot.child("username").getValue().toString();
                     email = dataSnapshot.child("email").getValue().toString();
@@ -231,9 +244,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             row = inflater.inflate(R.layout.request_list, parent, false);
 
             TextView heading,requester,reward;
-            heading = (TextView) row.findViewById(R.id.heading);
-            requester = (TextView) row.findViewById(R.id.Requester);
-            reward = (TextView) row.findViewById(R.id.reward);
+            heading = (TextView) row.findViewById(R.id.myTake_entry_title);
+            requester = (TextView) row.findViewById(R.id.myTake_entry_poster);
+            reward = (TextView) row.findViewById(R.id.myTake_entry_reward);
 
             RatingBar rate = (RatingBar) row.findViewById(R.id.userRating);
 

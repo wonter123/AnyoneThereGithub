@@ -62,7 +62,17 @@ public class ProfileEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_profile_edit);
 
-
+        final int[] userHeadsId = new int[10];
+        userHeadsId[0] = R.drawable.user_head_1;
+        userHeadsId[1] = R.drawable.user_head_2;
+        userHeadsId[2] = R.drawable.user_head_3;
+        userHeadsId[3] = R.drawable.user_head_4;
+        userHeadsId[4] = R.drawable.user_head_5;
+        userHeadsId[5] = R.drawable.user_head_6;
+        userHeadsId[6] = R.drawable.user_head_7;
+        userHeadsId[7] = R.drawable.user_head_8;
+        userHeadsId[8] = R.drawable.user_head_9;
+        userHeadsId[9] = R.drawable.user_head_10;
 
         mAuth = FirebaseAuth.getInstance();
         currentUID = mAuth.getCurrentUser().getUid();
@@ -107,7 +117,7 @@ public class ProfileEditActivity extends AppCompatActivity {
                 profileEmail.setText(email);
                 profileCoin.setText(Integer.toString(credit));
                 phoneText.setText(phone);
-                profilePhoto.setImageDrawable(getResources().getDrawable(photoId));
+                profilePhoto.setImageDrawable(getResources().getDrawable(userHeadsId[photoId]));
                 profileRating.setNumStars(rating);
                 profileTaskAccomplished.setText(Integer.toString(accomplished_number));
                 profileTaskPoseted.setText(Integer.toString(post_number));

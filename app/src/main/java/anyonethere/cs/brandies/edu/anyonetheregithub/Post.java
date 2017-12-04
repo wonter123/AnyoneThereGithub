@@ -23,9 +23,11 @@ public class Post {
     public String posterId;
     public String takerId;
     public int rating;
-    public String imageID;
+    public int imageID;
     public int postState;
     public HashMap<String, Object> result;
+    public boolean status = true;
+    public String takerName = null;
 
     public Post() {
         // Default constructor required for calls to DataSnapshot.getValue(Post.class)
@@ -55,10 +57,13 @@ public class Post {
         result.put("description", description);
         result.put("postDate", postDate);
         result.put("expireDate", expireDate);
+        result.put("imageID", imageID);
         result.put("to", to);
         result.put("from", from);
         result.put("poster", posterId);
         result.put("taker", takerId);
+        result.put("status", status);
+        result.put("takerName", takerName);
         return result;
     }
 
@@ -72,15 +77,20 @@ public class Post {
         result.put("poster", posterId);
     }
 
-    public int getPostState() {
-        return postState;
+    public void setStatus(boolean boo) {
+        status = boo;
+        result.put("status", status);
+    }
+
+    public void setPostComplete() {
+        setStatus(false);
     }
 
     public void setRating(int rating) {
         this.rating = rating;
     }
 
-    public void setImageID(String imageID) {
+    public void setImageID(int imageID) {
         this.imageID = imageID;
     }
 
@@ -131,7 +141,7 @@ public class Post {
         return rating;
     }
 
-    public String getImageID() {
+    public int getImageID() {
         return imageID;
     }
 }
