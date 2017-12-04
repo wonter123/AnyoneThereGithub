@@ -162,6 +162,7 @@ public class PostRequestActivity extends AppCompatActivity implements AdapterVie
                                     expire, from, to);
 
                             newPost.setPoster(userId);
+                            newPost.posterName = FirebaseAuth.getInstance().getCurrentUser().getEmail();
                             // set user photo into request info
                             newPost.setImageID(Integer.valueOf(dataSnapshot.child("photoId").getValue().toString()));
 
