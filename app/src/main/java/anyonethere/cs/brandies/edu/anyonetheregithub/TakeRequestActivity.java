@@ -21,6 +21,7 @@ public class TakeRequestActivity extends AppCompatActivity {
 
     Intent intent;
     String postId;
+    int postStatus;
     DatabaseReference mDatabase;
     DatabaseReference curtPost;
     final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -70,6 +71,7 @@ public class TakeRequestActivity extends AppCompatActivity {
         intent = getIntent();
         if (intent.getExtras() != null) {
             postId = intent.getExtras().getString("key");
+            postStatus = intent.getExtras().getInt("state");
             mDatabase = FirebaseDatabase.getInstance().getReference("posts");
             curtPost = mDatabase.child(postId);
 
@@ -78,7 +80,7 @@ public class TakeRequestActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     p = dataSnapshot.getValue(Post.class);
-                    if ((p != null || p.takerId != null) || (p.posterId != null || p.posterId.equals(userId))) {  // bug here
+                    if (p != null && p.postState != 0) {  // bug here
                         take.setVisibility(View.GONE);
                     } else {
                         take();

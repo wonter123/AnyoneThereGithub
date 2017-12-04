@@ -158,11 +158,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 for (DataSnapshot uniqueUserSnapshot : dataSnapshot.getChildren()) {
                     String key = uniqueUserSnapshot.getKey();
                     Post post = uniqueUserSnapshot.getValue(Post.class);
+                    if (post.postState > 1) {
+                        continue;
+                    };
                     adp.addIn(post,key);
                 }
                 mainListView.setAdapter(adp);
             }
-
 
             @Override
             public void onCancelled(DatabaseError firebaseError) {
@@ -183,11 +185,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         for (DataSnapshot uniqueUserSnapshot : dataSnapshot.getChildren()) {
                             String key = uniqueUserSnapshot.getKey();
                             Post post = uniqueUserSnapshot.getValue(Post.class);
-                            if (post.expireDate.before(new Date())) post.setPostState(3);
+                            if (post.expireDate.before(new Date())) {
+                                post.setPostState(3);
+                                mDatabase.child(key).child("postState").setValue(3);
+                            }
                         }
-
                     }
-
 
                     @Override
                     public void onCancelled(DatabaseError firebaseError) {
@@ -241,17 +244,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     class AppAdaptor extends BaseAdapter {
         ArrayList<Post> arrlist;
         ArrayList<String> key;
+        ArrayList<Integer> states;
 
         public AppAdaptor() {
             super();
             key = new ArrayList<>();
             arrlist = new ArrayList<>();
+            states = new ArrayList<Integer>();
         }
 
         public void addIn(Post post, String keys) {
             arrlist.add(post);
             key.add(keys);
-
         }
 
         @Override
@@ -277,10 +281,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             row = inflater.inflate(R.layout.request_list, parent, false);
 
             ImageView iv = (ImageView) row.findViewById(R.id.detail_statusimg);
-            Post p = (Post) getItem(index);
-            Log.d("post status: ", "" +  (p.postState));
-            if(p.postState == 1) iv.setImageResource(R.drawable.stamp_taken);
-            else if(p.postState == 2) iv.setImageResource(R.drawable.stamp_completed);
+            //int state = states.get(index);
+            int state = arrlist.get(index).postState;
+            if(state == 1) iv.setImageResource(R.drawable.stamp_taken);
+            else if(state == 2) iv.setImageResource(R.drawable.stamp_completed);
 
             TextView heading,requester,reward;
             heading = (TextView) row.findViewById(R.id.myPost_entry_title);
