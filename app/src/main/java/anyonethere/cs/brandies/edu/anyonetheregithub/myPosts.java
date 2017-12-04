@@ -36,7 +36,7 @@ public class myPosts extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 AppAdaptor adp = new AppAdaptor();
-                ListView mainListView = (ListView) findViewById( R.id.myTakes_list);
+                ListView mainListView = (ListView) findViewById( R.id.myPosts_list);
                 for (DataSnapshot uniqueUserSnapshot : dataSnapshot.getChildren()) {
                     String key = uniqueUserSnapshot.getKey();
                     Post post = uniqueUserSnapshot.getValue(Post.class);
@@ -52,10 +52,6 @@ public class myPosts extends AppCompatActivity {
                 Log.w("loadPost:onCancelled", firebaseError.toException());
             }
         });
-
-
-//        mainListView = (ListView) findViewById( R.id.listexpense);
-//        mainListView.setAdapter(adp);
     }
 
     class AppAdaptor extends BaseAdapter {
@@ -71,7 +67,6 @@ public class myPosts extends AppCompatActivity {
         public void addIn(Post post,String keys) {
             arrlist.add(post);
             key.add(keys);
-
         }
 
         @Override
