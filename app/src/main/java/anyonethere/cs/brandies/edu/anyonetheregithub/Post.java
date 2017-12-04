@@ -28,6 +28,7 @@ public class Post {
     public HashMap<String, Object> result;
 //    public boolean status = true;
     public String takerName = null;
+    public String posterName;
 
     public Post() {
         // Default constructor required for calls to DataSnapshot.getValue(Post.class)
@@ -60,11 +61,12 @@ public class Post {
         result.put("imageID", imageID);
         result.put("to", to);
         result.put("from", from);
-        result.put("poster", posterId);
-        result.put("taker", takerId);
+        result.put("posterId", posterId);
+        result.put("takerId", takerId);
 //        result.put("status", status);
         result.put("postState", postState);
         result.put("takerName", takerName);
+        result.put("posterName", posterName);
         return result;
     }
 
