@@ -19,8 +19,6 @@ public class User {
     public int task_accomplished;
     public int task_posted;
 
-    final int[] userHeadsId = new int[10];
-
     public HashMap<String, Object> result;
 
     public User() {
@@ -28,21 +26,11 @@ public class User {
     }
 
     public User(String username, String email) {
-        userHeadsId[0] = R.drawable.user_head_1;
-        userHeadsId[1] = R.drawable.user_head_2;
-        userHeadsId[2] = R.drawable.user_head_3;
-        userHeadsId[3] = R.drawable.user_head_4;
-        userHeadsId[4] = R.drawable.user_head_5;
-        userHeadsId[5] = R.drawable.user_head_6;
-        userHeadsId[6] = R.drawable.user_head_7;
-        userHeadsId[7] = R.drawable.user_head_8;
-        userHeadsId[8] = R.drawable.user_head_9;
-        userHeadsId[9] = R.drawable.user_head_10;
 
         this.username = username;
         this.email = email;
         this.phone = "";
-        this.photoId = userHeadsId[(int) (Math.random()*10)];
+        this.photoId = (int) (Math.random()*10);
         this.credit = 100;
         this.rating = 5;
         this.task_accomplished = 0;
