@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -32,6 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.mindorks.placeholderview.PlaceHolderView;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -167,6 +169,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Log.w("loadPost:onCancelled", firebaseError.toException());
             }
         });
+
+        final SwipeRefreshLayout swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                mDatabase = FirebaseDatabase.getInstance().getReference().child("posts");
+                mDatabase.addListenerForSingleValueEvent(new ValueEventListener(){
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        for (DataSnapshot uniqueUserSnapshot : dataSnapshot.getChildren()) {
+                            String key = uniqueUserSnapshot.getKey();
+                            Post post = uniqueUserSnapshot.getValue(Post.class);
+                            if (post.expireDate.before(new Date())) post.setPostState(3);
+                        }
+
+                    }
+
+
+                    @Override
+                    public void onCancelled(DatabaseError firebaseError) {
+                        Log.w("loadPost:onCancelled", firebaseError.toException());
+                    }
+                });
+                // Now we call setRefreshing(false) to signal refresh has finished
+                swipeContainer.setRefreshing(false);
+
+            }
+        });
+
 
 
     }

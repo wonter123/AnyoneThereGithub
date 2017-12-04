@@ -9,12 +9,13 @@
         android:layout_height="50dp"
         android:background="#90dde1"/>
 
-    <ListView
-        android:id="@+id/list_in_dialog_listview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:divider="#c91986ae"
-        android:dividerHeight="3dp"/>
+
+        <ListView
+            android:id="@+id/list_in_dialog_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:divider="#c91986ae"
+            android:dividerHeight="3dp"/>
 
 </LinearLayout>
