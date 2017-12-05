@@ -52,16 +52,29 @@ public class ProfileActivity extends AppCompatActivity {
         // get current user's name for further search in database
         mAuth = FirebaseAuth.getInstance();
         currentUID = mAuth.getCurrentUser().getUid();
-        email = mAuth.getCurrentUser().getEmail();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        // get the database information
-        mDatabase = FirebaseDatabase.getInstance().getReference("users").child(currentUID);
-        // extract user info from database
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                currentUser = dataSnapshot.getValue(User.class);
-                Toast.makeText(ProfileActivity.this, "lalala: ",Toast.LENGTH_LONG).show();
+                DataSnapshot userData = dataSnapshot.child("users");
+                DataSnapshot postData = dataSnapshot.child("posts");
+                DataSnapshot curUserData = userData.child(currentUID);
+                currentUser = curUserData.getValue(User.class);
+
+                int accomplished_num = 0;
+                int post_num = 0;
+                for (DataSnapshot ds : postData.getChildren()) {
+                    if (ds.child("posterId").getValue().toString().equals(currentUID)) {
+                        post_num++;
+                    }
+                    if (ds.child("takerId").getValue() != null &&
+                            ds.child("takerId").getValue().toString().equals(currentUID) &&
+                            Integer.valueOf(ds.child("postState").getValue().toString()) == 2) {
+                        accomplished_num++;
+                    }
+                }
+
                 // set all fields from database
                 TextView profileName = (TextView) findViewById(R.id.profile_name);
                 TextView profileEmail = (TextView) findViewById(R.id.profile_email);
@@ -70,6 +83,7 @@ public class ProfileActivity extends AppCompatActivity {
                 RatingBar profileRating = (RatingBar) findViewById(R.id.profile_ratingBar);
                 TextView profileCredit = (TextView) findViewById(R.id.profile_credit);
                 TextView profileTaskAccomplished = (TextView) findViewById(R.id.profile_accomplished_number);
+                TextView profileTaskPosted = (TextView) findViewById(R.id.profile_post_number);
 
                 // set each view with input information
                 profileName.setText(currentUser.getUsername());
@@ -78,46 +92,62 @@ public class ProfileActivity extends AppCompatActivity {
                 profilePhoto.setImageDrawable(getResources().getDrawable(userHeadsId[currentUser.getPhotoId()]));
                 profileCredit.setText(Integer.toString(currentUser.getCredit()));
                 profileRating.setNumStars(currentUser.getRating());
-                profileTaskAccomplished.setText(Integer.toString(currentUser.getTask_accomplished()));
-                Toast.makeText(ProfileActivity.this, "POST: ", Toast.LENGTH_LONG);
+                profileTaskAccomplished.setText(Integer.toString(accomplished_num));
+                profileTaskPosted.setText(Integer.toString(post_num));
+
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
-
-
-        mrDatabase = FirebaseDatabase.getInstance().getReference("posts");
-        mrDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                int accomplished = 0;
-                int posted = 0;
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    post = ds.getValue(Post.class);
-//                    Toast.makeText(ProfileActivity.this, "POST: " + post.toString(), Toast.LENGTH_LONG).show();
-//                    if (post.getPosterId().equals(currentUID)) posted++;
-                }
+//        email = mAuth.getCurrentUser().getEmail();
+//
+//        // get the database information
+//        mDatabase = FirebaseDatabase.getInstance().getReference("users").child(currentUID);
+//        // extract user info from database
+//        mDatabase.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                currentUser = dataSnapshot.getValue(User.class);
+//                Toast.makeText(ProfileActivity.this, "lalala: ",Toast.LENGTH_LONG).show();
+//                // set all fields from database
+//                TextView profileName = (TextView) findViewById(R.id.profile_name);
+//                TextView profileEmail = (TextView) findViewById(R.id.profile_email);
+//                TextView profilePhone = (TextView) findViewById(R.id.profile_phone);
+//                ImageView profilePhoto = (ImageView) findViewById(R.id.profile_photo);
+//                RatingBar profileRating = (RatingBar) findViewById(R.id.profile_ratingBar);
+//                TextView profileCredit = (TextView) findViewById(R.id.profile_credit);
+//                TextView profileTaskAccomplished = (TextView) findViewById(R.id.profile_accomplished_number);
 //                TextView profileTaskPosted = (TextView) findViewById(R.id.profile_post_number);
+//
+//                // set each view with input information
+//                profileName.setText(currentUser.getUsername());
+//                profileEmail.setText(currentUser.getEmail());
+//                profilePhone.setText(currentUser.getPhone());
+//                profilePhoto.setImageDrawable(getResources().getDrawable(userHeadsId[currentUser.getPhotoId()]));
+//                profileCredit.setText(Integer.toString(currentUser.getCredit()));
+//                profileRating.setNumStars(currentUser.getRating());
+//                profileTaskAccomplished.setText(Integer.toString(currentUser.getTask_accomplished()));
 //                profileTaskPosted.setText(Integer.toString(currentUser.getTask_posted()));
-            }
+//                Toast.makeText(ProfileActivity.this, "POST: ", Toast.LENGTH_LONG);
+//            }
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        // GOTO EDIT
-        Button editButton = (Button) findViewById(R.id.profile_edit_button);
-        editButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent editIntent = new Intent(ProfileActivity.this, ProfileEditActivity.class);
-                startActivity(editIntent);
-            }
-        });
+//        // GOTO EDIT
+//        Button editButton = (Button) findViewById(R.id.profile_edit_button);
+//        editButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent editIntent = new Intent(ProfileActivity.this, ProfileEditActivity.class);
+//                startActivity(editIntent);
+//            }
+//        });
 
         // GOTO BACK
         Button backButton = (Button) findViewById(R.id.profile_back_button);
