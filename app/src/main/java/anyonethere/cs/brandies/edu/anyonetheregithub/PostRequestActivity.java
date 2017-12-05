@@ -165,6 +165,7 @@ public class PostRequestActivity extends AppCompatActivity implements AdapterVie
                             newPost.posterName = FirebaseAuth.getInstance().getCurrentUser().getEmail();
                             // set user photo into request info
                             newPost.setImageID(Integer.valueOf(dataSnapshot.child("photoId").getValue().toString()));
+                            newPost.setRating(Integer.valueOf(dataSnapshot.child("rating").getValue().toString()));
 
                             Map<String, Object> postValues = newPost.toMap();
                             Map<String, Object> childUpdates = new HashMap<>();

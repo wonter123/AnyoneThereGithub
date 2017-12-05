@@ -65,6 +65,7 @@ public class Post {
         result.put("postState", postState);
         result.put("takerName", takerName);
         result.put("posterName", posterName);
+        result.put("rating", rating);
         return result;
     }
 
