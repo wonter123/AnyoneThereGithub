@@ -6,13 +6,12 @@
         android:id="@+id/takeRequest_postUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="30dp"
-        android:text="POST USER" />
+        android:layout_alignLeft="@+id/post_request_description"
+        android:layout_alignStart="@+id/post_request_description"
+        android:layout_below="@+id/post_request_description"
+        android:layout_marginTop="14dp"
+        android:text="POST USER"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/takeRequest_head"
@@ -23,7 +22,7 @@
         android:layout_below="@+id/takeRequest_postUser"
         android:layout_marginLeft="32dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="24dp"
         android:text="Request" />
 
     <TextView
@@ -179,6 +178,16 @@
         android:layout_alignStart="@+id/takeRequest_descriptionContent"
         android:layout_marginBottom="38dp"
         android:text="Take" />
+
+    <Button
+        android:id="@+id/takeRequest_call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/takeRequest_descriptionContent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/takeRequest_descriptionContent"
+        android:layout_marginBottom="38dp"
+        android:text="Call Requester" />
 
     <Button
         android:id="@+id/takeRequest_cancle"
