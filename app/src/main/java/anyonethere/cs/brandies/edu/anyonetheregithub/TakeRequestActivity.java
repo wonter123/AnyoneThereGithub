@@ -122,7 +122,7 @@ public class TakeRequestActivity extends AppCompatActivity {
                     expireDate.setText(p.expireDate.toString());
                     from.setText(p.from);
                     to.setText(p.to);
-                    poster.setText(p.posterName);
+                    poster.setText("Poster: " + p.posterName);
                 }
 
                 @Override
