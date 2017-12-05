@@ -98,10 +98,8 @@ public class TakeRequestActivity extends AppCompatActivity {
                                         String phone = dataSnapshot.getValue(User.class).getPhone();
                                         startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null)));
                                     }
-
                                     @Override
                                     public void onCancelled(DatabaseError databaseError) {
-
                                     }
                                 });
                                 finish();
@@ -110,7 +108,7 @@ public class TakeRequestActivity extends AppCompatActivity {
                     } else {
                         call.setVisibility(View.GONE);
                     }
-
+                    TextView poster = (TextView) findViewById(R.id.takeRequest_postUser);
                     TextView header = (TextView) findViewById(R.id.takeRequest_headContent);
                     TextView reward = (TextView) findViewById(R.id.takeRequest_rewardContent);
                     TextView from = (TextView) findViewById(R.id.takeRequest_fromContent);
@@ -124,6 +122,7 @@ public class TakeRequestActivity extends AppCompatActivity {
                     expireDate.setText(p.expireDate.toString());
                     from.setText(p.from);
                     to.setText(p.to);
+                    poster.setText(p.posterName);
                 }
 
                 @Override

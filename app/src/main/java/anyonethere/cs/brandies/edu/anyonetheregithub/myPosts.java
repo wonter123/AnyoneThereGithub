@@ -139,7 +139,7 @@ public class myPosts extends AppCompatActivity {
 
             userPhoto.setImageDrawable(getResources().getDrawable(userHeadsId[post.getImageID()]));
             heading.setText(post.title);
-            requester.setText(post.takerId);
+            requester.setText(post.takerName);
             reward.setText("Reward: " + post.reward+"");
 
             Button button = (Button) row.findViewById(R.id.entry_detail);
