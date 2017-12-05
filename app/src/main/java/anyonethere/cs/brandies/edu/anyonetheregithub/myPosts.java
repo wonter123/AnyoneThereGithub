@@ -47,8 +47,6 @@ public class myPosts extends AppCompatActivity {
                     Post post = uniqueUserSnapshot.getValue(Post.class);
                     if (post.posterId != null && post.posterId.equals(uid)) {
                         adp.addIn(post,key);
-                    } else {
-                        adp.addIn(post,key);
                     }
                 }
                 mainListView.setAdapter(adp);
