@@ -75,7 +75,6 @@ public class TakeRequestActivity extends AppCompatActivity {
             mDatabase = FirebaseDatabase.getInstance().getReference("posts");
             curtPost = mDatabase.child(postId);
 
-            Log.d("Take Request: ", "take request");
             curtPost.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {

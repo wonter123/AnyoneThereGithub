@@ -14,6 +14,16 @@
         android:padding="20dp"
         android:background="#d5ffffff">
 
+        <ImageView
+            android:id="@+id/detail_statusimg"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            app:srcCompat="@drawable/blank_block" />
+
         <TextView
             android:id="@+id/entry_title"
             android:layout_width="match_parent"

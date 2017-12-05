@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 
 public class myPosts extends AppCompatActivity {
     private DatabaseReference mDatabase;
+    DatabaseReference curtPost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class myPosts extends AppCompatActivity {
         cancel();
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("posts");
+
         mDatabase.addValueEventListener(new ValueEventListener(){
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -104,13 +107,20 @@ public class myPosts extends AppCompatActivity {
         public View getView(int index, View view, ViewGroup parent){
 
             LayoutInflater inflater = getLayoutInflater();
-            View row;
-            row = inflater.inflate(R.layout.activity_my_post_entry, parent, false);
+            View row = inflater.inflate(R.layout.activity_my_post_entry, parent, false);
+
+            ImageView iv = (ImageView) row.findViewById(R.id.detail_statusimg);
+            //int state = states.get(index);
+            int state = arrlist.get(index).postState;
+            if(state == 1) iv.setImageResource(R.drawable.stamp_taken);
+            else if(state == 2) iv.setImageResource(R.drawable.stamp_completed);
 
             TextView heading,requester,reward;
             heading = (TextView) row.findViewById(R.id.entry_title);
             requester = (TextView) row.findViewById(R.id.entry_poster);
             reward = (TextView) row.findViewById(R.id.entry_reward);
+
+
 
             final String k = key.get(index);
 
@@ -135,7 +145,9 @@ public class myPosts extends AppCompatActivity {
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mDatabase.child("posts").child(k).setValue(3);
+                    DatabaseReference mBase = FirebaseDatabase.getInstance().getReference("posts");
+                    curtPost = mDatabase.child(k);
+                    curtPost.child("postState").setValue(2);
                     finish();
                 }
             });
