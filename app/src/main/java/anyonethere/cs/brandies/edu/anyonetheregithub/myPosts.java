@@ -1,5 +1,6 @@
 package anyonethere.cs.brandies.edu.anyonetheregithub;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,10 +8,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -144,7 +147,28 @@ public class myPosts extends AppCompatActivity {
                     DatabaseReference mBase = FirebaseDatabase.getInstance().getReference("posts");
                     curtPost = mDatabase.child(k);
                     curtPost.child("postState").setValue(2);
-                    finish();
+
+                    final Dialog rankDialog = new Dialog(myPosts.this);
+                    rankDialog.setContentView(R.layout.rank_dialog);
+                    rankDialog.setCancelable(true);
+
+                    RatingBar ratingBar = (RatingBar)rankDialog.findViewById(R.id.dialog_ratingbar);
+                    double rate = ratingBar.getRating();
+
+
+
+                    Button updateButton = (Button) rankDialog.findViewById(R.id.rank_dialog_button);
+                    updateButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            rankDialog.dismiss();
+                            finish();
+                        }
+                    });
+                    //now that the dialog is set up, it's time to show it
+                    rankDialog.show();
+
+
                 }
             });
 
