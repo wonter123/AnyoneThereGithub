@@ -55,10 +55,8 @@ public class ProfileActivity extends AppCompatActivity {
         String intentString = getIntent().getStringExtra("userid");
         if (intentString == null)  currentUID = mAuth.getCurrentUser().getUid();
         else {
-            if (getIntent().getExtras() != null) {
                 currentUID = getIntent().getStringExtra("userid");
                 localFlag = false;
-            }
         }
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -96,9 +94,10 @@ public class ProfileActivity extends AppCompatActivity {
                 // set each view with input information
                 profileName.setText(currentUser.getUsername());
                 profileEmail.setText(currentUser.getEmail());
-                if (localFlag) profilePhone.setText(currentUser.getPhone());
+                if (currentUID.equals(mAuth.getCurrentUser().getUid())) profilePhone.setText(currentUser.getPhone());
                 else {
-                    profilePhone.setText("xxx-xxx-xxx");
+                    Toast.makeText(ProfileActivity.this, "herhe", Toast.LENGTH_LONG).show();
+                    profilePhone.setText("xxx-xxx-xxxx");
                     Button saveButton = (Button) findViewById(R.id.profile_edit_button);
                     saveButton.setVisibility(View.GONE);
                 }

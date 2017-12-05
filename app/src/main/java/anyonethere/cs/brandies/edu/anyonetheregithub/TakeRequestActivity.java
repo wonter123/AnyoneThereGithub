@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -21,6 +22,8 @@ public class TakeRequestActivity extends AppCompatActivity {
 
     Intent intent;
     String postId;
+    String posterId;
+    String uid;
     int postStatus;
     DatabaseReference mDatabase;
     DatabaseReference curtPost;
@@ -44,7 +47,7 @@ public class TakeRequestActivity extends AppCompatActivity {
         drawPost();
         drawPoster();
         cancel();
-        findUser();
+
     }
 
     // if cancel is clicked, do nothing
@@ -87,7 +90,7 @@ public class TakeRequestActivity extends AppCompatActivity {
                     } else {
                         take();
                     }
-
+                    findUser(p.posterId);
                     if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(p.takerId)) {
                         call.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -141,14 +144,14 @@ public class TakeRequestActivity extends AppCompatActivity {
         DatabaseReference user = curtUser.child(userId);
     }
 
-    void findUser() {
+    void findUser(String findPosterId) {
         View row = findViewById(R.id.takeRequest_postUser);
-        Button button = (Button) row.findViewById(R.id.detail);
-        button.setOnClickListener(new View.OnClickListener() {
+        uid = findPosterId;
+        row.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(TakeRequestActivity.this, ProfileActivity.class);
-                intent.putExtra("userid", postId);
+                intent.putExtra("userid", uid);
                 startActivity(intent);
             }
         });
