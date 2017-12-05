@@ -181,6 +181,16 @@
         android:text="Take" />
 
     <Button
+        android:id="@+id/takeRequest_call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/takeRequest_descriptionContent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/takeRequest_descriptionContent"
+        android:layout_marginBottom="38dp"
+        android:text="Call Requester" />
+
+    <Button
         android:id="@+id/takeRequest_cancle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
