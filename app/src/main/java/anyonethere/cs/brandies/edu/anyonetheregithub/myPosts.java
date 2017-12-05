@@ -167,8 +167,6 @@ public class myPosts extends AppCompatActivity {
                     RatingBar ratingBar = (RatingBar)rankDialog.findViewById(R.id.dialog_ratingbar);
                     double rate = ratingBar.getRating();
 
-
-
                     Button updateButton = (Button) rankDialog.findViewById(R.id.rank_dialog_button);
                     updateButton.setOnClickListener(new View.OnClickListener() {
                         @Override

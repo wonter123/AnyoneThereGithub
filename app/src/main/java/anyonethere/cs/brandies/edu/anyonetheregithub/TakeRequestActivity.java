@@ -80,7 +80,7 @@ public class TakeRequestActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     final Post p = dataSnapshot.getValue(Post.class);
-                    if (p != null && p.postState != 0) {  // bug here
+                    if (p == null || p != null && p.postState != 0) {  // bug here
                         take.setVisibility(View.GONE);
                     } else {
                         take();

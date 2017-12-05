@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -117,6 +118,23 @@ public class myTakes extends AppCompatActivity {
             final String k = key.get(index);
 
             Post post = arrlist.get(index);
+
+            final int[] userHeadsId = new int[10];
+            userHeadsId[0] = R.drawable.user_head_1;
+            userHeadsId[1] = R.drawable.user_head_2;
+            userHeadsId[2] = R.drawable.user_head_3;
+            userHeadsId[3] = R.drawable.user_head_4;
+            userHeadsId[4] = R.drawable.user_head_5;
+            userHeadsId[5] = R.drawable.user_head_6;
+            userHeadsId[6] = R.drawable.user_head_7;
+            userHeadsId[7] = R.drawable.user_head_8;
+            userHeadsId[8] = R.drawable.user_head_9;
+            userHeadsId[9] = R.drawable.user_head_10;
+            ImageView userPhoto = (ImageView) row.findViewById(R.id.taken_userID);
+            userPhoto.setImageResource(userHeadsId[post.getImageID()]);
+
+            RatingBar ratingBar = (RatingBar)row.findViewById(R.id.taken_ratingbar);
+            ratingBar.setRating(post.getRating());
 
             heading.setText(post.title);
             reward.setText("Reward: " + post.reward+"");
