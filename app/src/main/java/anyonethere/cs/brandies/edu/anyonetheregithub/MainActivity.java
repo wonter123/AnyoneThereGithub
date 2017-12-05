@@ -281,6 +281,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         public View getView(int index, View view, ViewGroup parent){
 
+            int[] userHeadsId = new int[10];
+            userHeadsId[0] = R.drawable.user_head_1;
+            userHeadsId[1] = R.drawable.user_head_2;
+            userHeadsId[2] = R.drawable.user_head_3;
+            userHeadsId[3] = R.drawable.user_head_4;
+            userHeadsId[4] = R.drawable.user_head_5;
+            userHeadsId[5] = R.drawable.user_head_6;
+            userHeadsId[6] = R.drawable.user_head_7;
+            userHeadsId[7] = R.drawable.user_head_8;
+            userHeadsId[8] = R.drawable.user_head_9;
+            userHeadsId[9] = R.drawable.user_head_10;
+
             LayoutInflater inflater = getLayoutInflater();
             View row;
             row = inflater.inflate(R.layout.request_list, parent, false);
@@ -295,6 +307,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             heading = (TextView) row.findViewById(R.id.entry_title);
             requester = (TextView) row.findViewById(R.id.entry_poster);
             reward = (TextView) row.findViewById(R.id.entry_reward);
+            ImageView profileImg = (ImageView) row.findViewById(R.id.userID);
+
+
 
             RatingBar rate = (RatingBar) row.findViewById(R.id.userRating);
 
@@ -302,6 +317,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             Post post = arrlist.get(index);
             Log.d("Main Activity: ", "main activity getView");
+
+            profileImg.setImageResource(userHeadsId[post.getImageID()]);
 
             heading.setText("Title:  " + post.title);
             requester.setText("From:  " + post.from);
