@@ -128,22 +128,24 @@
         android:text="0"
         android:textSize="20dp" />
 
-    <!--<Button-->
-        <!--android:id="@+id/profile_edit_button"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="EDIT"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_marginLeft="50dp"/>-->
+    <Button
+        android:id="@+id/profile_edit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/profile_back_button"
+        android:layout_alignBottom="@+id/profile_back_button"
+        android:layout_toLeftOf="@+id/profile_photo"
+        android:layout_toStartOf="@+id/profile_photo"
+        android:text="EDIT" />
 
     <Button
         android:id="@+id/profile_back_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="100dp"
-        android:layout_marginStart="120dp"
-        android:layout_centerHorizontal="true"
+        android:layout_toEndOf="@+id/profile_credit"
+        android:layout_toRightOf="@+id/profile_credit"
         android:text="BACK" />
 
 </RelativeLayout>

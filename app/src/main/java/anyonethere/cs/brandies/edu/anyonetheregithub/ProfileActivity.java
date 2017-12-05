@@ -31,6 +31,7 @@ public class ProfileActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private User currentUser;
     private Post post;
+    boolean localFlag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +52,17 @@ public class ProfileActivity extends AppCompatActivity {
 
         // get current user's name for further search in database
         mAuth = FirebaseAuth.getInstance();
-        currentUID = mAuth.getCurrentUser().getUid();
+        String intentString = getIntent().getStringExtra("userid");
+        if (intentString == null)  currentUID = mAuth.getCurrentUser().getUid();
+        else {
+            if (getIntent().getExtras() != null) {
+                currentUID = getIntent().getStringExtra("userid");
+                localFlag = false;
+            }
+        }
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        mDatabase.addValueEventListener(new ValueEventListener() {
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 DataSnapshot userData = dataSnapshot.child("users");
@@ -88,7 +96,12 @@ public class ProfileActivity extends AppCompatActivity {
                 // set each view with input information
                 profileName.setText(currentUser.getUsername());
                 profileEmail.setText(currentUser.getEmail());
-                profilePhone.setText(currentUser.getPhone());
+                if (localFlag) profilePhone.setText(currentUser.getPhone());
+                else {
+                    profilePhone.setText("xxx-xxx-xxx");
+                    Button saveButton = (Button) findViewById(R.id.profile_edit_button);
+                    saveButton.setVisibility(View.GONE);
+                }
                 profilePhoto.setImageDrawable(getResources().getDrawable(userHeadsId[currentUser.getPhotoId()]));
                 profileCredit.setText(Integer.toString(currentUser.getCredit()));
                 profileRating.setNumStars(currentUser.getRating());
@@ -102,52 +115,16 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
-//        email = mAuth.getCurrentUser().getEmail();
-//
-//        // get the database information
-//        mDatabase = FirebaseDatabase.getInstance().getReference("users").child(currentUID);
-//        // extract user info from database
-//        mDatabase.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                currentUser = dataSnapshot.getValue(User.class);
-//                Toast.makeText(ProfileActivity.this, "lalala: ",Toast.LENGTH_LONG).show();
-//                // set all fields from database
-//                TextView profileName = (TextView) findViewById(R.id.profile_name);
-//                TextView profileEmail = (TextView) findViewById(R.id.profile_email);
-//                TextView profilePhone = (TextView) findViewById(R.id.profile_phone);
-//                ImageView profilePhoto = (ImageView) findViewById(R.id.profile_photo);
-//                RatingBar profileRating = (RatingBar) findViewById(R.id.profile_ratingBar);
-//                TextView profileCredit = (TextView) findViewById(R.id.profile_credit);
-//                TextView profileTaskAccomplished = (TextView) findViewById(R.id.profile_accomplished_number);
-//                TextView profileTaskPosted = (TextView) findViewById(R.id.profile_post_number);
-//
-//                // set each view with input information
-//                profileName.setText(currentUser.getUsername());
-//                profileEmail.setText(currentUser.getEmail());
-//                profilePhone.setText(currentUser.getPhone());
-//                profilePhoto.setImageDrawable(getResources().getDrawable(userHeadsId[currentUser.getPhotoId()]));
-//                profileCredit.setText(Integer.toString(currentUser.getCredit()));
-//                profileRating.setNumStars(currentUser.getRating());
-//                profileTaskAccomplished.setText(Integer.toString(currentUser.getTask_accomplished()));
-//                profileTaskPosted.setText(Integer.toString(currentUser.getTask_posted()));
-//                Toast.makeText(ProfileActivity.this, "POST: ", Toast.LENGTH_LONG);
-//            }
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
 
-//        // GOTO EDIT
-//        Button editButton = (Button) findViewById(R.id.profile_edit_button);
-//        editButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent editIntent = new Intent(ProfileActivity.this, ProfileEditActivity.class);
-//                startActivity(editIntent);
-//            }
-//        });
+        // GOTO EDIT
+        Button editButton = (Button) findViewById(R.id.profile_edit_button);
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent editIntent = new Intent(ProfileActivity.this, ProfileEditActivity.class);
+                startActivity(editIntent);
+            }
+        });
 
         // GOTO BACK
         Button backButton = (Button) findViewById(R.id.profile_back_button);
@@ -160,4 +137,5 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
     }
+
 }
