@@ -129,7 +129,7 @@ public class PostRequestActivity extends AppCompatActivity implements AdapterVie
                 final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 DatabaseReference curUser = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
 
-                curUser.addValueEventListener(new ValueEventListener() {
+                curUser.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         User u = dataSnapshot.getValue(User.class);
@@ -174,6 +174,7 @@ public class PostRequestActivity extends AppCompatActivity implements AdapterVie
 
                             mDatabase.updateChildren(childUpdates);
                             finish();
+                            return;
                         }
                     }
 
