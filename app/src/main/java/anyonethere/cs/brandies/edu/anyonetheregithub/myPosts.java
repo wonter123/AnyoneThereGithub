@@ -347,7 +347,7 @@ public class myPosts extends AppCompatActivity {
 
             Button confirm = (Button) row.findViewById(R.id.entry_confirm);
 
-            if (post.postState >= 2) {
+            if (post.postState == 0 || post.postState >= 2) {
                 confirm.setVisibility(View.GONE);
             }
 
