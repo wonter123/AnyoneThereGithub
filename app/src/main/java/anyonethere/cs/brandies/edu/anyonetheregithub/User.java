@@ -124,4 +124,5 @@ public class User {
     public void setTask_posted(int task_posted) {
         this.task_posted = task_posted;
     }
+
 }
