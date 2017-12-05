@@ -131,13 +131,13 @@ public class myPosts extends AppCompatActivity {
             heading = (TextView) row.findViewById(R.id.entry_title);
             requester = (TextView) row.findViewById(R.id.entry_poster);
             reward = (TextView) row.findViewById(R.id.entry_reward);
-            ImageView userPhoto = (ImageView) row.findViewById(R.id.nav_photo);
+            ImageView userPhoto = (ImageView) row.findViewById(R.id.userID);
             final String k = key.get(index);
 
             Post post = arrlist.get(index);
             System.out.println("here");
 
-            userPhoto.setImageDrawable(getResources().getDrawable(userHeadsId[post.getImageID()]));
+            userPhoto.setImageResource(userHeadsId[post.getImageID()]);
             heading.setText(post.title);
             requester.setText(post.takerName);
             reward.setText("Reward: " + post.reward+"");
