@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -43,6 +44,7 @@ public class TakeRequestActivity extends AppCompatActivity {
         drawPost();
         drawPoster();
         cancel();
+        findUser();
     }
 
     // if cancel is clicked, do nothing
@@ -80,7 +82,7 @@ public class TakeRequestActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     final Post p = dataSnapshot.getValue(Post.class);
-                    if (p != null && p.postState != 0) {  // bug here
+                    if (p == null || p != null && p.postState != 0) {  // bug here
                         take.setVisibility(View.GONE);
                     } else {
                         take();
@@ -137,5 +139,18 @@ public class TakeRequestActivity extends AppCompatActivity {
     void drawPoster() {
         DatabaseReference curtUser = FirebaseDatabase.getInstance().getReference("posts");
         DatabaseReference user = curtUser.child(userId);
+    }
+
+    void findUser() {
+        View row = findViewById(R.id.takeRequest_postUser);
+        Button button = (Button) row.findViewById(R.id.detail);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(TakeRequestActivity.this, ProfileActivity.class);
+                intent.putExtra("userid", postId);
+                startActivity(intent);
+            }
+        });
     }
 }
