@@ -26,6 +26,18 @@ public class ListInDialogAdapter extends ArrayAdapter<Post> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
+        final int[] userHeadsId = new int[10];
+        userHeadsId[0] = R.drawable.user_head_1;
+        userHeadsId[1] = R.drawable.user_head_2;
+        userHeadsId[2] = R.drawable.user_head_3;
+        userHeadsId[3] = R.drawable.user_head_4;
+        userHeadsId[4] = R.drawable.user_head_5;
+        userHeadsId[5] = R.drawable.user_head_6;
+        userHeadsId[6] = R.drawable.user_head_7;
+        userHeadsId[7] = R.drawable.user_head_8;
+        userHeadsId[8] = R.drawable.user_head_9;
+        userHeadsId[9] = R.drawable.user_head_10;
+
         View curView = convertView;
         if (curView == null)
         {
@@ -47,7 +59,8 @@ public class ListInDialogAdapter extends ArrayAdapter<Post> {
         Heading.setText(p.getTitle());
         from.setText("From: "+p.getFrom());
         Reward.setText("Reward: "+p.getReward()+"");
-        profileImg.setImageResource(p.getImageID());
+
+        profileImg.setImageResource(userHeadsId[p.getImageID()]);
         rb.setRating(p.getRating());
 
 //        final String key = p.getPosterId();
