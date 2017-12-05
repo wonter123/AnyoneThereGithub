@@ -121,8 +121,8 @@ public class myTakes extends AppCompatActivity {
             Post post = arrlist.get(index);
 
             heading.setText(post.title);
-            requester.setText(post.posterId);
-            reward.setText(post.reward + "");
+            requester.setText(post.posterName);
+            reward.setText("Reward: " + post.reward+"");
             try {
                 Button button = (Button) row.findViewById(R.id.entry_detail);
                 button.setOnClickListener(new View.OnClickListener() {

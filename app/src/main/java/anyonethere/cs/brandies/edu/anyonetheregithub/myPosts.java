@@ -120,16 +120,14 @@ public class myPosts extends AppCompatActivity {
             requester = (TextView) row.findViewById(R.id.entry_poster);
             reward = (TextView) row.findViewById(R.id.entry_reward);
 
-
-
             final String k = key.get(index);
 
             Post post = arrlist.get(index);
             System.out.println("here");
 
             heading.setText(post.title);
-            requester.setText(post.posterId);
-            reward.setText(post.reward+"");
+            requester.setText(post.takerId);
+            reward.setText("Reward: " + post.reward+"");
 
             Button button = (Button) row.findViewById(R.id.entry_detail);
             button.setOnClickListener(new View.OnClickListener() {
