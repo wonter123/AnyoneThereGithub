@@ -332,8 +332,8 @@ public class myPosts extends AppCompatActivity {
             ratingBar.setRating(post.getRating());
             userPhoto.setImageResource(userHeadsId[post.getImageID()]);
             heading.setText(post.title);
-            requester.setText(post.takerId);
-            reward.setText("Reward: " + post.reward+"");
+            requester.setText(post.takerName);
+            reward.setText("Reward: " + post.reward + "");
 
             Button button = (Button) row.findViewById(R.id.entry_detail);
             button.setOnClickListener(new View.OnClickListener() {
