@@ -24,7 +24,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="146dp"
-        app:srcCompat="@drawable/user_head_1" />
+        app:srcCompat="@drawable/user_head_0" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -101,7 +101,7 @@
 
     <TextView
         android:id="@+id/profile_edit_email"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/profile_edit_name"
         android:layout_alignStart="@+id/profile_edit_name"

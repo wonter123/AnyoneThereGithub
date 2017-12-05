@@ -23,7 +23,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="146dp"
-        app:srcCompat="@drawable/user_head_1" />
+        app:srcCompat="@drawable/user_head_0" />
     
     <TextView
         android:layout_width="wrap_content"
