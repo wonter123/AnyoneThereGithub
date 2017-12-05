@@ -44,6 +44,7 @@ public class TakeRequestActivity extends AppCompatActivity {
         drawPost();
         drawPoster();
         cancel();
+        findUser();
     }
 
     // if cancel is clicked, do nothing
