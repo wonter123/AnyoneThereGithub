@@ -1,8 +1,8 @@
 package anyonethere.cs.brandies.edu.anyonetheregithub;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,10 +15,10 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.DatabaseError;
 
 import java.util.ArrayList;
 
@@ -103,28 +103,43 @@ public class myTakes extends AppCompatActivity {
         public View getView(int index, View view, ViewGroup parent){
 
             LayoutInflater inflater = getLayoutInflater();
-            View row = inflater.inflate(R.layout.request_list, parent, false);
+            View row = inflater.inflate(R.layout.activity_my_take_entry, parent, false);
 
-            ImageView iv = (ImageView) row.findViewById(R.id.detail_statusimg);
-            //int state = states.get(index);
+            ImageView iv = (ImageView) row.findViewById(R.id.taken_stamp);
             int state = arrlist.get(index).postState;
             if(state == 1) iv.setImageResource(R.drawable.stamp_taken);
             else if(state == 2) iv.setImageResource(R.drawable.stamp_completed);
-
-            TextView heading,requester,reward;
-            heading = (TextView) row.findViewById(R.id.entry_title);
-            requester = (TextView) row.findViewById(R.id.entry_poster);
-            reward = (TextView) row.findViewById(R.id.entry_reward);
+            TextView heading,reward;
+            heading = (TextView) row.findViewById(R.id.taken_heading);
+            final TextView poster_phone = (TextView) row.findViewById(R.id.taken_phone);
+            reward = (TextView) row.findViewById(R.id.taken_reward);
 
             final String k = key.get(index);
 
             Post post = arrlist.get(index);
 
             heading.setText(post.title);
-            requester.setText(post.posterName);
             reward.setText("Reward: " + post.reward+"");
+            mDatabase = FirebaseDatabase.getInstance().getReference("users");
+            DatabaseReference p = mDatabase.child(post.posterId);
+
+            p.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    User poster = dataSnapshot.getValue(User.class);
+
+                    poster_phone.setText("Requester phone: "+poster.getPhone());
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+
             try {
-                Button button = (Button) row.findViewById(R.id.entry_detail);
+                Button button = (Button) row.findViewById(R.id.taken_detail);
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
