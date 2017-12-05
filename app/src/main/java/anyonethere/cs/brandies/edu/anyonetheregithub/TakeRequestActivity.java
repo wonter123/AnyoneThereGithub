@@ -82,6 +82,8 @@ public class TakeRequestActivity extends AppCompatActivity {
                     final Post p = dataSnapshot.getValue(Post.class);
                     if (p != null && p.postState != 0) {  // bug here
                         take.setVisibility(View.GONE);
+                    } else {
+                        take();
                     }
 
                     if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(p.takerId)) {
